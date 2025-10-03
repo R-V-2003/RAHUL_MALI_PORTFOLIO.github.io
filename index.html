@@ -1,0 +1,13180 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+<!-- saved from url=(0069)file:///C:/Users/non%20of%20your%20business/Desktop/design/index.html -->
+
+
+
+
+
+
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+
+
+
+  <title>Rahul Mali | Portfolio</title>
+
+
+
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+
+
+
+  <link href="./Rahul Mali _ Portfolio_files/css2" rel="stylesheet">
+
+
+
+
+
+
+
+  <style>
+
+
+
+
+
+
+
+    :root {
+
+
+
+
+
+
+
+      --bg:#f2f5fb;
+
+
+
+
+
+
+
+      --card:#ffffffd9;
+
+
+
+
+
+
+
+      --glass-border:#ffffff55;
+
+
+
+
+
+
+
+      --primary:#0e6bff;
+
+
+
+
+
+
+
+      --text-dark:#262c35;
+
+
+
+
+
+
+
+      --text-muted:#6f7b8a;
+
+
+
+
+
+
+
+      --mail:#0e6bff;
+
+
+
+
+
+
+
+      --linkedin:#0a66c2;
+
+
+
+
+
+
+
+      --github:#24292f;
+
+
+
+
+
+
+
+      --figma:#f24e1e;
+
+
+
+
+
+
+
+      --phone:#191919;
+
+
+
+
+
+
+
+      --viewport-pad:56px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    * { box-sizing:border-box; }
+
+
+
+
+
+
+
+    body {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      font-family:"Poppins",sans-serif;
+
+
+
+
+
+
+
+      background:radial-gradient(circle at top, #f8fbff 0%, var(--bg) 70%);
+
+
+
+
+
+
+
+      color:var(--text-dark);
+
+
+
+
+
+
+
+      min-height:100vh;
+
+
+
+
+
+
+
+      overflow-x:hidden;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .viewport {
+
+
+
+
+
+
+
+      width:min(1200px, 95vw);
+
+
+
+
+
+
+
+      margin:24px auto 20px;
+
+
+
+
+
+
+
+      background:linear-gradient(145deg,#ffffffed,#f3f6fbf5);
+
+
+
+
+
+
+
+      border-radius:34px;
+
+
+
+
+
+
+
+      box-shadow:0 28px 60px rgba(16,39,80,0.12);
+
+
+
+
+
+
+
+      padding:32px var(--viewport-pad) 72px;
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      overflow:hidden;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .viewport::before,
+
+
+
+
+
+
+
+    .viewport::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      border-radius:50%;
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.35);
+
+
+
+
+
+
+
+      z-index:0;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .viewport::before {
+
+
+
+
+
+
+
+      width:420px;height:420px;
+
+
+
+
+
+
+
+      top:-160px;right:-80px;
+
+
+
+
+
+
+
+      opacity:0.65;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .viewport::after {
+
+
+
+
+
+
+
+      width:280px;height:280px;
+
+
+
+
+
+
+
+      bottom:-140px;left:-100px;
+
+
+
+
+
+
+
+      opacity:0.45;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .bg-orb {
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      border-radius:50%;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg,rgba(255,255,255,0.8),rgba(156,201,255,0.45));
+
+
+
+
+
+
+
+      box-shadow:0 25px 45px rgba(26,54,101,0.12);
+
+
+
+
+
+
+
+      animation:drift 18s ease-in-out infinite;
+
+
+
+
+
+
+
+      z-index:1;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .bg-orb::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:18%;
+
+
+
+
+
+
+
+      border-radius:50%;
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.35);
+
+
+
+
+
+
+
+      filter:blur(4px);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .bg-orb.orb--1 { width:110px;height:110px; top:90px; left:85px; animation-delay:-2s; }
+
+
+
+
+
+
+
+    .bg-orb.orb--2 { width:80px;height:80px; bottom:120px; left:50%; transform:translateX(-50%); animation-delay:3s; }
+
+
+
+
+
+
+
+    .bg-orb.orb--3 { width:90px;height:90px; top:60%; right:90px; animation-delay:6s; }
+
+
+
+
+
+
+
+    @keyframes drift {
+
+
+
+
+
+
+
+      0%,100% { transform:translate3d(0,0,0); }
+
+
+
+
+
+
+
+      40% { transform:translate3d(12px,-18px,0); }
+
+
+
+
+
+
+
+      70% { transform:translate3d(-15px,15px,0); }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    header {
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      width:calc(100% + var(--viewport-pad) * 2);
+
+
+
+
+
+
+
+      margin:0 calc(-1 * var(--viewport-pad)) 24px;
+
+
+
+
+
+
+
+      padding:18px clamp(32px, 8vw, 72px);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      justify-content:space-between;
+
+
+
+
+
+
+
+      gap:32px;
+
+
+
+
+
+
+
+      border-radius:0;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg, rgba(255,255,255,0.92), rgba(242,246,255,0.72));
+
+
+
+
+
+
+
+      box-shadow:0 18px 32px rgba(16,39,80,0.14);
+
+
+
+
+
+
+
+      backdrop-filter:blur(14px);
+
+
+
+
+
+
+
+      border-bottom:1px solid rgba(255,255,255,0.65);
+
+
+
+
+
+
+
+      z-index:10;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .hero {
+
+
+
+
+
+
+
+      margin-top:24px;
+
+
+
+
+
+
+
+      display:grid;
+
+
+
+
+
+
+
+      grid-template-columns:minmax(280px, 1fr) minmax(300px, 360px) minmax(260px, 1fr);
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:40px;
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .logo {
+
+
+
+
+
+
+
+      font-weight:700;
+
+
+
+
+
+
+
+      font-size:22px;
+
+
+
+
+
+
+
+      letter-spacing:0.12em;
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:10px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .logo svg {
+
+
+
+
+
+
+
+      width:24px;
+
+
+
+
+
+
+
+      height:24px;
+
+
+
+
+
+
+
+      fill:var(--primary);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    nav {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      gap:28px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    nav a {
+
+
+
+
+
+
+
+      text-decoration:none;
+
+
+
+
+
+
+
+      font-weight:500;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      transition:color 0.2s ease;
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:6px;
+
+
+
+
+
+
+
+      font-size:15px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    nav a svg {
+
+
+
+
+
+
+
+      width:16px;
+
+
+
+
+
+
+
+      height:16px;
+
+
+
+
+
+
+
+      fill:currentColor;
+
+
+
+
+
+
+
+      flex-shrink:0;
+
+
+
+
+
+
+
+      transition:transform 0.2s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    nav a.active,
+
+
+
+
+
+
+
+    nav a:hover,
+
+
+
+
+
+
+
+    nav a:focus-visible {
+
+
+
+
+
+
+
+      color:var(--primary);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    nav a.active svg,
+
+
+
+
+
+
+
+    nav a:hover svg,
+
+
+
+
+
+
+
+    nav a:focus-visible svg {
+
+
+
+
+
+
+
+      transform:translateY(-1px);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    nav a.active::after,
+
+
+
+
+
+
+
+    nav a:hover::after,
+
+
+
+
+
+
+
+    nav a:focus-visible::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      left:0;bottom:-10px;
+
+
+
+
+
+
+
+      width:22px;height:3px;
+
+
+
+
+
+
+
+      border-radius:4px;
+
+
+
+
+
+
+
+      background:var(--primary);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    section[id] {
+
+
+
+
+
+
+
+      scroll-margin-top:72px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .btn-glass {
+
+
+
+
+
+
+
+      padding:14px 32px;
+
+
+
+
+
+
+
+      border-radius:999px;
+
+
+
+
+
+
+
+      border:1px solid var(--glass-border);
+
+
+
+
+
+
+
+      background:linear-gradient(135deg,rgba(255,255,255,0.4),rgba(255,255,255,0.05));
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      letter-spacing:0.04em;
+
+
+
+
+
+
+
+      text-decoration:none;
+
+
+
+
+
+
+
+      backdrop-filter:blur(14px);
+
+
+
+
+
+
+
+      box-shadow:0 15px 25px rgba(12,56,174,0.25), inset 0 1px 0 rgba(255,255,255,0.35);
+
+
+
+
+
+
+
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+
+
+
+
+
+
+
+      background-color:var(--primary);
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      overflow:hidden;
+
+
+
+
+
+
+
+      display:inline-flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:10px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .btn-glass svg {
+
+
+
+
+
+
+
+      width:18px;
+
+
+
+
+
+
+
+      height:18px;
+
+
+
+
+
+
+
+      fill:#fff;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .btn-glass::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:-2px;
+
+
+
+
+
+
+
+      border-radius:inherit;
+
+
+
+
+
+
+
+      background:radial-gradient(circle at 20% -20%,rgba(255,255,255,0.6),transparent 45%);
+
+
+
+
+
+
+
+      opacity:0;
+
+
+
+
+
+
+
+      transition:opacity 0.4s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .btn-glass:hover {
+
+
+
+
+
+
+
+      transform:translateY(-4px) scale(1.02);
+
+
+
+
+
+
+
+      box-shadow:0 18px 30px rgba(12,56,174,0.35), inset 0 1px 0 rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .btn-glass:hover::after { opacity:1; }
+
+
+
+
+
+
+
+    .floating-contact {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:16px;
+
+
+
+
+
+
+
+      margin-top:20px;
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      z-index:3;
+
+
+
+
+
+
+
+      flex-wrap:wrap;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__link {
+
+
+
+
+
+
+
+      width:56px;
+
+
+
+
+
+
+
+      height:56px;
+
+
+
+
+
+
+
+      border-radius:18px;
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.82);
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      display:grid;
+
+
+
+
+
+
+
+      place-items:center;
+
+
+
+
+
+
+
+      text-decoration:none;
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      font-size:16px;
+
+
+
+
+
+
+
+      box-shadow:0 16px 22px rgba(24,46,79,0.16);
+
+
+
+
+
+
+
+      transition:transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+
+
+
+
+
+
+
+      backdrop-filter:blur(16px);
+
+
+
+
+
+
+
+      color:var(--text-dark);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__link:hover { transform:translateY(-6px); }
+
+
+
+
+
+
+
+    .floating-contact__link--mail { color:var(--mail); }
+
+
+
+
+
+
+
+    .floating-contact__link--mail:hover {
+
+
+
+
+
+
+
+      background:var(--mail);
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      box-shadow:0 22px 34px rgba(14,107,255,0.45);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__icon {
+
+
+
+
+
+
+
+      font-size:22px;
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      letter-spacing:-0.02em;
+
+
+
+
+
+
+
+      display:inline-flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      justify-content:center;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__link--mail:hover .floating-contact__icon {
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__link--linkedin { color:var(--linkedin); }
+
+
+
+
+
+
+
+    .floating-contact__link--linkedin:hover {
+
+
+
+
+
+
+
+      background:var(--linkedin);
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      box-shadow:0 22px 34px rgba(10,102,194,0.4);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__link--github { color:var(--github); }
+
+
+
+
+
+
+
+    .floating-contact__link--github:hover {
+
+
+
+
+
+
+
+      background:var(--github);
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      box-shadow:0 22px 34px rgba(36,41,47,0.35);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__link--figma { color:var(--figma); }
+
+
+
+
+
+
+
+    .floating-contact__link--figma:hover {
+
+
+
+
+
+
+
+      background:var(--figma);
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      box-shadow:0 22px 34px rgba(242,78,30,0.4);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__link--instagram { color:#d62976; }
+
+
+
+
+
+
+
+    .floating-contact__link--instagram:hover {
+
+
+
+
+
+
+
+      background:#d62976;
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      box-shadow:0 22px 34px rgba(214,41,118,0.4);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__tooltip {
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      left:50%;
+
+
+
+
+
+
+
+      top:0;
+
+
+
+
+
+
+
+      transform:translate(-50%, calc(-100% - 10px));
+
+
+
+
+
+
+
+      padding:10px 18px;
+
+
+
+
+
+
+
+      border-radius:14px;
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.92);
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.7);
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      font-size:14px;
+
+
+
+
+
+
+
+      font-weight:500;
+
+
+
+
+
+
+
+      white-space:nowrap;
+
+
+
+
+
+
+
+      box-shadow:0 14px 28px rgba(20,42,75,0.18);
+
+
+
+
+
+
+
+      opacity:0;
+
+
+
+
+
+
+
+      transition:opacity 0.25s ease, transform 0.25s ease;
+
+
+
+
+
+
+
+      pointer-events:none;
+
+
+
+
+
+
+
+      backdrop-filter:blur(12px);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .floating-contact__link--mail:hover .floating-contact__tooltip {
+
+
+
+
+
+
+
+      opacity:1;
+
+
+
+
+
+
+
+      transform:translate(-50%, calc(-120% - 10px));
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    main { position:relative; z-index:2; }    .intro { grid-column:1; }
+
+
+
+
+
+
+
+    .intro h2 {
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      margin:0 0 12px;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      font-size:18px;
+
+
+
+
+
+
+
+      letter-spacing:0.08em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .intro h1 {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      font-size:clamp(2.5rem, 4.2vw, 3.4rem);
+
+
+
+
+
+
+
+      line-height:1.08;
+
+
+
+
+
+
+
+      letter-spacing:0.02em;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .intro p {
+
+
+
+
+
+
+
+      margin:16px 0 0;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      font-weight:400;
+
+
+
+
+
+
+
+      max-width:360px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .role-cards {
+
+
+
+
+
+
+
+      margin-top:18px;
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      gap:18px;
+
+
+
+
+
+
+
+      flex-wrap:wrap;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .role-card {
+
+
+
+
+
+
+
+      flex:1 1 150px;
+
+
+
+
+
+
+
+      min-width:150px;
+
+
+
+
+
+
+
+      padding:16px 18px;
+
+
+
+
+
+
+
+      border-radius:18px;
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.85);
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      box-shadow:0 18px 34px rgba(20,42,75,0.12);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      gap:12px;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .role-card svg {
+
+
+
+
+
+
+
+      width:28px;
+
+
+
+
+
+
+
+      height:28px;
+
+
+
+
+
+
+
+      fill:var(--primary);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .role-card strong { display:block; font-size:15px; }
+
+
+
+
+
+
+
+    .role-card span { font-size:13px; color:var(--text-muted); }
+
+
+
+
+
+
+
+    .portrait {
+
+
+
+
+
+
+
+      grid-column:2;
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      justify-content:center;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      padding:12px;
+
+
+
+
+
+
+
+      margin-left:56px;
+
+
+
+
+
+
+
+      min-height:100vh;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .portrait::before {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      width:80vh;height:80vh;
+
+
+
+
+
+
+
+      background:radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.72) 48%, rgba(210,224,252,0.1) 75%, rgba(255,255,255,0));
+
+
+
+
+
+
+
+      border-radius:50%;
+
+
+
+
+
+
+
+      top:50%;
+
+
+
+
+
+
+
+      left:50%;
+
+
+
+
+
+
+
+      transform:translate(-50%, -50%);
+
+
+
+
+
+
+
+      box-shadow:0 32px 64px rgba(25,46,88,0.18);
+
+
+
+
+
+
+
+      z-index:0;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .portrait::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      width:96vh;height:96vh;
+
+
+
+
+
+
+
+      top:50%;
+
+
+
+
+
+
+
+      left:50%;
+
+
+
+
+
+
+
+      transform:translate(-50%, -50%);
+
+
+
+
+
+
+
+      border-radius:50%;
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      background:radial-gradient(circle, rgba(255,255,255,0.18), transparent 65%);
+
+
+
+
+
+
+
+      z-index:0;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .portrait img {
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      height:100vh;
+
+
+
+
+
+
+
+      max-height:100vh;
+
+
+
+
+
+
+
+      width:auto;
+
+
+
+
+
+
+
+      max-width:90vw;
+
+
+
+
+
+
+
+      filter:drop-shadow(0 28px 42px rgba(22,41,66,0.24));
+
+
+
+
+
+
+
+      z-index:1;
+
+
+
+
+
+
+
+      border-radius:0;
+
+
+
+
+
+
+
+      transform-origin:50% 80%;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skills {
+
+
+
+
+
+
+
+      grid-column:3;
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:34px;
+
+
+
+
+
+
+
+      align-items:flex-start;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card {
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      padding:26px;
+
+
+
+
+
+
+
+      min-width:280px;
+
+
+
+
+
+
+
+      border-radius:26px;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg, rgba(255,255,255,0.78), rgba(214,226,255,0.18));
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      box-shadow:0 28px 46px rgba(20,42,75,0.2);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      gap:20px;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      animation:floatRight 7s ease-in-out infinite;
+
+
+
+
+
+
+
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+
+
+
+
+
+
+
+      backdrop-filter:blur(18px);
+
+
+
+
+
+
+
+      overflow:visible;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card:not(:last-child)::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      left:44px;
+
+
+
+
+
+
+
+      bottom:-58px;
+
+
+
+
+
+
+
+      width:14px;
+
+
+
+
+
+
+
+      height:58px;
+
+
+
+
+
+
+
+      background:
+
+
+
+
+
+
+
+        radial-gradient(circle at top, var(--skill-accent) 0%, rgba(255,255,255,0) 70%),
+
+
+
+
+
+
+
+        linear-gradient(180deg, var(--skill-glow), transparent);
+
+
+
+
+
+
+
+      background-repeat:no-repeat;
+
+
+
+
+
+
+
+      background-size:14px 14px, 2px 46px;
+
+
+
+
+
+
+
+      background-position:center 0, center 14px;
+
+
+
+
+
+
+
+      opacity:0.85;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card:nth-child(2) { animation-delay:1.2s; }
+
+
+
+
+
+
+
+    .skill-card:nth-child(3) { animation-delay:2.4s; }
+
+
+
+
+
+
+
+    .skill-card::before {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:0;
+
+
+
+
+
+
+
+      border-radius:inherit;
+
+
+
+
+
+
+
+      background:
+
+
+
+
+
+
+
+        radial-gradient(circle at 18% -25%, var(--skill-glow) 0%, rgba(255,255,255,0) 56%),
+
+
+
+
+
+
+
+        linear-gradient(135deg, rgba(255,255,255,0.65), rgba(255,255,255,0.08));
+
+
+
+
+
+
+
+      opacity:0.9;
+
+
+
+
+
+
+
+      z-index:-1;
+
+
+
+
+
+
+
+      pointer-events:none;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card:hover {
+
+
+
+
+
+
+
+      transform:translateY(-14px) translateX(6px);
+
+
+
+
+
+
+
+      box-shadow:0 38px 70px rgba(20,42,75,0.28), 0 18px 38px var(--skill-glow);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    @keyframes floatRight {
+
+
+
+
+
+
+
+      0%, 100% { transform:translateX(0) translateY(0); }
+
+
+
+
+
+
+
+      50% { transform:translateX(12px) translateY(-12px); }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card__badge {
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      top:-18px;
+
+
+
+
+
+
+
+      left:26px;
+
+
+
+
+
+
+
+      padding:6px 16px;
+
+
+
+
+
+
+
+      border-radius:999px;
+
+
+
+
+
+
+
+      background:var(--skill-accent);
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      font-size:11px;
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      letter-spacing:0.12em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+      box-shadow:0 12px 24px var(--skill-glow);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card__icon {
+
+
+
+
+
+
+
+      width:76px;
+
+
+
+
+
+
+
+      height:76px;
+
+
+
+
+
+
+
+      border-radius:22px;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.15));
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      box-shadow:0 18px 32px rgba(20,42,75,0.18);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      justify-content:center;
+
+
+
+
+
+
+
+      flex-shrink:0;
+
+
+
+
+
+
+
+      transition:transform 0.35s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card__icon img {
+
+
+
+
+
+
+
+      width:100%;
+
+
+
+
+
+
+
+      height:100%;
+
+
+
+
+
+
+
+      object-fit:contain;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card:hover .skill-card__icon {
+
+
+
+
+
+
+
+      transform:translateY(-6px) scale(1.04);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card__text {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:6px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card__title {
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      font-size:17px;
+
+
+
+
+
+
+
+      letter-spacing:0.01em;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card__meta {
+
+
+
+
+
+
+
+      font-size:13px;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      max-width:200px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-card[data-tone="violet"] { --skill-accent:#7e65ff; --skill-glow:rgba(126,101,255,0.32); }
+
+
+
+
+
+
+
+    .skill-card[data-tone="blue"] { --skill-accent:#1d7cff; --skill-glow:rgba(29,124,255,0.32); }
+
+
+
+
+
+
+
+    .skill-card[data-tone="orange"] { --skill-accent:#ff8f4f; --skill-glow:rgba(255,143,79,0.3); }
+
+
+
+
+
+
+
+    .section-card {
+
+
+
+
+
+
+
+      margin-top:72px;
+
+
+
+
+
+
+
+      padding:48px 56px;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg, rgba(255,255,255,0.94), rgba(242,246,255,0.92));
+
+
+
+
+
+
+
+      border-radius:32px;
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      box-shadow:0 24px 48px rgba(20,42,75,0.1);
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      overflow:hidden;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .section-heading {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      font-size:26px;
+
+
+
+
+
+
+
+      letter-spacing:0.12em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:12px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .section-heading::before,
+
+
+
+
+
+
+
+    .section-heading::after {
+
+
+
+
+
+
+
+      content:"+";
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      color:var(--primary);
+
+
+
+
+
+
+
+      font-size:18px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .section-heading::before { opacity:0.7; }
+
+
+
+
+
+
+
+    .section-heading::after { opacity:0.35; }
+
+
+
+
+
+
+
+    .about {
+
+
+
+
+
+
+
+      display:block;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-grid {
+
+
+
+
+
+
+
+      display:grid;
+
+
+
+
+
+
+
+      grid-template-columns:minmax(260px, 320px) minmax(0, 1fr);
+
+
+
+
+
+
+
+      gap:48px;
+
+
+
+
+
+
+
+      align-items:start;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__visual {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:24px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__portrait {
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      width:100%;
+
+
+
+
+
+
+
+      max-width:360px;
+
+
+
+
+
+
+
+      border-radius:28px;
+
+
+
+
+
+
+
+      background:linear-gradient(150deg, rgba(255,255,255,0.9), rgba(212,227,255,0.35));
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.6);
+
+
+
+
+
+
+
+      box-shadow:0 30px 48px rgba(24,44,78,0.16);
+
+
+
+
+
+
+
+      overflow:hidden;
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      justify-content:center;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__portrait::before,
+
+
+
+
+
+
+
+    .about__portrait::after {
+
+
+
+
+
+
+
+      content:none;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__portrait img {
+
+
+
+
+
+
+
+      width:100%;
+
+
+
+
+
+
+
+      height:auto;
+
+
+
+
+
+
+
+      display:block;
+
+
+
+
+
+
+
+      border-radius:20px;
+
+
+
+
+
+
+
+      object-fit:cover;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chips {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:12px;
+
+
+
+
+
+
+
+      width:100%;
+
+
+
+
+
+
+
+      max-width:280px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip {
+
+      position:relative;
+
+      display:block;
+
+      padding:12px 18px;
+
+      border-radius:18px;
+
+      background:#ffffff;
+
+      border:1px solid rgba(14,107,255,0.12);
+
+      color:var(--text-muted);
+
+      font-size:13px;
+
+      text-align:center;
+
+      text-decoration:none;
+
+      box-shadow:0 10px 18px rgba(20,42,75,0.08);
+
+      transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+
+    }
+
+.about__chip--link {
+
+      cursor:pointer;
+
+    }
+
+    .about__chip--link:visited {
+
+      color:var(--text-muted);
+
+    }
+
+    .about__chip--link:focus-visible {
+
+      outline:2px solid rgba(14,107,255,0.35);
+
+      outline-offset:4px;
+
+    }
+
+
+
+
+
+
+
+    .about__chip::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:-2px;
+
+
+
+
+
+
+
+      border-radius:inherit;
+
+
+
+
+
+
+
+      border:1px solid transparent;
+
+
+
+
+
+
+
+      box-shadow:0 0 0 rgba(0,0,0,0);
+
+
+
+
+
+
+
+      opacity:0;
+
+
+
+
+
+
+
+      transition:border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:hover {
+
+
+
+
+
+
+
+      transform:translateY(-4px);
+
+
+
+
+
+
+
+      color:var(--text-dark);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:hover::after {
+
+
+
+
+
+
+
+      opacity:1;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:nth-child(1):hover {
+
+
+
+
+
+
+
+      border-color:rgba(255,92,141,0.75);
+
+
+
+
+
+
+
+      box-shadow:0 16px 28px rgba(255,92,141,0.25);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:nth-child(1):hover::after {
+
+
+
+
+
+
+
+      border-color:rgba(255,92,141,0.8);
+
+
+
+
+
+
+
+      box-shadow:0 0 18px rgba(255,92,141,0.55);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:nth-child(2):hover {
+
+
+
+
+
+
+
+      border-color:rgba(0,206,201,0.75);
+
+
+
+
+
+
+
+      box-shadow:0 16px 28px rgba(0,206,201,0.22);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:nth-child(2):hover::after {
+
+
+
+
+
+
+
+      border-color:rgba(0,206,201,0.8);
+
+
+
+
+
+
+
+      box-shadow:0 0 18px rgba(0,206,201,0.5);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:nth-child(3):hover {
+
+
+
+
+
+
+
+      border-color:rgba(255,193,59,0.75);
+
+
+
+
+
+
+
+      box-shadow:0 16px 28px rgba(255,193,59,0.22);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:nth-child(3):hover::after {
+
+
+
+
+
+
+
+      border-color:rgba(255,193,59,0.8);
+
+
+
+
+
+
+
+      box-shadow:0 0 18px rgba(255,193,59,0.45);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:nth-child(4):hover {
+
+
+
+
+
+
+
+      border-color:rgba(132,94,247,0.75);
+
+
+
+
+
+
+
+      box-shadow:0 16px 28px rgba(132,94,247,0.24);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__chip:nth-child(4):hover::after {
+
+
+
+
+
+
+
+      border-color:rgba(132,94,247,0.8);
+
+
+
+
+
+
+
+      box-shadow:0 0 18px rgba(132,94,247,0.5);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__details {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:22px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__lead {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      color:var(--text-dark);
+
+
+
+
+
+
+
+      font-size:18px;
+
+
+
+
+
+
+
+      line-height:1.7;
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__details p {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      line-height:1.7;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about__cards {
+
+
+
+
+
+
+
+      display:grid;
+
+
+
+
+
+
+
+      gap:22px;
+
+
+
+
+
+
+
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card {
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      padding:22px 24px;
+
+
+
+
+
+
+
+      border-radius:22px;
+
+
+
+
+
+
+
+      background:linear-gradient(145deg, rgba(255,255,255,0.94), rgba(230,239,255,0.6));
+
+
+
+
+
+
+
+      border:1px solid rgba(14,107,255,0.12);
+
+
+
+
+
+
+
+      box-shadow:0 18px 32px rgba(18,42,78,0.12);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:14px;
+
+
+
+
+
+
+
+      backdrop-filter:blur(12px);
+
+
+
+
+
+
+
+      overflow:hidden;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card::before {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:0;
+
+
+
+
+
+
+
+      border-radius:inherit;
+
+
+
+
+
+
+
+      background:radial-gradient(circle at top right, rgba(14,107,255,0.18), rgba(255,255,255,0));
+
+
+
+
+
+
+
+      opacity:0.45;
+
+
+
+
+
+
+
+      pointer-events:none;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      top:0;
+
+
+
+
+
+
+
+      left:0;
+
+
+
+
+
+
+
+      width:100%;
+
+
+
+
+
+
+
+      height:3px;
+
+
+
+
+
+
+
+      background:linear-gradient(90deg, rgba(14,107,255,0.35), rgba(255,255,255,0));
+
+
+
+
+
+
+
+      opacity:0.8;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card h4 {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      font-size:15px;
+
+
+
+
+
+
+
+      letter-spacing:0.1em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+      color:var(--text-dark);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card ul {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      padding-left:18px;
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:10px;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card li {
+
+
+
+
+
+
+
+      line-height:1.6;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card li strong {
+
+
+
+
+
+
+
+      color:var(--text-dark);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card small {
+
+
+
+
+
+
+
+      display:block;
+
+
+
+
+
+
+
+      font-size:12px;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      letter-spacing:0.08em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+      margin-top:4px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card--focus ul {
+
+
+
+
+
+
+
+      list-style:none;
+
+
+
+
+
+
+
+      padding-left:0;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card--focus li {
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      padding-left:18px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .about-card--focus li::before {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      left:0;
+
+
+
+
+
+
+
+      top:10px;
+
+
+
+
+
+
+
+      width:8px;
+
+
+
+
+
+
+
+      height:8px;
+
+
+
+
+
+
+
+      border-radius:50%;
+
+
+
+
+
+
+
+      background:var(--primary);
+
+
+
+
+
+
+
+      box-shadow:0 0 0 4px rgba(14,107,255,0.15);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .services {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:32px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .services > p {
+
+
+
+
+
+
+
+      margin:16px 0 0;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      max-width:560px;
+
+
+
+
+
+
+
+      line-height:1.6;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-grid {
+
+
+
+
+
+
+
+      display:grid;
+
+
+
+
+
+
+
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+
+
+
+
+
+
+      gap:26px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card {
+
+
+
+
+
+
+
+      --service-accent:var(--primary);
+
+
+
+
+
+
+
+      --service-glow:rgba(14,107,255,0.22);
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      padding:30px 28px;
+
+
+
+
+
+
+
+      border-radius:26px;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg, rgba(255,255,255,0.86), rgba(214,226,255,0.16));
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      box-shadow:0 22px 42px rgba(20,42,75,0.12);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:18px;
+
+
+
+
+
+
+
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+
+
+
+
+
+
+
+      backdrop-filter:blur(14px);
+
+
+
+
+
+
+
+      isolation:isolate;
+
+
+
+
+
+
+
+      overflow:hidden;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card::before {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:-20% 40% auto -20%;
+
+
+
+
+
+
+
+      height:70%;
+
+
+
+
+
+
+
+      background:radial-gradient(circle, var(--service-accent) 0%, rgba(255,255,255,0) 65%);
+
+
+
+
+
+
+
+      opacity:0.45;
+
+
+
+
+
+
+
+      z-index:-1;
+
+
+
+
+
+
+
+      transition:opacity 0.35s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:auto -10% -35% 30%;
+
+
+
+
+
+
+
+      height:60%;
+
+
+
+
+
+
+
+      background:radial-gradient(circle, var(--service-glow) 0%, rgba(255,255,255,0) 70%);
+
+
+
+
+
+
+
+      opacity:0.5;
+
+
+
+
+
+
+
+      z-index:-1;
+
+
+
+
+
+
+
+      transition:opacity 0.35s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card[data-tone="blue"] { --service-accent:#1d7cff; --service-glow:rgba(29,124,255,0.26); }
+
+
+
+
+
+
+
+    .service-card[data-tone="violet"] { --service-accent:#7e5bff; --service-glow:rgba(126,91,255,0.26); }
+
+
+
+
+
+
+
+    .service-card[data-tone="orange"] { --service-accent:#ff8f4f; --service-glow:rgba(255,143,79,0.28); }
+
+
+
+
+
+
+
+    .service-card__icon {
+
+
+
+
+
+
+
+      width:66px;
+
+
+
+
+
+
+
+      height:66px;
+
+
+
+
+
+
+
+      border-radius:20px;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.25));
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      box-shadow:0 16px 28px var(--service-glow);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      justify-content:center;
+
+
+
+
+
+
+
+      transition:transform 0.35s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card__icon img {
+
+
+
+
+
+
+
+      width:42px;
+
+
+
+
+
+
+
+      height:42px;
+
+
+
+
+
+
+
+      object-fit:contain;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card__badge {
+
+
+
+
+
+
+
+      align-self:flex-start;
+
+
+
+
+
+
+
+      padding:6px 14px;
+
+
+
+
+
+
+
+      border-radius:999px;
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.7);
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      font-size:11px;
+
+
+
+
+
+
+
+      letter-spacing:0.12em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      transition:background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card h4 {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      font-size:19px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card p {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      line-height:1.6;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card__list {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      padding:0;
+
+
+
+
+
+
+
+      list-style:none;
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:8px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card__list li {
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      padding-left:18px;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      font-size:13px;
+
+
+
+
+
+
+
+      line-height:1.55;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card__list li::before {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      left:0;
+
+
+
+
+
+
+
+      top:8px;
+
+
+
+
+
+
+
+      width:8px;
+
+
+
+
+
+
+
+      height:8px;
+
+
+
+
+
+
+
+      border-radius:50%;
+
+
+
+
+
+
+
+      background:var(--service-accent);
+
+
+
+
+
+
+
+      box-shadow:0 0 0 4px rgba(255,255,255,0.45);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card:hover {
+
+
+
+
+
+
+
+      transform:translateY(-12px);
+
+
+
+
+
+
+
+      box-shadow:0 32px 56px rgba(20,42,75,0.18), 0 18px 32px var(--service-glow);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card:hover::before,
+
+
+
+
+
+
+
+    .service-card:hover::after {
+
+
+
+
+
+
+
+      opacity:0.75;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card:hover .service-card__icon {
+
+
+
+
+
+
+
+      transform:translateY(-6px) scale(1.05);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .service-card:hover .service-card__badge {
+
+
+
+
+
+
+
+      background:var(--service-accent);
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      border-color:transparent;
+
+
+
+
+
+
+
+      box-shadow:0 12px 24px var(--service-glow);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skills-section {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:28px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip-grid {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-wrap:wrap;
+
+
+
+
+
+
+
+      gap:14px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip {
+
+
+
+
+
+
+
+      --neon:rgba(14,107,255,0.85);
+
+
+
+
+
+
+
+      padding:10px 18px;
+
+
+
+
+
+
+
+      border-radius:18px;
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.85);
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.55);
+
+
+
+
+
+
+
+      color:var(--text-dark);
+
+
+
+
+
+
+
+      font-size:13px;
+
+
+
+
+
+
+
+      letter-spacing:0.03em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+      display:inline-flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:8px;
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      transition:transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, background 0.25s ease;
+
+
+
+
+
+
+
+      box-shadow:0 12px 22px rgba(20,42,75,0.12);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip::before {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:-6px;
+
+
+
+
+
+
+
+      border-radius:inherit;
+
+
+
+
+
+
+
+      background:radial-gradient(circle, var(--neon) 0%, transparent 65%);
+
+
+
+
+
+
+
+      opacity:0;
+
+
+
+
+
+
+
+      transition:opacity 0.25s ease;
+
+
+
+
+
+
+
+      z-index:-1;
+
+
+
+
+
+
+
+      filter:blur(14px);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip::after {
+
+
+
+
+
+
+
+      content:"";
+
+
+
+
+
+
+
+      position:absolute;
+
+
+
+
+
+
+
+      inset:0;
+
+
+
+
+
+
+
+      border-radius:inherit;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.2));
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.4);
+
+
+
+
+
+
+
+      opacity:1;
+
+
+
+
+
+
+
+      transition:opacity 0.25s ease;
+
+
+
+
+
+
+
+      z-index:-2;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip svg {
+
+
+
+
+
+
+
+      width:16px;
+
+
+
+
+
+
+
+      height:16px;
+
+
+
+
+
+
+
+      fill:currentColor;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip:hover {
+
+
+
+
+
+
+
+      transform:translateY(-4px);
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      background:var(--neon);
+
+
+
+
+
+
+
+      box-shadow:0 22px 34px rgba(20,42,75,0.2), 0 0 24px var(--neon);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip:hover::before { opacity:1; }
+
+
+
+
+
+
+
+    .skill-chip:hover::after { opacity:0.35; }
+
+
+
+
+
+
+
+    .skill-chip[data-neon="cyan"] { --neon:rgba(72,226,255,0.95); }
+
+
+
+
+
+
+
+    .skill-chip[data-neon="pink"] { --neon:rgba(255,92,219,0.95); }
+
+
+
+
+
+
+
+    .skill-chip[data-neon="lime"] { --neon:rgba(153,255,126,0.95); }
+
+
+
+
+
+
+
+    .skill-chip[data-neon="purple"] { --neon:rgba(205,160,255,0.95); }
+
+
+
+
+
+
+
+    .skill-chip[data-neon="amber"] { --neon:rgba(255,196,88,0.98); }
+
+
+
+
+
+
+
+    .skill-chip[data-neon="blue"] { --neon:rgba(88,158,255,0.95); }
+
+
+
+
+
+
+
+    .skill-chip[data-neon="teal"] { --neon:rgba(88,255,222,0.95); }
+
+
+
+
+
+
+
+    .skill-chip[data-neon="red"] { --neon:rgba(255,122,122,0.98); }
+
+
+
+
+
+
+
+    .chip-icon {
+
+
+
+
+
+
+
+      width:22px;
+
+
+
+
+
+
+
+      height:22px;
+
+
+
+
+
+
+
+      object-fit:contain;
+
+
+
+
+
+
+
+      transition:transform 0.25s ease;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip:hover .chip-icon {
+
+
+
+
+
+
+
+      transform:scale(1.08);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .chip-label {
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      letter-spacing:0.03em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip--stacked {
+
+
+
+
+
+
+
+      align-items:flex-start;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip--stacked .chip-text {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:2px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip--stacked strong {
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      letter-spacing:0.03em;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip--stacked small {
+
+
+
+
+
+
+
+      font-size:11px;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      text-transform:none;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-chip--stacked:hover small {
+
+
+
+
+
+
+
+      color:#f4f6ff;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-subsection {
+
+
+
+
+
+
+
+      margin-top:32px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .skill-subsection h4 {
+
+
+
+
+
+
+
+      margin:0 0 16px;
+
+
+
+
+
+
+
+      font-size:16px;
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+      letter-spacing:0.08em;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .works {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:32px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .project-grid {
+
+
+
+
+
+
+
+      display:grid;
+
+
+
+
+
+
+
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+
+
+
+
+
+
+      gap:32px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card {
+
+
+
+
+
+
+
+      padding:24px;
+
+
+
+
+
+
+
+      border-radius:26px;
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.82);
+
+
+
+
+
+
+
+      border:1px solid rgba(255,255,255,0.6);
+
+
+
+
+
+
+
+      box-shadow:0 22px 38px rgba(20,42,75,0.12);
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:18px;
+
+
+
+
+
+
+
+      height:100%;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card__media {
+
+
+
+
+
+
+
+      position:relative;
+
+
+
+
+
+
+
+      border-radius:22px;
+
+
+
+
+
+
+
+      overflow:hidden;
+
+
+
+
+
+
+
+      box-shadow:0 18px 32px rgba(20,42,75,0.18);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card__media img {
+
+
+
+
+
+
+
+      width:100%;
+
+
+
+
+
+
+
+      display:block;
+
+
+
+
+
+
+
+      object-fit:cover;
+
+
+
+
+
+
+
+      height:190px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card__tags {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-wrap:wrap;
+
+
+
+
+
+
+
+      gap:10px;
+
+
+
+
+
+
+
+      font-size:12px;
+
+
+
+
+
+
+
+      color:var(--primary);
+
+
+
+
+
+
+
+      text-transform:uppercase;
+
+
+
+
+
+
+
+      letter-spacing:0.08em;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card__title {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      font-size:20px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card p {
+
+
+
+
+
+
+
+      margin:0;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      line-height:1.6;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card__links {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-wrap:wrap;
+
+
+
+
+
+
+
+      gap:16px;
+
+
+
+
+
+
+
+      font-size:14px;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card__links a {
+
+
+
+
+
+
+
+      color:var(--primary);
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      text-decoration:none;
+
+
+
+
+
+
+
+      display:inline-flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:6px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .work-card__links svg {
+
+
+
+
+
+
+
+      width:16px;
+
+
+
+
+
+
+
+      height:16px;
+
+
+
+
+
+
+
+      fill:var(--primary);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta {
+
+
+
+
+
+
+
+      display:grid;
+
+
+
+
+
+
+
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+
+
+
+
+
+
+
+      gap:32px;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      background:linear-gradient(135deg, rgba(14,107,255,0.12), rgba(255,255,255,0.95));
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta h3 {
+
+
+
+
+
+
+
+      margin:0 0 16px;
+
+
+
+
+
+
+
+      font-size:28px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta p {
+
+
+
+
+
+
+
+      margin:0 0 24px;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      line-height:1.6;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-actions {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      gap:18px;
+
+
+
+
+
+
+
+      flex-wrap:wrap;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary {
+
+
+
+
+
+
+
+      padding:14px 28px;
+
+
+
+
+
+
+
+      border-radius:999px;
+
+
+
+
+
+
+
+      border:1px solid rgba(14,107,255,0.35);
+
+
+
+
+
+
+
+      background:rgba(255,255,255,0.8);
+
+
+
+
+
+
+
+      color:var(--primary);
+
+
+
+
+
+
+
+      font-weight:600;
+
+
+
+
+
+
+
+      text-decoration:none;
+
+
+
+
+
+
+
+      box-shadow:0 12px 24px rgba(14,107,255,0.15);
+
+
+
+
+
+
+
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+
+
+
+
+
+
+
+      display:inline-flex;
+
+
+
+
+
+
+
+      align-items:center;
+
+
+
+
+
+
+
+      gap:8px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary svg {
+
+
+
+
+
+
+
+      width:18px;
+
+
+
+
+
+
+
+      height:18px;
+
+
+
+
+
+
+
+      fill:var(--primary);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary:hover {
+
+
+
+
+
+
+
+      transform:translateY(-4px);
+
+
+
+
+
+
+
+      box-shadow:0 16px 28px rgba(14,107,255,0.22);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary--instagram {
+
+
+
+
+
+
+
+      border-color:rgba(214,41,118,0.35);
+
+
+
+
+
+
+
+      color:#d62976;
+
+
+
+
+
+
+
+      box-shadow:0 12px 24px rgba(214,41,118,0.18);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary--instagram svg {
+
+
+
+
+
+
+
+      fill:#d62976;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary--instagram:hover {
+
+
+
+
+
+
+
+      background:#d62976;
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      box-shadow:0 16px 28px rgba(214,41,118,0.28);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary--instagram:hover svg {
+
+
+
+
+
+
+
+      fill:#fff;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary--resume {
+
+
+
+
+
+
+
+      border-color:rgba(14,107,255,0.35);
+
+
+
+
+
+
+
+      color:var(--primary);
+
+
+
+
+
+
+
+      box-shadow:0 12px 24px rgba(14,107,255,0.18);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary--resume svg {
+
+
+
+
+
+
+
+      fill:var(--primary);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary--resume:hover {
+
+
+
+
+
+
+
+      background:var(--primary);
+
+
+
+
+
+
+
+      color:#fff;
+
+
+
+
+
+
+
+      box-shadow:0 16px 28px rgba(14,107,255,0.28);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-secondary--resume:hover svg {
+
+
+
+
+
+
+
+      fill:#fff;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-availability {
+
+
+
+
+
+
+
+      display:flex;
+
+
+
+
+
+
+
+      flex-direction:column;
+
+
+
+
+
+
+
+      gap:12px;
+
+
+
+
+
+
+
+      justify-content:center;
+
+
+
+
+
+
+
+      text-align:right;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-availability span {
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      font-size:14px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    .cta-availability strong {
+
+
+
+
+
+
+
+      font-size:20px;
+
+
+
+
+
+
+
+      color:var(--text-dark);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    footer {
+
+
+
+
+
+
+
+      margin-top:48px;
+
+
+
+
+
+
+
+      text-align:center;
+
+
+
+
+
+
+
+      color:var(--text-muted);
+
+
+
+
+
+
+
+      font-size:14px;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    @media (max-width:1180px) {
+
+
+
+
+
+
+
+      :root { --viewport-pad:40px; }
+
+
+
+
+
+
+
+      .viewport { padding:32px var(--viewport-pad) 60px; }
+
+
+
+
+
+
+
+      .hero {
+
+
+
+
+
+
+
+        grid-template-columns:minmax(0, 1.05fr) minmax(0, 0.95fr);
+
+
+
+
+
+
+
+        gap:28px;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+      .portrait {
+
+
+
+
+
+
+
+        margin-left:24px;
+
+
+
+
+
+
+
+        min-height:88vh;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+      .portrait::before { width:68vh;height:68vh; }
+
+
+
+
+
+
+
+      .portrait::after { width:84vh;height:84vh; }
+
+
+
+
+
+
+
+      .portrait img { height:88vh; max-height:88vh; }
+
+
+
+
+
+
+
+      .skills {
+
+
+
+
+
+
+
+        grid-column:1 / span 2;
+
+
+
+
+
+
+
+        flex-direction:row;
+
+
+
+
+
+
+
+        flex-wrap:wrap;
+
+
+
+
+
+
+
+        justify-content:center;
+
+
+
+
+
+
+
+        gap:20px;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+      .skill-card { min-width:220px; }
+
+
+
+
+
+
+
+      .skills .skill-card:not(:last-child)::after { display:none; }
+
+
+
+
+
+
+
+      .section-card { padding:38px 36px; }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    @media (max-width:1024px) {
+
+
+
+
+
+
+
+      :root { --viewport-pad:30px; }
+
+
+
+
+
+
+
+      .viewport { padding:28px var(--viewport-pad) 54px; }
+
+
+
+
+
+
+
+      .hero {
+
+
+
+
+
+
+
+        grid-template-columns:minmax(0, 1fr) minmax(0, 0.9fr);
+
+
+
+
+
+
+
+        gap:24px;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+      .portrait {
+
+
+
+
+
+
+
+        margin-left:0;
+
+
+
+
+
+
+
+        min-height:auto;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+      .portrait::before { width:56vh;height:56vh; }
+
+
+
+
+
+
+
+      .portrait::after { width:68vh;height:68vh; }
+
+
+
+
+
+
+
+      .portrait img { height:auto; max-height:520px; width:72%; max-width:340px; }
+
+
+
+
+
+
+
+      .skills {
+
+
+
+
+
+
+
+        grid-column:1 / span 2;
+
+
+
+
+
+
+
+        flex-direction:row;
+
+
+
+
+
+
+
+        flex-wrap:wrap;
+
+
+
+
+
+
+
+        justify-content:center;
+
+
+
+
+
+
+
+        gap:18px;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+      .skill-card { min-width:210px; }
+
+
+
+
+
+
+
+      .skills .skill-card:not(:last-child)::after { display:none; }
+
+
+
+
+
+
+
+      .section-card { padding:34px 32px; }
+
+
+
+
+
+
+
+      .about-grid { grid-template-columns:1fr; gap:32px; }
+
+
+
+
+
+
+
+      .about__visual { align-items:center; }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    @media (max-width:860px) {
+
+
+
+
+
+
+
+      :root { --viewport-pad:24px; }
+
+
+
+
+
+
+
+      .viewport { padding:32px var(--viewport-pad) 54px; }
+
+
+
+
+
+
+
+      header { flex-direction:column; align-items:center; gap:18px; padding:14px 20px; }
+
+
+
+
+
+
+
+      nav { gap:16px; flex-wrap:wrap; justify-content:center; }
+
+
+
+
+
+
+
+      nav a { margin:0 10px; }
+
+
+
+
+
+
+
+      .hero { grid-template-columns:1fr; text-align:center; gap:32px; }
+
+
+
+
+
+
+
+      .intro, .portrait, .skills { grid-column:auto; }
+
+
+
+
+
+
+
+      .intro p { margin-inline:auto; }
+
+
+
+
+
+
+
+      .floating-contact { justify-content:center; }
+
+
+
+
+
+
+
+      .portrait { min-height:auto; margin-left:0; }
+
+
+
+
+
+
+
+      .portrait::before { width:300px;height:300px; }
+
+
+
+
+
+
+
+      .portrait::after { width:340px;height:340px; }
+
+
+
+
+
+
+
+      .portrait img { height:auto; max-height:320px; width:70%; max-width:260px; }
+
+
+
+
+
+
+
+      .skills { align-items:center; flex-direction:column; gap:20px; }
+
+
+
+
+
+
+
+      .skills .skill-card { width:min(280px, 90%); min-width:0; }
+
+
+
+
+
+
+
+      .skills .skill-card:not(:last-child)::after { display:none; }
+
+
+
+
+
+
+
+      .section-card { padding:32px 24px; }
+
+
+
+
+
+
+
+      .cta { grid-template-columns:1fr; text-align:center; }
+
+
+
+
+
+
+
+      .cta-availability { text-align:center; }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    @media (max-width:720px) {
+
+
+
+
+
+
+
+      .role-cards { flex-direction:column; align-items:center; gap:16px; }
+
+
+
+
+
+
+
+      .floating-contact { gap:12px; }
+
+
+
+
+
+
+
+      .floating-contact__link { width:54px; height:54px; }
+
+
+
+
+
+
+
+      .service-grid,
+
+
+
+
+
+
+
+      .project-grid { grid-template-columns:1fr; }
+
+
+
+
+
+
+
+      .about__cards { grid-template-columns:1fr; }
+
+
+
+
+
+
+
+      .skill-chip-grid { justify-content:center; }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    @media (max-width:540px) {
+
+
+
+
+
+
+
+      :root { --viewport-pad:18px; }
+
+
+
+
+
+
+
+      .viewport { padding:22px var(--viewport-pad) 44px; }
+
+
+
+
+
+
+
+      header { padding:12px 16px; }
+
+
+
+
+
+
+
+      .intro h1 { font-size:clamp(2.2rem, 8vw, 2.6rem); }
+
+
+
+
+
+
+
+      .intro p { font-size:14px; }
+
+
+
+
+
+
+
+      nav { gap:12px; }
+
+
+
+
+
+
+
+      .floating-contact__link { width:50px; height:50px; }
+
+
+
+
+
+
+
+      .portrait::before { width:230px;height:230px; }
+
+
+
+
+
+
+
+      .portrait::after { width:270px;height:270px; }
+
+
+
+
+
+
+
+      .portrait img { max-width:200px; }
+
+
+
+
+
+
+
+      .skills .skill-card { width:100%; }
+
+
+
+
+
+
+
+      .skill-card__icon { width:60px; height:60px; }
+
+
+
+
+
+
+
+      .skill-card__meta { font-size:12px; }
+
+
+
+
+
+
+
+      .service-card { padding:26px 22px; }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+  </style>
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+
+<body>
+
+
+
+
+
+
+
+  <div class="viewport" id="top">
+
+
+
+
+
+
+
+    <div class="bg-orb orb--1"></div>
+
+
+
+
+
+
+
+    <div class="bg-orb orb--2"></div>
+
+
+
+
+
+
+
+    <div class="bg-orb orb--3"></div>
+
+
+
+
+
+
+
+    <header>
+
+
+
+
+
+
+
+      <div class="logo">
+
+
+
+
+
+
+
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10.012 10.012 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm3.5-8.5a.999.999 0 0 1-.293.707l-3 3a1 1 0 1 1-1.414-1.414L12.586 12 10.8 10.207a1 1 0 0 1 1.414-1.414l3 3a.999.999 0 0 1 .286.707Z"></path></svg>
+
+
+
+
+
+
+
+        rah.
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+      <nav>
+
+
+
+
+
+
+
+        <a href="#hero">
+
+
+
+
+
+
+
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+
+
+
+
+
+
+            <path d="M12 3 3 10.5V21h7v-6h4v6h7v-10.5L12 3Z"></path>
+
+
+
+
+
+
+
+          </svg>
+
+
+
+
+
+
+
+          Home
+
+
+
+
+
+
+
+        </a>
+
+
+
+
+
+
+
+        <a href="#works">
+
+
+
+
+
+
+
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+
+
+
+
+
+
+            <path d="M3 3h8v8H3V3Zm10 0h8v8h-8V3Zm-10 10h8v8H3v-8Zm10 0h8v8h-8v-8Z"></path>
+
+
+
+
+
+
+
+          </svg>
+
+
+
+
+
+
+
+          Projects
+
+
+
+
+
+
+
+        </a>
+
+
+
+
+
+
+
+        <a href="#services">
+
+
+
+
+
+
+
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+
+
+
+
+
+
+            <path d="M12 3 3 7.5 12 12l9-4.5L12 3Zm-9 7.5L12 15l9-4.5v5L12 20l-9-4.5v-5Z"></path>
+
+
+
+
+
+
+
+          </svg>
+
+
+
+
+
+
+
+          Services
+
+
+
+
+
+
+
+        </a>
+
+
+
+
+
+
+
+        <a href="#skills">
+
+
+
+
+
+
+
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+
+
+
+
+
+
+            <path d="M4 14h3v7H4v-7Zm6-5h3v12h-3V9Zm6-7h3v19h-3V2Z"></path>
+
+
+
+
+
+
+
+          </svg>
+
+
+
+
+
+
+
+          Skills
+
+
+
+
+
+
+
+        </a>
+
+
+
+
+
+
+
+        <a href="#about">
+
+
+
+
+
+
+
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+
+
+
+
+
+
+            <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 5v2h16v-2c0-2.99-3.58-5-8-5Z"></path>
+
+
+
+
+
+
+
+          </svg>
+
+
+
+
+
+
+
+          About
+
+
+
+
+
+
+
+        </a>
+
+
+
+
+
+
+
+      </nav>
+
+
+
+
+
+
+
+      <a class="btn-glass" href="#contact"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3Zm9 7 9-6H3Z"></path></svg>Let's Talk</a>
+
+
+
+
+
+
+
+    </header>
+
+
+
+
+
+
+
+    <main>
+
+
+
+
+
+
+
+      <section class="hero" id="hero">
+
+
+
+
+
+
+
+        <div class="intro">
+
+
+
+
+
+
+
+          <h2>Hello, I'm</h2>
+
+
+
+
+
+
+
+          <h1>RAHUL MALI</h1>
+
+
+
+
+
+
+
+          <p>Front-end developer &amp; UI designer focused on Tailwind CSS, React, and polished user journeys. At Sedani Digital I ship responsive product experiences while experimenting with motion and micro-interactions.</p>
+
+
+
+
+
+
+
+          <div class="role-cards">
+
+
+
+
+
+
+
+            <div class="role-card">
+
+
+
+
+
+
+
+              <svg viewBox="0 0 24 24"><path d="M4 5h16v4H4Zm0 6h16v4H4Zm0 6h16v2H4Z"></path></svg>
+
+
+
+
+
+
+
+              <div>
+
+
+
+
+
+
+
+                <strong>Front-end Developer</strong>
+
+
+
+
+
+
+
+                <span>React | Tailwind | Accessibility</span>
+
+
+
+
+
+
+
+              </div>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="role-card">
+
+
+
+
+
+
+
+              <svg viewBox="0 0 24 24"><path d="M12 2 3 9h4v11h10V9h4Zm-1 7v8H9V9Zm4 8h-2V9h2Z"></path></svg>
+
+
+
+
+
+
+
+              <div>
+
+
+
+
+
+
+
+                <strong>UI/UX Designer</strong>
+
+
+
+
+
+
+
+                <span>Figma | Motion | Prototyping</span>
+
+
+
+
+
+
+
+              </div>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+          <div class="floating-contact">
+
+
+
+
+
+
+
+            <a class="floating-contact__link floating-contact__link--mail" href="mailto:rahulmali10394@gmail.com" aria-label="Email Rahul Mali">
+
+
+
+
+
+
+
+              <span class="floating-contact__tooltip">rahulmali10394@gmail.com</span>
+
+
+
+
+
+
+
+              <span class="floating-contact__icon" aria-hidden="true">&#9993;</span>
+
+
+
+
+
+
+
+            </a>
+
+
+
+
+
+
+
+            <a class="floating-contact__link floating-contact__link--linkedin" href="https://www.linkedin.com/in/rahulmali-6a5357328" target="_blank" rel="noopener">In</a>
+
+
+
+
+
+
+
+            <a class="floating-contact__link floating-contact__link--github" href="https://github.com/R-V-2003" target="_blank" rel="noopener">GH</a>
+
+
+
+
+
+
+
+            <a class="floating-contact__link floating-contact__link--figma" href="https://www.figma.com/@rahulmali2" target="_blank" rel="noopener">Fg</a>
+
+
+
+
+
+
+
+            <a class="floating-contact__link floating-contact__link--instagram" href="https://www.instagram.com/rahul_mali_2003" target="_blank" rel="noopener">IG</a>
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="portrait">
+
+
+
+
+
+
+
+          <img src="./Rahul Mali _ Portfolio_files/P_I (2).png" alt="Rahul Mali portrait">
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <aside class="skills">
+
+
+
+
+
+
+
+          <div class="skill-card" data-tone="violet">
+
+
+
+
+
+
+
+            <span class="skill-card__badge">Design Craft</span>
+
+
+
+
+
+
+
+            <div class="skill-card__icon">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/web-design.png" alt="UI/UX design workspace">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="skill-card__text">
+
+
+
+
+
+
+
+              <span class="skill-card__title">UI/UX Design</span>
+
+
+
+
+
+
+
+              <span class="skill-card__meta">Wireframes, flows &amp; interactive prototypes</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+          <div class="skill-card" data-tone="blue">
+
+
+
+
+
+
+
+            <span class="skill-card__badge">Front-end</span>
+
+
+
+
+
+
+
+            <div class="skill-card__icon">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/source-code.png" alt="Front-end development setup">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="skill-card__text">
+
+
+
+
+
+
+
+              <span class="skill-card__title">Front-end Development</span>
+
+
+
+
+
+
+
+              <span class="skill-card__meta">Responsive interfaces, component systems &amp; testing</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+          <div class="skill-card" data-tone="orange">
+
+
+
+
+
+
+
+            <span class="skill-card__badge">AI Toolkit</span>
+
+
+
+
+
+
+
+            <div class="skill-card__icon">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/artificial-intelligence.png" alt="AI workflow screens">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="skill-card__text">
+
+
+
+
+
+
+
+              <span class="skill-card__title">Integrate AI into Workflow</span>
+
+
+
+
+
+
+
+              <span class="skill-card__meta">Automation, co-pilot tooling &amp; intelligent hand-offs</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+        </aside>
+
+
+
+
+
+
+
+      </section>
+
+
+
+
+
+
+
+      <section class="section-card about" id="about">
+
+
+
+
+
+
+
+        <div class="about-grid">
+
+
+
+
+
+
+
+          <aside class="about__visual">
+
+
+
+
+
+
+
+            <div class="about__portrait">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/Gemini_Generated_Image_80kdfe80kdfe80kd (3).png" alt="Rahul Mali portrait during the Sedani Digital internship">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="about__chips">
+
+
+
+
+
+
+
+              <a class="about__chip about__chip--link" href="https://sedani.digital/" target="_blank" rel="noopener">Frontend Intern - Sedani Digital</a>
+
+
+
+
+
+
+
+              <a class="about__chip about__chip--link" href="https://jguni.in/" target="_blank" rel="noopener">B.Tech CSE - JG University (2024-2027)</a>
+
+
+
+
+
+
+
+              <a class="about__chip about__chip--link" href="https://hte.rajasthan.gov.in/college/gpcsirohi/about-us-contact-us" target="_blank" rel="noopener">Diploma CSE - CGPA 9.34</a>
+
+
+
+
+
+
+
+              <span class="about__chip">Design x Development x AI</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </aside>
+
+
+
+
+
+
+
+          <div class="about__details">
+
+
+
+
+
+
+
+            <h3 class="section-heading">About Me</h3>
+
+
+
+
+
+
+
+            <p class="about__lead">I'm Rahul Mali, a developer-designer hybrid who learns fastest by shipping polished features for real users.</p>
+
+
+
+
+
+
+
+            <p>During my internship at Sedani Digital I build responsive UI components, hunt down styling bugs, and collaborate closely with designers to lock down product details. Blending Tailwind, React, and thoughtful prototyping keeps my work fast, accessible, and delightful.</p>
+
+
+
+
+
+
+
+            <div class="about__cards">
+
+
+
+
+
+
+
+              <article class="about-card">
+
+
+
+
+
+
+
+                <h4>Experience</h4>
+
+
+
+
+
+
+
+                <ul>
+
+
+
+
+
+
+
+                  <li><strong>Sedani Digital Pvt. Ltd.</strong><small>Frontend Developer Intern - May 2025 to Present</small></li>
+
+
+
+
+
+
+
+                  <li>Implement reusable components, iterate on design hand-offs, and improve UI performance with modern tooling.</li>
+
+
+
+
+
+
+
+                </ul>
+
+
+
+
+
+
+
+              </article>
+
+
+
+
+
+
+
+              <article class="about-card">
+
+
+
+
+
+
+
+                <h4>Education</h4>
+
+
+
+
+
+
+
+                <ul>
+
+
+
+
+
+
+
+                  <li><strong>B.Tech CSE</strong> - JG University, Ahmedabad (2024-2027)</li>
+
+
+
+
+
+
+
+                  <li><strong>Diploma CSE</strong> - Gokul Bhai Bhatt Govt. Polytechnic (CGPA 9.34)</li>
+
+
+
+
+
+
+
+                  <li>Senior Secondary (Science) - Swami Vivekanand Govt. Model School (2021)</li>
+
+
+
+
+
+
+
+                </ul>
+
+
+
+
+
+
+
+              </article>
+
+
+
+
+
+
+
+              <article class="about-card about-card--focus">
+
+
+
+
+
+
+
+                <h4>Currently Focused On</h4>
+
+
+
+
+
+
+
+                <ul>
+
+
+
+
+
+
+
+                  <li>Integrating AI copilots into everyday design and development workflows.</li>
+
+
+
+
+
+
+
+                  <li>Building accessible component libraries with React and Tailwind.</li>
+
+
+
+
+
+
+
+                  <li>Crafting motion-rich product prototypes that sell the story.</li>
+
+
+
+
+
+
+
+                </ul>
+
+
+
+
+
+
+
+              </article>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </div></div></section>
+
+
+
+
+
+
+
+      <section class="section-card services" id="services">
+
+
+
+
+
+
+
+        <h3 class="section-heading">Services</h3>
+
+
+
+
+
+
+
+        <p>I partner with product and design teams to ship polished interfaces, motion-rich prototypes, and AI-assisted workflows that keep iterations fast.</p>
+
+
+
+
+
+
+
+        <div class="service-grid">
+
+
+
+
+
+
+
+          <article class="service-card" data-tone="blue">
+
+
+
+
+
+
+
+            <div class="service-card__icon">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/visual-studio-code-2019.png" alt="Developer coding setup">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <span class="service-card__badge">Front-end</span>
+
+
+
+
+
+
+
+            <h4>Design-to-Code Delivery</h4>
+
+
+
+
+
+
+
+            <p>Translate Figma concepts into performant React and Tailwind experiences with semantic HTML foundations and pixel care.</p>
+
+
+
+
+
+
+
+            <ul class="service-card__list">
+
+
+
+
+
+
+
+              <li>Component systems mapped to design tokens.</li>
+
+
+
+
+
+
+
+              <li>Responsive, accessible states verified across devices.</li>
+
+
+
+
+
+
+
+              <li>Documentation that keeps dev handoff smooth.</li>
+
+
+
+
+
+
+
+            </ul>
+
+
+
+
+
+
+
+          </article>
+
+
+
+
+
+
+
+          <article class="service-card" data-tone="violet">
+
+
+
+
+
+
+
+            <div class="service-card__icon">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/figma--v1.png" alt="Design tools on desk">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <span class="service-card__badge">Experience Design</span>
+
+
+
+
+
+
+
+            <h4>Interactive Prototype Sprints</h4>
+
+
+
+
+
+
+
+            <p>Craft high-fidelity user journeys, motion specs, and usability-ready prototypes that align product, design, and engineering.</p>
+
+
+
+
+
+
+
+            <ul class="service-card__list">
+
+
+
+
+
+
+
+              <li>Clickable flows with micro-interactions and motion previews.</li>
+
+
+
+
+
+
+
+              <li>Design critiques translated into clear implementation notes.</li>
+
+
+
+
+
+
+
+              <li>Dev-ready assets, iconography, and handoff checklists.</li>
+
+
+
+
+
+
+
+            </ul>
+
+
+
+
+
+
+
+          </article>
+
+
+
+
+
+
+
+          <article class="service-card" data-tone="orange">
+
+
+
+
+
+
+
+            <div class="service-card__icon">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/bot.png" alt="AI generated visuals">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <span class="service-card__badge">AI Toolkit</span>
+
+
+
+
+
+
+
+            <h4>AI-Augmented Workflows</h4>
+
+
+
+
+
+
+
+            <p>Blend tools like ChatGPT, Vercel v0, and Sora/Canva to accelerate research, ideation, and build spikes without losing craft.</p>
+
+
+
+
+
+
+
+            <ul class="service-card__list">
+
+
+
+
+
+
+
+              <li>Prompt libraries for content, UX writing, and research synthesis.</li>
+
+
+
+
+
+
+
+              <li>AI-assisted component scaffolds and code reviews.</li>
+
+
+
+
+
+
+
+              <li>Generative visuals and video explorations for presentations.</li>
+
+
+
+
+
+
+
+            </ul>
+
+
+
+
+
+
+
+          </article></div></section>
+
+
+
+
+
+
+
+      <section class="section-card skills-section" id="skills">
+
+
+
+
+
+
+
+        <h3 class="section-heading">Skills</h3>
+
+
+
+
+
+
+
+        <div class="skill-chip-grid">
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="cyan">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/html5-original.svg" alt="HTML logo">
+
+
+
+
+
+
+
+            <span class="chip-label">HTML</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="blue">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/css3-original.svg" alt="CSS logo">
+
+
+
+
+
+
+
+            <span class="chip-label">CSS</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="amber">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/javascript-original.svg" alt="JavaScript logo">
+
+
+
+
+
+
+
+            <span class="chip-label">JavaScript</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="pink">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/react-original.svg" alt="React logo">
+
+
+
+
+
+
+
+            <span class="chip-label">React</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="lime">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/saved_resource" alt="Tailwind CSS logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Tailwind CSS</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="purple">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/python-original.svg" alt="Python logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Python</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="red">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/cplusplus-original.svg" alt="C++ logo">
+
+
+
+
+
+
+
+            <span class="chip-label">C++ Programming</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="teal">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/figma-original.svg" alt="Figma logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Figma</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="cyan">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/blueprint.png" alt="Miro logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Wireframing</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="amber">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/adobe-creative-cloud.png" alt="Adobe Creative Cloud logo">
+
+
+
+
+
+
+
+            <span class="chip-label">UI &amp; UX Design</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="blue">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/webflow.png" alt="Webflow logo">
+
+
+
+
+
+
+
+            <span class="chip-label">User Interface Dev</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="lime">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/google-analytics.png" alt="Google Analytics logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Research &amp; Analytics</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="pink">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/adobe-premiere-pro.png" alt="Adobe Premiere Pro logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Video Editing</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="purple">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/adobe-after-effects.png" alt="Adobe After Effects logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Video Making</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="blue">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/ms-word.png" alt="Microsoft Word logo">
+
+
+
+
+
+
+
+            <span class="chip-label">MS Word</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="amber">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/ms-powerpoint.png" alt="Microsoft PowerPoint logo">
+
+
+
+
+
+
+
+            <span class="chip-label">MS PowerPoint</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="teal">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/canva.png" alt="Canva logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Canva</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+          <span class="skill-chip" data-neon="red">
+
+
+
+
+
+
+
+            <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/artificial-intelligence(1).png" alt="OpenAI logo">
+
+
+
+
+
+
+
+            <span class="chip-label">Artificial Intelligence</span>
+
+
+
+
+
+
+
+          </span>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="skill-subsection">
+
+
+
+
+
+
+
+          <h4>AI Tools</h4>
+
+
+
+
+
+
+
+          <div class="skill-chip-grid">
+
+
+
+
+
+
+
+            <span class="skill-chip skill-chip--stacked" data-neon="pink">
+
+
+
+
+
+
+
+              <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/ideogram.ai" alt="Ideogram icon">
+
+
+
+
+
+
+
+              <span class="chip-text"><strong>Ideogram</strong><small>Design inspiration</small></span>
+
+
+
+
+
+
+
+            </span>
+
+
+
+
+
+
+
+            <span class="skill-chip skill-chip--stacked" data-neon="blue">
+
+
+
+
+
+
+
+              <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/artificial-intelligence(1).png" alt="Codex icon">
+
+
+
+
+
+
+
+              <span class="chip-text"><strong>Codex</strong><small>Project building</small></span>
+
+
+
+
+
+
+
+            </span>
+
+
+
+
+
+
+
+            <span class="skill-chip skill-chip--stacked" data-neon="teal">
+
+
+
+
+
+
+
+              <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/180x180.png" alt="Vercel icon">
+
+
+
+
+
+
+
+              <span class="chip-text"><strong>Vercel v0</strong><small>Development</small></span>
+
+
+
+
+
+
+
+            </span>
+
+
+
+
+
+
+
+            <span class="skill-chip skill-chip--stacked" data-neon="amber">
+
+
+
+
+
+
+
+              <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/figma--v1(1).png" alt="Figma icon">
+
+
+
+
+
+
+
+              <span class="chip-text"><strong>Figma AI</strong><small>Design &amp; development</small></span>
+
+
+
+
+
+
+
+            </span>
+
+
+
+
+
+
+
+            <span class="skill-chip skill-chip--stacked" data-neon="lime">
+
+
+
+
+
+
+
+              <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/chatgpt.png" alt="ChatGPT icon">
+
+
+
+
+
+
+
+              <span class="chip-text"><strong>ChatGPT</strong><small>Content &amp; research</small></span>
+
+
+
+
+
+
+
+            </span>
+
+
+
+
+
+
+
+            <span class="skill-chip skill-chip--stacked" data-neon="purple">
+
+
+
+
+
+
+
+              <img class="chip-icon" src="./Rahul Mali _ Portfolio_files/OpenAI_Logo.svg.png" alt="Sora icon">
+
+
+
+
+
+
+
+              <span class="chip-text"><strong>Sora</strong><small>Image &amp; video processing</small></span>
+
+
+
+
+
+
+
+            </span>
+
+
+
+
+
+
+
+          </div></div></section>
+
+
+
+
+
+
+
+      <section class="section-card works" id="works">
+
+
+
+
+
+
+
+        <h3 class="section-heading">Selected Projects</h3>
+
+
+
+
+
+
+
+        <div class="project-grid">
+
+
+
+
+
+
+
+          <article class="work-card">
+
+
+
+
+
+
+
+            <div class="work-card__media">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/school site.png" alt="School website mobile mockup">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="work-card__tags">Figma / Mobile</div>
+
+
+
+
+
+
+
+            <h4 class="work-card__title">School Website (Mobile)</h4>
+
+
+
+
+
+
+
+            <p>A multi-page mobile experience covering academics, sports, and student life. Focused on modular layouts and consistent iconography for fast browsing.</p>
+
+
+
+
+
+
+
+            <div class="work-card__links">
+
+
+
+
+
+
+
+              <a href="https://www.figma.com/design/yUbbO3Kuwz8om8GeFEplA2/school-website-(Community)?node-id=0-1&amp;t=FACcwzcGvly5zKkc-1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"></path></svg>View on Figma</a>
+
+
+
+
+
+
+
+              <span>Feb 2025 - Mar 2025</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </article>
+
+
+
+
+
+
+
+          <article class="work-card">
+
+
+
+
+
+
+
+            <div class="work-card__media">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/youtube_landing.png" alt="YouTube landing page redesign mockup">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="work-card__tags">Figma / Feature Concept</div>
+
+
+
+
+
+
+
+            <h4 class="work-card__title">YouTube Landing Highlight</h4>
+
+
+
+
+
+
+
+            <p>Conceptual landing page that spotlights a creator's own uploads among trending content, balancing personalization with familiar YouTube patterns.</p>
+
+
+
+
+
+
+
+            <div class="work-card__links">
+
+
+
+
+
+
+
+              <a href="https://www.figma.com/design/gNONaeNuj3eVoqsCu9h91p/You-tube---Landing-page-(Highlight)?node-id=0-1&amp;t=6VPhrm0k59uimj2D-1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"></path></svg>View on Figma</a>
+
+
+
+
+
+
+
+              <span>Mar 2025</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </article>
+
+
+
+
+
+
+
+          <article class="work-card">
+
+
+
+
+
+
+
+            <div class="work-card__media">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/epicgames.png" alt="Epic Games landing page recreation">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="work-card__tags">HTML / CSS</div>
+
+
+
+
+
+
+
+            <h4 class="work-card__title">Epic Games Landing</h4>
+
+
+
+
+
+
+
+            <p>Coded a polished storefront inspired by Epic Games with responsive hero interactions and promotional carousels.</p>
+
+
+
+
+
+
+
+            <div class="work-card__links">
+
+
+
+
+
+
+
+              <a href="https://r-v-2003.github.io/EPIC_GAMES.github.io/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"></path></svg>Launch site</a>
+
+
+
+
+
+
+
+              <span>Mar 2025</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </article>
+
+
+
+
+
+
+
+          <article class="work-card">
+
+
+
+
+
+
+
+            <div class="work-card__media">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/Ultraedit.png" alt="UltraEdit homepage clone redesign">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="work-card__tags">HTML / CSS</div>
+
+
+
+
+
+
+
+            <h4 class="work-card__title">UltraEdit Homepage Clone</h4>
+
+
+
+
+
+
+
+            <p>Recreated UltraEdit's marketing site to practice layout fidelity, typography matching, and responsive navigation.</p>
+
+
+
+
+
+
+
+            <div class="work-card__links">
+
+
+
+
+
+
+
+              <a href="https://r-v-2003.github.io/Clone---UltraEdit-text-editor-for-windows.github.io/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"></path></svg>Launch site</a>
+
+
+
+
+
+
+
+              <span>Feb 2025</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </article>
+
+
+
+
+
+
+
+          <article class="work-card">
+
+
+
+
+
+
+
+            <div class="work-card__media">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/enlighted.png" alt="EnlightEd learning platform UI mockup">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="work-card__tags">HTML / CSS</div>
+
+
+
+
+
+
+
+            <h4 class="work-card__title">EnlightEd Platform</h4>
+
+
+
+
+
+
+
+            <p>An interactive learning tool with course units, quizzes, and milestones crafted to keep students motivated across topics.</p>
+
+
+
+
+
+
+
+            <div class="work-card__links">
+
+
+
+
+
+
+
+              <a href="https://r-v-2003.github.io/EnlightEd.github.io/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"></path></svg>Launch site</a>
+
+
+
+
+
+
+
+              <span>Dec 2024</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </article>
+
+
+
+
+
+
+
+          <article class="work-card">
+
+
+
+
+
+
+
+            <div class="work-card__media">
+
+
+
+
+
+
+
+              <img src="./Rahul Mali _ Portfolio_files/calculator.png" alt="Calculator web app interface">
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="work-card__tags">HTML / CSS / JavaScript</div>
+
+
+
+
+
+
+
+            <h4 class="work-card__title">Calculator Web App</h4>
+
+
+
+
+
+
+
+            <p>A responsive calculator with clean UI, keyboard support, and performant vanilla JS operations suitable for mobile and desktop.</p>
+
+
+
+
+
+
+
+            <div class="work-card__links">
+
+
+
+
+
+
+
+              <a href="https://r-v-2003.github.io/Calsi.github.io/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"></path></svg>Launch site</a>
+
+
+
+
+
+
+
+              <span>Oct 2024</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </article></div></section>
+
+
+
+
+
+
+
+      <section class="section-card cta" id="contact">
+
+
+
+
+
+
+
+        <div>
+
+
+
+
+
+
+
+          <h3>Let's build polished web experiences together.</h3>
+
+
+
+
+
+
+
+          <p>I'm Rahul Mali, a front-end developer interning with Sedani Digital. I help teams ship responsive React and Tailwind interfaces, smooth out UX snags, and turn design ideas into production-ready features.</p>
+
+
+
+
+
+
+
+          <div class="cta-actions">
+
+
+
+
+
+
+
+            <a class="btn-glass" href="mailto:rahulmali10394@gmail.com"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3Zm9 7 9-6H3Z"></path></svg>Schedule a call</a>
+
+
+
+
+
+
+
+            <a class="cta-secondary cta-secondary--resume" href="./Rahul%20Mali.pdf" download><svg viewBox="0 0 24 24"><path d="M12 3v11.586l3.293-3.293 1.414 1.414L12 18.414l-4.707-4.707 1.414-1.414L11 13.586V3h2Zm-7 13v3h14v-3H5Z"></path></svg>Download Resume</a>
+
+
+
+
+
+
+
+            <a class="cta-secondary" href="https://www.linkedin.com/in/rahulmali-6a5357328" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4Zm6 6h4v2h.06A4.39 4.39 0 0 1 18 9.84c2.4 0 3 2.05 3 4.7V20h-4v-4.4c0-1.05-.02-2.4-1.46-2.4s-1.69 1.14-1.69 2.32V20h-4Z"></path></svg>Message on LinkedIn</a>
+
+
+
+
+
+
+
+            <a class="cta-secondary cta-secondary--instagram" href="https://www.instagram.com/rahul_mali_2003" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 4a5 5 0 1 0 5 5 5 5 0 0 0-5-5Zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3Zm6.5-8.5a1.1 1.1 0 1 0-1.1-1.1 1.1 1.1 0 0 0 1.1 1.1Z"></path></svg>Follow on Instagram</a>
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="cta-availability">
+
+
+
+
+
+
+
+          <span>Current Availability</span>
+
+
+
+
+
+
+
+          <strong>10-12 hrs/week | Remote-friendly</strong>
+
+
+
+
+
+
+
+          <span>Based in Ahmedabad | GMT+5:30</span></div></section>
+
+
+
+
+
+
+
+    </main>
+
+
+
+
+
+
+
+    <footer>© 2025 Rahul Mali. Crafted with React energy &amp; plenty of Tailwind love.</footer>
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+</body></html>
+
+
+
+
+
