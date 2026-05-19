@@ -72,7 +72,7 @@
 
         position: relative;
 
-        overflow: hidden;
+        overflow: clip;
       }
 
       .viewport::before,
@@ -623,48 +623,50 @@
 
         display: flex;
 
-        gap: 18px;
+        gap: 12px;
 
         flex-wrap: wrap;
       }
 
       .role-card {
-        flex: 1 1 150px;
+        flex: 1 1 180px;
 
-        min-width: 150px;
+        min-width: 180px;
 
-        padding: 16px 18px;
+        padding: 10px 16px;
 
-        border-radius: 18px;
+        border-radius: 14px;
 
         background: rgba(255, 255, 255, 0.85);
 
         border: 1px solid rgba(255, 255, 255, 0.55);
 
-        box-shadow: 0 18px 34px rgba(20, 42, 75, 0.12);
+        box-shadow: 0 12px 24px rgba(20, 42, 75, 0.1);
 
         display: flex;
 
-        gap: 12px;
+        gap: 10px;
 
         align-items: center;
       }
 
       .role-card svg {
-        width: 28px;
+        width: 22px;
 
-        height: 28px;
+        height: 22px;
 
         fill: var(--primary);
+
+        flex-shrink: 0;
       }
 
       .role-card strong {
         display: block;
-        font-size: 15px;
+        font-size: 13px;
       }
 
       .role-card span {
-        font-size: 13px;
+        font-size: 11px;
         color: var(--text-muted);
       }
 
@@ -2208,6 +2210,40 @@
         font-size: 14px;
       }
 
+      /* ── Hamburger menu ── */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        padding: 8px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 11;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 24px;
+        height: 2.5px;
+        background: var(--text-dark);
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+      }
+
       @media (max-width: 1180px) {
         :root {
           --viewport-pad: 40px;
@@ -2350,73 +2386,128 @@
           padding: 32px var(--viewport-pad) 54px;
         }
 
+        /* ── Hamburger mobile nav ── */
+        .hamburger {
+          display: flex;
+        }
+
         header {
-          flex-direction: column;
+          flex-wrap: wrap;
+          justify-content: space-between;
           align-items: center;
-          gap: 18px;
+          gap: 0;
           padding: 14px 20px;
         }
 
         nav {
-          gap: 16px;
-          flex-wrap: wrap;
-          justify-content: center;
+          display: none;
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          padding: 18px 0 12px;
+          margin-top: 14px;
+          border-top: 1px solid rgba(14, 107, 255, 0.1);
+        }
+
+        header.menu-open nav {
+          display: flex;
         }
 
         nav a {
-          margin: 0 10px;
-        }
-
-        .hero {
-          grid-template-columns: 1fr;
+          margin: 0;
+          font-size: 15px;
+          padding: 8px 16px;
+          width: 100%;
           text-align: center;
-          gap: 32px;
+          border-radius: 12px;
+          transition: background 0.2s ease, color 0.2s ease;
         }
 
-        .intro,
-        .portrait,
-        .skills {
-          grid-column: auto;
+        nav a:hover,
+        nav a.active {
+          background: rgba(14, 107, 255, 0.08);
         }
 
-        .intro p {
-          margin-inline: auto;
+        nav a::after {
+          display: none !important;
         }
 
-        .floating-contact {
-          justify-content: center;
+        header > .btn-glass {
+          display: none;
+          margin-top: 8px;
+          margin-bottom: 4px;
         }
+
+        header.menu-open > .btn-glass {
+          display: inline-flex;
+        }
+
+        /* ── Hero reorder: Name → Portrait → Details ── */
+        .hero {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 24px;
+        }
+
+        .intro {
+          display: contents;
+        }
+
+        .intro h2 { order: 1; position: relative; z-index: 4; margin-bottom: 0; }
+        .intro h1 { order: 2; position: relative; z-index: 4; margin-top: -20px; }
+        .portrait  { order: 3; }
+        .intro p   { order: 4; max-width: 400px; margin-inline: auto; }
+        .role-cards { order: 5; justify-content: center; margin-bottom: 0; }
+        .floating-contact { order: 6; justify-content: center; margin-top: -14px; margin-bottom: 32px; }
+        .skills    { order: 7; }
 
         .portrait {
           min-height: auto;
           margin-left: 0;
-        }
-
-        .portrait::before {
-          width: 300px;
-          height: 300px;
-        }
-
-        .portrait::after {
+          padding: 0;
+          z-index: 1;
           width: 340px;
           height: 340px;
+          border-radius: 50%;
+          overflow: hidden;
+          background: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.98) 0%,
+            rgba(255, 255, 255, 0.72) 48%,
+            rgba(210, 224, 252, 0.15) 100%
+          );
+          box-shadow:
+            0 32px 64px rgba(25, 46, 88, 0.18),
+            0 0 0 28px rgba(255, 255, 255, 0.2),
+            0 0 0 29px rgba(255, 255, 255, 0.55);
+        }
+
+        .portrait::before,
+        .portrait::after {
+          display: none;
         }
 
         .portrait img {
-          height: auto;
-          max-height: 320px;
-          width: 70%;
-          max-width: 260px;
+          height: 370px;
+          width: auto;
+          max-height: none;
+          max-width: none;
+          position: relative;
+          filter: drop-shadow(0 12px 24px rgba(22, 41, 66, 0.2));
         }
 
         .skills {
           align-items: center;
           flex-direction: column;
           gap: 20px;
+          width: 100%;
         }
 
         .skills .skill-card {
-          width: min(280px, 90%);
+          width: min(280px, 92%);
           min-width: 0;
         }
 
@@ -2425,12 +2516,43 @@
         }
 
         .section-card {
-          padding: 32px 24px;
+          padding: 28px 20px;
+          border-radius: 24px;
+        }
+
+        .about-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .about__details {
+          display: contents;
+        }
+
+        .about__details .section-heading {
+          order: -2;
+        }
+
+        .about__visual {
+          order: -1;
+        }
+
+        .section-heading {
+          font-size: 20px;
         }
 
         .cta {
           grid-template-columns: 1fr;
           text-align: center;
+        }
+
+        .cta h3 {
+          font-size: 22px;
+        }
+
+        .cta-actions {
+          justify-content: center;
         }
 
         .cta-availability {
@@ -2440,9 +2562,10 @@
 
       @media (max-width: 720px) {
         .role-cards {
-          flex-direction: column;
-          align-items: center;
-          gap: 16px;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
         }
 
         .floating-contact {
@@ -2470,63 +2593,379 @@
 
       @media (max-width: 540px) {
         :root {
-          --viewport-pad: 18px;
+          --viewport-pad: 14px;
         }
 
         .viewport {
-          padding: 22px var(--viewport-pad) 44px;
+          padding: 16px var(--viewport-pad) 36px;
+          border-radius: 22px;
+          margin: 12px auto 12px;
         }
 
         header {
-          padding: 12px 16px;
+          padding: 12px 14px;
+          gap: 10px;
+          box-shadow: 0 12px 22px rgba(16, 39, 80, 0.1);
+        }
+
+        .logo {
+          font-size: 19px;
+        }
+
+        nav {
+          width: 100%;
+          gap: 4px 10px;
+          justify-content: center;
+        }
+
+        nav a {
+          font-size: 13px;
+          gap: 4px;
+        }
+
+        nav a svg {
+          width: 13px;
+          height: 13px;
+        }
+
+        .btn-glass {
+          padding: 9px 18px;
+          font-size: 13px;
+        }
+
+        .btn-glass svg {
+          width: 15px;
+          height: 15px;
+        }
+
+        .intro h2 {
+          font-size: 15px;
         }
 
         .intro h1 {
-          font-size: clamp(2.2rem, 8vw, 2.6rem);
+          font-size: clamp(2rem, 10vw, 2.5rem);
         }
 
         .intro p {
           font-size: 14px;
+          max-width: 100%;
         }
 
-        nav {
+        .role-cards {
           gap: 12px;
         }
 
+        .role-card {
+          padding: 8px 14px;
+          border-radius: 12px;
+          min-width: 0;
+          width: auto;
+          max-width: 280px;
+        }
+
+        .role-card strong {
+          font-size: 14px;
+        }
+
+        .role-card span {
+          font-size: 12px;
+        }
+
+        .role-card svg {
+          width: 22px;
+          height: 22px;
+        }
+
+        .floating-contact {
+          gap: 10px;
+        }
+
         .floating-contact__link {
-          width: 50px;
-          height: 50px;
+          width: 46px;
+          height: 46px;
+          border-radius: 14px;
         }
 
-        .portrait::before {
-          width: 230px;
-          height: 230px;
+        .floating-contact__icon {
+          font-size: 18px;
         }
 
-        .portrait::after {
-          width: 270px;
-          height: 270px;
+        .portrait {
+          width: 280px;
+          height: 280px;
+          box-shadow:
+            0 28px 56px rgba(25, 46, 88, 0.18),
+            0 0 0 22px rgba(255, 255, 255, 0.2),
+            0 0 0 23px rgba(255, 255, 255, 0.55);
         }
 
         .portrait img {
-          max-width: 200px;
+          height: 310px;
         }
 
         .skills .skill-card {
           width: 100%;
+          padding: 20px;
+          border-radius: 20px;
         }
 
         .skill-card__icon {
-          width: 60px;
-          height: 60px;
+          width: 56px;
+          height: 56px;
+          border-radius: 16px;
+        }
+
+        .skill-card__title {
+          font-size: 15px;
         }
 
         .skill-card__meta {
           font-size: 12px;
         }
 
+        .skill-card__badge {
+          font-size: 10px;
+          padding: 5px 12px;
+          top: -14px;
+          left: 20px;
+        }
+
+        .section-card {
+          padding: 22px 16px;
+          border-radius: 20px;
+          margin-top: 48px;
+        }
+
+        .section-heading {
+          font-size: 18px;
+          letter-spacing: 0.08em;
+        }
+
+        .about__portrait {
+          max-width: 280px;
+          border-radius: 20px;
+        }
+
+        .about__chips {
+          max-width: 100%;
+        }
+
+        .about__chip {
+          font-size: 12px;
+          padding: 10px 14px;
+          border-radius: 14px;
+        }
+
+        .about__lead {
+          font-size: 16px;
+        }
+
+        .about__details p {
+          font-size: 14px;
+        }
+
+        .about-card {
+          padding: 18px 16px;
+          border-radius: 18px;
+        }
+
+        .about-card h4 {
+          font-size: 13px;
+        }
+
+        .about-card li {
+          font-size: 13px;
+        }
+
         .service-card {
-          padding: 26px 22px;
+          padding: 22px 18px;
+          border-radius: 20px;
+        }
+
+        .service-card__icon {
+          width: 54px;
+          height: 54px;
+          border-radius: 16px;
+        }
+
+        .service-card__icon img {
+          width: 34px;
+          height: 34px;
+        }
+
+        .service-card h4 {
+          font-size: 17px;
+        }
+
+        .service-card p {
+          font-size: 14px;
+        }
+
+        .service-card__list li {
+          font-size: 12px;
+        }
+
+        .skill-chip {
+          padding: 8px 14px;
+          border-radius: 14px;
+          font-size: 12px;
+        }
+
+        .chip-icon {
+          width: 18px;
+          height: 18px;
+        }
+
+        .skill-chip--stacked small {
+          font-size: 10px;
+        }
+
+        .skill-subsection h4 {
+          font-size: 14px;
+        }
+
+        .work-card {
+          padding: 16px;
+          border-radius: 20px;
+        }
+
+        .work-card__media {
+          border-radius: 16px;
+        }
+
+        .work-card__media img {
+          height: 160px;
+        }
+
+        .work-card__title {
+          font-size: 17px;
+        }
+
+        .work-card p {
+          font-size: 14px;
+        }
+
+        .work-card__links {
+          font-size: 13px;
+        }
+
+        .cta h3 {
+          font-size: 20px;
+        }
+
+        .cta p {
+          font-size: 14px;
+        }
+
+        .cta-actions {
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .cta-actions .btn-glass,
+        .cta-actions .cta-secondary {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .cta-secondary {
+          padding: 12px 20px;
+          font-size: 13px;
+        }
+
+        .cta-availability strong {
+          font-size: 17px;
+        }
+
+        .cta-availability span {
+          font-size: 13px;
+        }
+
+        footer {
+          font-size: 12px;
+          margin-top: 32px;
+        }
+      }
+
+      @media (max-width: 390px) {
+        :root {
+          --viewport-pad: 10px;
+        }
+
+        .viewport {
+          padding: 12px var(--viewport-pad) 30px;
+          border-radius: 18px;
+          margin: 8px auto 8px;
+          width: 98vw;
+        }
+
+        header {
+          padding: 10px 12px;
+          gap: 8px;
+          margin: 0 calc(-1 * var(--viewport-pad)) 16px;
+        }
+
+        .logo {
+          font-size: 17px;
+        }
+
+        nav a {
+          font-size: 12px;
+          gap: 3px;
+        }
+
+        nav a svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        .btn-glass {
+          padding: 8px 16px;
+          font-size: 12px;
+        }
+
+        .intro h1 {
+          font-size: clamp(1.8rem, 10vw, 2.2rem);
+        }
+
+        .floating-contact__link {
+          width: 42px;
+          height: 42px;
+          border-radius: 12px;
+        }
+
+        .portrait {
+          width: 240px;
+          height: 240px;
+          box-shadow:
+            0 24px 48px rgba(25, 46, 88, 0.18),
+            0 0 0 18px rgba(255, 255, 255, 0.2),
+            0 0 0 19px rgba(255, 255, 255, 0.55);
+        }
+
+        .portrait img {
+          height: 270px;
+        }
+
+        .section-card {
+          padding: 18px 12px;
+          border-radius: 16px;
+          margin-top: 36px;
+        }
+
+        .section-heading {
+          font-size: 16px;
+        }
+
+        .skill-card {
+          padding: 16px;
+        }
+
+        .skill-card__icon {
+          width: 48px;
+          height: 48px;
         }
       }
     </style>
@@ -2550,6 +2989,12 @@
 
           rah.
         </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
         <nav>
           <a href="#hero">
@@ -2614,10 +3059,9 @@
             <h1>RAHUL MALI</h1>
 
             <p>
-              Front-end developer &amp; UI designer focused on Tailwind CSS,
-              React, and polished user journeys. At Sedani Digital I ship
-              responsive product experiences while experimenting with motion and
-              micro-interactions.
+              Computer Science student. Skilled in Figma, HTML, CSS, JavaScript, React,
+              and Tailwind CSS. Passionate about designing intuitive user
+              experiences and shipping responsive product interfaces.
             </p>
 
             <div class="role-cards">
@@ -2685,6 +3129,15 @@
                 target="_blank"
                 rel="noopener"
                 >Fg</a
+              >
+
+              <a
+                class="floating-contact__link floating-contact__link--instagram"
+                href="https://www.behance.net/rahulmali50"
+                target="_blank"
+                rel="noopener"
+                style="color: #1769ff;"
+                >Be</a
               >
 
               <a
@@ -2810,14 +3263,15 @@
               <h3 class="section-heading">About Me</h3>
 
               <p class="about__lead">
-                I'm Rahul Mali, a developer-designer hybrid who learns fastest
-                by shipping polished features for real users.
+                I'm Rahul Mali, a Computer Science student with a diploma in
+                CS and experience as a UI/UX and Front-End Intern. Passionate
+                about designing intuitive user experiences.
               </p>
 
               <p>
-                During my internship at Sedani Digital I build responsive UI
-                components, hunt down styling bugs, and collaborate closely with
-                designers to lock down product details. Blending Tailwind,
+                During my internship at Sedani Digital I build industry-level
+                projects, craft interactive prototypes in Figma, and involve
+                AI in the designing and development process. Blending Tailwind,
                 React, and thoughtful prototyping keeps my work fast,
                 accessible, and delightful.
               </p>
@@ -2830,7 +3284,7 @@
                     <li>
                       <strong>Sedani Digital Pvt. Ltd.</strong
                       ><small
-                        >Frontend Developer Intern - May 2025 to Present</small
+                        >Frontend Developer Intern - May 2025 to May 2026</small
                       >
                     </li>
 
@@ -3263,6 +3717,113 @@
             <article class="work-card">
               <div class="work-card__media">
                 <img
+                  src="https://ptenote.com/og-image.png"
+                  alt="PTENote website redesign"
+                  onerror="this.style.background='linear-gradient(135deg,#1d7cff,#7e65ff)';this.style.height='190px';this.alt='PTENote'"
+                />
+              </div>
+
+              <div class="work-card__tags">HTML / Tailwind CSS / JavaScript</div>
+
+              <h4 class="work-card__title">PTENote – Website Redesign</h4>
+
+              <p>
+                Redesigned and developed the PTENote landing page by creating
+                the base layout in Figma and refining iteratively during
+                development. Implemented a responsive interface with clean UX,
+                visual hierarchy, and performance.
+              </p>
+
+              <div class="work-card__links">
+                <a
+                  href="https://ptenote.com/"
+                  target="_blank"
+                  rel="noopener"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
+                    ></path></svg
+                  >Launch site</a
+                >
+
+                <span>Nov 2025 - Mar 2026</span>
+              </div>
+            </article>
+
+            <article class="work-card">
+              <div class="work-card__media">
+                <img
+                  src="https://detnote.com/og-image.png"
+                  alt="DetNote booking platform"
+                  onerror="this.style.background='linear-gradient(135deg,#ff8f4f,#ff5c8d)';this.style.height='190px';this.alt='DetNote'"
+                />
+              </div>
+
+              <div class="work-card__tags">Figma / UI Design</div>
+
+              <h4 class="work-card__title">DetNote – DET Exam Booking</h4>
+
+              <p>
+                Designed DetNote from scratch with the complete UI crafted in
+                Figma, focusing on clean user experience, responsive layout
+                planning, and strong visual hierarchy for a Duolingo English
+                Test exam booking platform.
+              </p>
+
+              <div class="work-card__links">
+                <a
+                  href="https://detnote.com/"
+                  target="_blank"
+                  rel="noopener"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
+                    ></path></svg
+                  >Launch site</a
+                >
+
+                <span>Sep 2025 - Oct 2025</span>
+              </div>
+            </article>
+
+            <article class="work-card">
+              <div class="work-card__media">
+                <img
+                  src="https://www.figma.com/community/resource/ehxh8y2eAXcttTr76LXAB3/thumbnail"
+                  alt="Dashboard score overview UI"
+                  onerror="this.style.background='linear-gradient(135deg,#7e65ff,#1d7cff)';this.style.height='190px';this.alt='Dashboard'"
+                />
+              </div>
+
+              <div class="work-card__tags">Figma / Dashboard</div>
+
+              <h4 class="work-card__title">Dashboard – Score Overview</h4>
+
+              <p>
+                Designed a dashboard UI in Figma that provides an overview of
+                user scores and available actions, focusing on clear information
+                hierarchy, usability, and intuitive navigation.
+              </p>
+
+              <div class="work-card__links">
+                <a
+                  href="https://www.figma.com/design/ehxh8y2eAXcttTr76LXAB3/Dashboard?node-id=0-1&amp;t=4xMsd2RENrZyCANr-1"
+                  target="_blank"
+                  rel="noopener"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
+                    ></path></svg
+                  >View on Figma</a
+                >
+
+                <span>Sep 2025</span>
+              </div>
+            </article>
+
+            <article class="work-card">
+              <div class="work-card__media">
+                <img
                   src="./Rahul Mali _ Portfolio_files/school site.png"
                   alt="School website mobile mockup"
                 />
@@ -3468,7 +4029,7 @@
             <h3>Let's build polished web experiences together.</h3>
 
             <p>
-              I'm Rahul Mali, a front-end developer interning with Sedani
+              I'm Rahul Mali, a front-end developer who interned with Sedani
               Digital. I help teams ship responsive React and Tailwind
               interfaces, smooth out UX snags, and turn design ideas into
               production-ready features.
@@ -3533,5 +4094,28 @@
         love.
       </footer>
     </div>
+
+    <script>
+      (function () {
+        const hamburger = document.getElementById('hamburger');
+        const header = hamburger.closest('header');
+
+        hamburger.addEventListener('click', function () {
+          this.classList.toggle('active');
+          header.classList.toggle('menu-open');
+          const expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', String(!expanded));
+        });
+
+        // Close menu when a nav link is clicked
+        document.querySelectorAll('nav a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            hamburger.classList.remove('active');
+            header.classList.remove('menu-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
