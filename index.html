@@ -3806,7 +3806,7 @@
 
           <div class="project-grid">
 
-            <article class="work-card">
+            <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-examprep.html'">
               <div class="work-card__media">
                 <img
                   src="./exam_prep_mockup.png"
@@ -3814,7 +3814,7 @@
                   onerror="this.style.background='linear-gradient(135deg,#ff8f4f,#ff5c8d)';this.style.height='190px';this.alt='Exam-Prep'"
                 />
               </div>
-
+              <span class="work-card__study-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>Case Study</span>
               <div class="work-card__tags">React / Vercel / Supabase / Groq AI / Gemini API</div>
 
               <h4 class="work-card__title">Exam-prep (GovPrep AI)</h4>
@@ -3825,9 +3825,20 @@
 
               <div class="work-card__links">
                 <a
+                  class="work-card__study-link"
+                  href="./case-study-examprep.html"
+                  onclick="event.stopPropagation()"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
+                    ></path></svg
+                  >View Case Study</a
+                >
+                <a
                   href="https://github.com/R-V-2003/Exam-prep"
                   target="_blank"
                   rel="noopener"
+                  onclick="event.stopPropagation()"
                   ><svg viewBox="0 0 24 24">
                     <path
                       d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"

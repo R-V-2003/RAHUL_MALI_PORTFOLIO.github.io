@@ -15,7 +15,9 @@ Welcome to the source code of my personal portfolio. If you're looking for stand
 - `case-study-ptenote.html`: A deep dive into the PTENote redesign.
 - `case-study-detnote.html`: The story behind the DetNote exam booking platform.
 - `case-study-chalo.html`: The journey of building the CHALO app.
+- `case-study-examprep.html`: The case study for GovPrep AI (BCI-Prep).
 - `chalo.apk`: **[Download the Chalo APK here](https://raw.githubusercontent.com/R-V-2003/RAHUL_MALI_PORTFOLIO.github.io/main/chalo.apk)**.
+- `exam-prep.apk`: **[Download the BCI-Prep APK here](https://raw.githubusercontent.com/R-V-2003/RAHUL_MALI_PORTFOLIO.github.io/main/exam-prep.apk)**.
 - `Rahul Mali _ Portfolio_files/`: Assorted assets and official brand icons for AI tools.
 
 ## ✨ Why Does This Look So Good?

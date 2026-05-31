@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GovPrep AI Case Study | Rahul Mali</title>
+    <meta name="description" content="UI/UX & Engineering Case Study — GovPrep AI (BCI-Prep), an AI-integrated exam preparation PWA and Android application compiled using Capacitor." />
+    <link href="./Rahul Mali _ Portfolio_files/css2" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #fdf6f0;
+        --card: rgba(255, 255, 255, 0.88);
+        --glass-border: rgba(255, 255, 255, 0.65);
+        --primary: #ff5f36;
+        --primary-glow: rgba(255, 95, 54, 0.15);
+        --text-dark: #242930;
+        --text-muted: #657180;
+        --accent-gradient: linear-gradient(135deg, #ff5f36, #ff2e93);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: radial-gradient(circle at 50% 0%, #fffbf8 0%, var(--bg) 100%);
+        color: var(--text-dark);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── Back Button ── */
+      .back-btn {
+        position: fixed; top: 24px; left: 24px; z-index: 100;
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 10px 20px; border-radius: 999px;
+        background: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.7);
+        box-shadow: 0 10px 25px rgba(20,42,75,0.06);
+        backdrop-filter: blur(20px);
+        text-decoration: none; color: var(--text-dark);
+        font-weight: 600; font-size: 13px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .back-btn:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(255, 95, 54, 0.18);
+        border-color: rgba(255, 95, 54, 0.25);
+        color: var(--primary);
+      }
+      .back-btn svg {
+        width: 18px; height: 18px; fill: currentColor;
+        transition: transform 0.2s ease;
+      }
+      .back-btn:hover svg {
+        transform: translateX(-3px);
+      }
+
+      /* ── Hero ── */
+      .cs-hero {
+        position: relative; width: 100%; min-height: 480px;
+        background: linear-gradient(135deg, #1a0f0f 0%, #2e171b 100%);
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden; padding: 100px 24px 80px;
+      }
+      .cs-hero::before {
+        content: ""; position: absolute; inset: 0;
+        background: radial-gradient(circle, rgba(255, 95, 54, 0.1) 0%, transparent 80%);
+        z-index: 0;
+      }
+      .cs-hero-glow-1 {
+        position: absolute; top: -100px; left: -100px; width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(255, 95, 54, 0.22) 0%, transparent 70%);
+        filter: blur(60px); pointer-events: none; z-index: 1;
+      }
+      .cs-hero-glow-2 {
+        position: absolute; bottom: -100px; right: -100px; width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(255, 46, 147, 0.15) 0%, transparent 70%);
+        filter: blur(60px); pointer-events: none; z-index: 1;
+      }
+      .cs-hero-grid {
+        position: absolute; inset: 0;
+        background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none; z-index: 1;
+      }
+      .cs-hero-content { position: relative; z-index: 2; text-align: center; max-width: 800px; }
+      .cs-hero-badge {
+        display: inline-block; padding: 6px 18px; border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.95); font-size: 11px; font-weight: 600;
+        letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 24px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      .cs-hero h1 {
+        color: #fff; font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 800; line-height: 1.15; margin-bottom: 20px;
+        letter-spacing: -0.02em;
+      }
+      .cs-hero h1 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .cs-hero-sub { color: rgba(255, 255, 255, 0.75); font-size: 17px; line-height: 1.65; max-width: 650px; margin: 0 auto; }
+      .cs-hero-meta {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+        background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px; padding: 20px; margin-top: 48px;
+        backdrop-filter: blur(12px); box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      }
+      .cs-hero-meta-item { text-align: center; padding: 4px 16px; }
+      .cs-hero-meta-item:not(:last-child) { border-right: 1px solid rgba(255, 255, 255, 0.08); }
+      .cs-hero-meta-item dt { color: rgba(255, 255, 255, 0.45); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; }
+      .cs-hero-meta-item dd { color: #fff; font-weight: 600; font-size: 15px; margin-top: 6px; }
+
+      /* ── Container ── */
+      .cs-container {
+        width: min(860px, 92vw); margin: 0 auto; padding: 0 24px;
+      }
+
+      /* ── Section ── */
+      .cs-section { margin-top: 80px; }
+      .cs-section-label {
+        display: inline-flex; align-items: center; gap: 10px;
+        font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--primary); margin-bottom: 16px;
+      }
+      .cs-section-label::before {
+        content: ""; width: 28px; height: 2px; background: var(--primary); border-radius: 2px;
+      }
+      .cs-section h2 { font-size: 32px; font-weight: 800; margin-bottom: 24px; line-height: 1.25; letter-spacing: -0.01em; }
+      .cs-section p { color: var(--text-muted); line-height: 1.8; font-size: 16px; margin-bottom: 20px; }
+
+      /* ── Glass Card ── */
+      .cs-card {
+        padding: 40px; border-radius: 28px;
+        background: var(--card); border: 1px solid var(--glass-border);
+        box-shadow: 0 20px 48px rgba(20, 42, 75, 0.05);
+        backdrop-filter: blur(20px);
+      }
+
+      /* ── Problem / Solution Grids ── */
+      .cs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+      .cs-grid-item {
+        padding: 32px; border-radius: 24px;
+        background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.6);
+        box-shadow: 0 12px 30px rgba(20,42,75,0.03);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .cs-grid-item::before {
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        background: transparent; transition: background 0.3s ease;
+      }
+      .cs-grid-item:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 48px rgba(20,42,75,0.1);
+        background: #fff;
+      }
+      .cs-grid-item--orange:hover { border-color: rgba(255, 95, 54, 0.25); }
+      .cs-grid-item--orange:hover::before { background: var(--primary); }
+      
+      .cs-grid-icon {
+        width: 48px; height: 48px; border-radius: 14px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 20px;
+      }
+      .cs-grid-icon--orange { background: rgba(255, 95, 54, 0.1); color: var(--primary); }
+      .cs-grid-icon svg { width: 24px; height: 24px; fill: currentColor; }
+
+      .cs-grid-item h4 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+      .cs-grid-item p { color: var(--text-muted); font-size: 14.5px; line-height: 1.65; margin-bottom: 0; }
+
+      /* ── Database Schema Container ── */
+      .schema-container {
+        background: #1e1e24; border-radius: 20px; padding: 24px;
+        margin-top: 24px; border: 1px solid rgba(255,255,255,0.05);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        font-family: 'Consolas', 'Courier New', monospace; font-size: 13.5px;
+        color: #abb2bf; overflow-x: auto;
+      }
+      .schema-title {
+        color: #fff; font-weight: 600; font-family: "Poppins", sans-serif;
+        margin-bottom: 12px; font-size: 15px; display: flex; align-items: center; gap: 8px;
+      }
+      .schema-title::before {
+        content: ""; width: 8px; height: 8px; border-radius: 50%; background: #4caf50;
+      }
+      .schema-code {
+        line-height: 1.5; color: #abb2bf;
+      }
+      .schema-keyword { color: #c678dd; }
+      .schema-type { color: #d19a66; }
+      .schema-string { color: #98c379; }
+      .schema-comment { color: #5c6370; font-style: italic; }
+
+      /* ── Tech Chips ── */
+      .cs-tech-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+      .cs-tech-chip {
+        padding: 10px 22px; border-radius: 999px;
+        background: rgba(255,255,255,0.9); border: 1px solid rgba(255, 95, 54, 0.15);
+        font-size: 13px; font-weight: 600; color: var(--text-dark);
+        box-shadow: 0 8px 20px rgba(20,42,75,0.03);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .cs-tech-chip:hover {
+        transform: translateY(-3px) scale(1.03);
+        background: var(--primary); color: #fff;
+        border-color: var(--primary);
+        box-shadow: 0 10px 22px rgba(255, 95, 54, 0.3);
+      }
+
+      /* ── CTA ── */
+      .cs-cta {
+        margin: 90px auto 64px; text-align: center; padding: 60px 40px;
+        border-radius: 36px;
+        background: linear-gradient(135deg, rgba(255, 95, 54, 0.05) 0%, rgba(255,255,255,0.9) 100%);
+        border: 1px solid rgba(255, 95, 54, 0.1);
+        box-shadow: 0 30px 60px rgba(20,42,75,0.05);
+        position: relative; overflow: hidden;
+      }
+      .cs-cta h3 { font-size: 28px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.01em; }
+      .cs-cta p { color: var(--text-muted); margin-bottom: 32px; font-size: 16px; }
+      .cs-cta-actions { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+      .cs-cta-btn {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 16px 36px; border-radius: 999px;
+        font-weight: 700; font-size: 14.5px; text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .cs-cta-btn--primary {
+        background: var(--primary); color: #fff;
+        box-shadow: 0 12px 28px rgba(255, 95, 54, 0.25);
+      }
+      .cs-cta-btn--primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 36px rgba(255, 95, 54, 0.35);
+      }
+      .cs-cta-btn--secondary {
+        background: rgba(255,255,255,0.9); color: var(--primary);
+        border: 1px solid rgba(255, 95, 54, 0.25);
+        box-shadow: 0 10px 24px rgba(255, 95, 54, 0.06);
+      }
+      .cs-cta-btn--secondary:hover {
+        transform: translateY(-3px);
+        background: #fff;
+        box-shadow: 0 14px 28px rgba(255, 95, 54, 0.12);
+      }
+      .cs-cta-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+      /* ── Responsive ── */
+      @media (max-width: 640px) {
+        .cs-hero { min-height: 420px; padding: 90px 16px 60px; }
+        .cs-hero h1 { font-size: 2.1rem; }
+        .cs-hero-sub { font-size: 15px; }
+        .cs-hero-meta {
+          grid-template-columns: repeat(2, 1fr); gap: 12px;
+          background: rgba(255, 255, 255, 0.04); padding: 16px;
+        }
+        .cs-hero-meta-item { padding: 4px; }
+        .cs-hero-meta-item:not(:last-child) { border-right: none; }
+        .cs-hero-meta-item dd { font-size: 13.5px; }
+        
+        .cs-section { margin-top: 56px; }
+        .cs-section h2 { font-size: 24px; margin-bottom: 16px; }
+        .cs-card { padding: 28px 20px; border-radius: 24px; }
+        .back-btn { top: 16px; left: 16px; padding: 8px 16px; font-size: 12px; }
+      }
+
+      /* ── Fade-in animation ── */
+      .cs-fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+      .cs-fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+  </head>
+  <body>
+    <a class="back-btn" href="./index.html">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12Z"></path></svg>
+      Back to Portfolio
+    </a>
+
+    <!-- ── Hero ── -->
+    <section class="cs-hero">
+      <div class="cs-hero-glow-1"></div>
+      <div class="cs-hero-glow-2"></div>
+      <div class="cs-hero-grid"></div>
+      <div class="cs-hero-content">
+        <span class="cs-hero-badge">AI-Integrated Exam Prep Platform</span>
+        <h1>GovPrep AI &mdash; <span>Exam Prep Reimagined</span></h1>
+        <p class="cs-hero-sub">
+          A high-performance progressive web app (PWA) and Ionic Capacitor Android application built to help aspirants survive the RSSB Rajasthan Computer Instructor Exam. Fully backed by Supabase and a dual Gemini/Groq AI study engine.
+        </p>
+        <dl class="cs-hero-meta">
+          <div class="cs-hero-meta-item"><dt>Role</dt><dd>Lead Architect & Developer</dd></div>
+          <div class="cs-hero-meta-item"><dt>Timeline</dt><dd>May 2026</dd></div>
+          <div class="cs-hero-meta-item"><dt>Stack</dt><dd>Vanilla JS &middot; Supabase &middot; Gemini &middot; Groq</dd></div>
+          <div class="cs-hero-meta-item"><dt>Shell</dt><dd>Ionic Capacitor (Android)</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="cs-container">
+
+      <!-- ── Genesis & The Syllabus Nightmare ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">1. Genesis &amp; Context</div>
+        <h2>The RSSB Syllabus Nightmare</h2>
+        <p>
+          Preparing for the <strong>Rajasthan Computer Instructor (Basic &amp; Senior) Exam</strong> is a recipe for mental collapse. The syllabus contains over <strong>79 distinct topics</strong>. It expects you to master everything in Paper I (Rajasthan history, art, culture, geography, and general mental ability) AND Paper II (CS fundamentals including Data Structures, OOPs, Computer Architecture, OS, Networking, DBMS, and *Pedagogy*—because apparently you need to know how to teach a child to count in binary).
+        </p>
+        <p>
+          Typical exam preparation consists of studying dry 400-page scanned PDFs downloaded from shady Telegram groups, guessing if a question key is correct, and crying silently in a corner. I wanted to build a modern, high-fidelity tool that actually helps aspirants structure their preparation, get instant feedback, and stay motivated.
+        </p>
+      </section>
+
+      <!-- ── Why standard apps suck ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">2. Problem Identification</div>
+        <h2>Why standard prep apps suck</h2>
+        <p>
+          If you look at the app store, most competitive exam prep apps look like they were designed during the early Windows 95 era and have the responsiveness of cold molasses. They suffer from critical UX failures:
+        </p>
+        <div class="cs-grid" style="margin-top: 24px;">
+          <div class="cs-grid-item cs-grid-item--orange">
+            <div class="cs-grid-icon cs-grid-icon--orange">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </div>
+            <h4>Dry-As-Dust Reading Material</h4>
+            <p>Hitting users with massive, unformatted blocks of study guides. It's the ultimate insomnia cure. No engagement, no formatting, and absolutely zero guidance on difficult concepts.</p>
+          </div>
+          <div class="cs-grid-item cs-grid-item--orange">
+            <div class="cs-grid-icon cs-grid-icon--orange">
+              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 2 22 6.48 22 12s-4.48-10-10.01-10zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </div>
+            <h4>No Active Guidance Loop</h4>
+            <p>When you get a mock test question wrong, you get a generic "Option C is correct" response. You're left wondering *why* the compiler resolved it that way, with no way to follow up.</p>
+          </div>
+          <div class="cs-grid-item cs-grid-item--orange">
+            <div class="cs-grid-icon cs-grid-icon--orange">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            </div>
+            <h4>Panic-Free Zone</h4>
+            <p>Without a persistent, ticking visual countdown, you fall into the trap of "I have plenty of time." Spoilers: you don't. You need visual urgency directly on your dashboard.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Engineering & Tech Stack ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">3. Engineering &amp; Architecture</div>
+        <h2>The Dual-AI &amp; Sync Architecture</h2>
+        <div class="cs-card">
+          <p style="margin-bottom: 16px;">
+            <strong>The Frontend:</strong> Built using Vanilla ES6 JavaScript, HTML5, and custom CSS variables. Deployed on Vercel for instant loads and configured as a progressive web app. No heavy UI libraries like React or Angular to slow down asset delivery. It runs at a smooth 60fps on low-end mobile devices.
+          </p>
+          <p style="margin-bottom: 16px;">
+            <strong>The Mobile Shell:</strong> Packaged into a native Android application using <strong>Ionic Capacitor</strong>. To bypass the pain of local Java/Gradle build configuration mismatches on random developer laptops, I wrote a PowerShell script that overrides system <code>JAVA_HOME</code> to hook directly into a bundled, portable JDK 21 folder, compiling the debug APK instantly.
+          </p>
+          <p style="margin-bottom: 16px;">
+            <strong>The Dual-AI Study Core:</strong>
+            Instead of bottlenecking user experience on a single model, GovPrep AI splits the load:
+          </p>
+          <ul style="margin-left: 24px; margin-bottom: 20px; color: var(--text-muted); line-height: 1.8;">
+            <li><strong>Llama 3.3 (70B) via Groq API</strong>: Used to generate instantaneous quiz explanations and doubts resolution. It responds in less than 200ms, making the interactive doubt chat feel like a real-time conversation.</li>
+            <li><strong>Google Gemini API (3.5 Flash)</strong>: Configured with web search grounding. Every morning, it fetches live, grounded briefings of local and national current affairs, parsing them into structured daily reading cards.</li>
+          </ul>
+          <p>
+            <strong>The Python ETL Pipeline:</strong> Let's be honest: manually typing 200 past year questions with 4 options each from raw PDF papers into a database is a form of digital torture. I wrote custom Python scripts to parse the raw text papers, automatically map correct option indexes, tag them with subjects and syllabus topics, and upload them securely to Supabase.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── Database Schema ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">4. Database Schema</div>
+        <h2>Structured Supabase Postgres Tables</h2>
+        <p>
+          To manage user streaks, mock history, cached study guides, and previous year papers (PYQs), we integrated Supabase PostgreSQL. Here is the SQL schema utilized to back the application data sync:
+        </p>
+
+        <div class="schema-container">
+          <div class="schema-title">user_data Table (Streaks &amp; Progress)</div>
+          <pre class="schema-code"><span class="schema-keyword">create table</span> public.user_data (
+  id <span class="schema-type">uuid</span> <span class="schema-keyword">references</span> auth.users <span class="schema-keyword">on delete cascade primary key</span>,
+  display_name <span class="schema-type">text</span>,
+  test_history <span class="schema-type">jsonb</span> <span class="schema-keyword">default</span> <span class="schema-string">'[]'::jsonb</span>,
+  streak_info <span class="schema-type">jsonb</span> <span class="schema-keyword">default</span> <span class="schema-string">'{"count": 0, "lastDate": null}'::jsonb</span>,
+  studied_topics <span class="schema-type">jsonb</span> <span class="schema-keyword">default</span> <span class="schema-string">'[]'::jsonb</span>,
+  target_exam <span class="schema-type">text</span> <span class="schema-keyword">default</span> <span class="schema-string">'BCI'</span>,
+  created_at <span class="schema-type">timestamptz</span> <span class="schema-keyword">default</span> <span class="schema-keyword">now()</span>
+);
+
+<span class="schema-comment">-- Enable RLS and setup policies</span>
+<span class="schema-keyword">alter table</span> public.user_data <span class="schema-keyword">enable row level security</span>;
+<span class="schema-keyword">create policy</span> <span class="schema-string">"Anyone can read user_data"</span> <span class="schema-keyword">on</span> public.user_data <span class="schema-keyword">for select using</span> (<span class="schema-keyword">true</span>);
+<span class="schema-keyword">create policy</span> <span class="schema-string">"Users can update own data"</span> <span class="schema-keyword">on</span> public.user_data <span class="schema-keyword">for update using</span> (auth.uid() = id);</pre>
+        </div>
+
+        <div class="schema-container" style="margin-top: 20px;">
+          <div class="schema-title">pyqs Table (Past Year Questions Storage)</div>
+          <pre class="schema-code"><span class="schema-keyword">create table</span> public.pyqs (
+  id <span class="schema-type">bigint</span> <span class="schema-keyword">generated always as identity primary key</span>,
+  paper_type <span class="schema-type">text</span> <span class="schema-keyword">not null</span>, <span class="schema-comment">-- 'basic_p1', 'basic_p2', 'senior_p1', etc.</span>
+  subject <span class="schema-type">text</span>,
+  topic <span class="schema-type">text</span>,
+  question <span class="schema-type">text</span> <span class="schema-keyword">not null</span>,
+  options <span class="schema-type">jsonb</span> <span class="schema-keyword">not null</span>, <span class="schema-comment">-- Array of strings e.g. ["A", "B", "C", "D"]</span>
+  correct_index <span class="schema-type">integer</span> <span class="schema-keyword">not null</span>,
+  explanation <span class="schema-type">text</span>,
+  created_at <span class="schema-type">timestamptz</span> <span class="schema-keyword">default</span> <span class="schema-keyword">now()</span>
+);</pre>
+        </div>
+      </section>
+
+      <!-- ── Solution & Key UI Elements ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">5. UX &amp; UI Highlights</div>
+        <h2>Sarcastic UX Insights</h2>
+        <p>
+          I didn't want to build just another dashboard. The application implements features specifically engineered to fight procrastination and provide immediate value:
+        </p>
+        <div class="cs-grid" style="margin-top: 24px;">
+          <div class="cs-grid-item cs-grid-item--orange">
+            <div class="cs-grid-icon cs-grid-icon--orange">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </div>
+            <h4>Panic Countdown Widget</h4>
+            <p>Positions a giant exam countdown timer right at the top of the dashboard. August 23, 2026 is ticking down second-by-second. Because nothing drives preparation quite like healthy, existential panic.</p>
+          </div>
+          <div class="cs-grid-item cs-grid-item--orange">
+            <div class="cs-grid-icon cs-grid-icon--orange">
+              <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm0-3h12v2H6V6zm0 6h9v2H6v-2z"/></svg>
+            </div>
+            <h4>Pre-loaded Doubt Helper</h4>
+            <p>Instead of copying a question, opening a tab, and paste-querying an LLM, you just click the float chat. It opens pre-populated with the question's context. One-click sanity check.</p>
+          </div>
+          <div class="cs-grid-item cs-grid-item--orange">
+            <div class="cs-grid-icon cs-grid-icon--orange">
+              <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+            </div>
+            <h4>Gamified Leaderboard</h4>
+            <p>Tracks weekly questions answered, score percentages, and active streaks. Because if you aren't motivated by learning, you might be motivated by showing off that you scored higher than 'Aspirant-382'.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CTA Download ── -->
+      <section class="cs-cta">
+        <h3>Try GovPrep AI (BCI-Prep)</h3>
+        <p>Grab the compiled Android APK directly or view the open-source repository on GitHub.</p>
+        <div class="cs-cta-actions">
+          <a class="cs-cta-btn cs-cta-btn--primary" href="./exam-prep.apk" download>
+            <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+            Download Android APK
+          </a>
+          <a class="cs-cta-btn cs-cta-btn--secondary" href="https://github.com/R-V-2003/Exam-prep" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.523-10-10-10z"/></svg>
+            GitHub Repository
+          </a>
+        </div>
+      </section>
+
+      <!-- ── Future Scope ── -->
+      <section class="cs-section cs-fade-in" style="margin-bottom: 80px;">
+        <div class="cs-section-label">Conclusion</div>
+        <h2>Takeaways &amp; Future Scope</h2>
+        <p>
+          GovPrep AI demonstrates the feasibility of building premium, fast-loading educational applications without the bloat of major frameworks, using direct client-side service wrappers (Supabase and LLM integrations). Packing it via Capacitor makes distribution cheap and effective.
+        </p>
+        <p>
+          Next features include incorporating localized test reports with heatmaps of syllabus weaknesses, and adding a collaborative peer-grilling system (because misery loves company).
+        </p>
+      </section>
+
+    </div>
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.cs-fade-in').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
