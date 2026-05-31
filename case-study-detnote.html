@@ -111,12 +111,20 @@
       .cs-grid-item:hover { transform: translateY(-6px); box-shadow: 0 22px 44px rgba(20,42,75,0.14); }
       .cs-grid-icon {
         width: 48px; height: 48px; border-radius: 14px; margin-bottom: 16px;
-        display: flex; align-items: center; justify-content: center; font-size: 22px;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .cs-grid-icon svg {
+        width: 24px;
+        height: 24px;
       }
       .cs-grid-icon--red { background: rgba(255,92,141,0.12); }
+      .cs-grid-icon--red svg { fill: #ff5c8d; }
       .cs-grid-icon--orange { background: rgba(255,167,81,0.12); }
+      .cs-grid-icon--orange svg { fill: #ffa751; }
       .cs-grid-icon--green { background: rgba(46,213,115,0.12); }
+      .cs-grid-icon--green svg { fill: #2ed573; }
       .cs-grid-icon--purple { background: rgba(126,101,255,0.12); }
+      .cs-grid-icon--purple svg { fill: #7e65ff; }
       .cs-grid-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
       .cs-grid-item p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin: 0; }
 
@@ -256,24 +264,32 @@
         <h2>What needed to be solved?</h2>
         <div class="cs-grid">
           <div class="cs-grid-item">
-            <div class="cs-grid-icon cs-grid-icon--orange">🆕</div>
-            <h4>Blank Canvas Design</h4>
-            <p>No existing design system or brand guidelines. I needed to create the entire visual identity, component library, and page layouts from zero.</p>
+            <div class="cs-grid-icon cs-grid-icon--orange">
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <h4>The Blank Canvas Void</h4>
+            <p>Absolutely no brand guidelines or colors existed. I had to summon a complete visual system and layouts out of thin air, like a digital wizard in a dark room.</p>
           </div>
           <div class="cs-grid-item">
-            <div class="cs-grid-icon cs-grid-icon--purple">🧩</div>
-            <h4>Complex Booking Flow</h4>
-            <p>Exam booking involves multiple steps — selecting dates, locations, payment. The UX needed to feel simple despite the underlying complexity.</p>
+            <div class="cs-grid-icon cs-grid-icon--purple">
+              <svg viewBox="0 0 24 24"><path d="M4 11h5V5H4v6zm0 8h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5V5h-5v14zm-6-8h5V5h-5v6z"/></svg>
+            </div>
+            <h4>Booking Journey Maze</h4>
+            <p>Exam booking is notoriously painful. Guiding nervous students through dates, times, and slot details without causing a full-blown panic attack was a major UX puzzle.</p>
           </div>
           <div class="cs-grid-item">
-            <div class="cs-grid-icon cs-grid-icon--green">🌍</div>
-            <h4>Global Student Audience</h4>
-            <p>DET takers come from diverse countries with different devices and network speeds. The design needed to be universally accessible and fast-loading.</p>
+            <div class="cs-grid-icon cs-grid-icon--green">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <h4>Global Bandwidth Chaos</h4>
+            <p>Aspirants browse on old mobile phones with unstable connections. The design had to load instantly, which meant heavy scripts and bloated layouts were strictly banned.</p>
           </div>
           <div class="cs-grid-item">
-            <div class="cs-grid-icon cs-grid-icon--red">💳</div>
-            <h4>Trust for Transactions</h4>
-            <p>Users are paying for exam slots — the interface needed to convey professionalism and reliability to reduce drop-off during checkout.</p>
+            <div class="cs-grid-icon cs-grid-icon--red">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+            </div>
+            <h4>Money Trust Barrier</h4>
+            <p>Students are paying real cash for exam seats. If the checkout screens looked even slightly sketchy, they would close the tab faster than you can say "refund policy".</p>
           </div>
         </div>
       </section>
@@ -319,20 +335,32 @@
         <h2>Key design decisions</h2>
         <div class="cs-grid" style="margin-top: 24px;">
           <div class="cs-grid-item">
-            <h4>🎨 Warm, Inviting Color Palette</h4>
-            <p>Chose coral-to-orange gradients to feel approachable and energetic — differentiating from the cold, clinical UIs of traditional exam platforms.</p>
+            <div class="cs-grid-icon cs-grid-icon--orange">
+              <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9a1 1 0 0 0 1-1v-1.39a2 2 0 0 1 2-2h1c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3.5 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+            </div>
+            <h4>Coral Color Gradients</h4>
+            <p>Chose approachably warm coral-to-orange gradients instead of sterile, clinical blues. It feels like an actual human platform rather than a tax software questionnaire.</p>
           </div>
           <div class="cs-grid-item">
-            <h4>📋 Clear Step-by-Step Booking</h4>
-            <p>Broke the booking process into clear, numbered steps with progress indicators — reducing anxiety and drop-off during the multi-step flow.</p>
+            <div class="cs-grid-icon cs-grid-icon--purple">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2zm0 8H7v-2h10v2z"/></svg>
+            </div>
+            <h4>Bite-Sized Booking Steps</h4>
+            <p>Broke the complex booking flow into clean, numbered steps. It holds students' hands throughout the process so they don't break down and close the tab mid-way.</p>
           </div>
           <div class="cs-grid-item">
-            <h4>🔒 Trust-First Layout</h4>
-            <p>Placed security badges, student testimonials, and transparent pricing above the fold to build confidence before users enter the booking funnel.</p>
+            <div class="cs-grid-icon cs-grid-icon--green">
+              <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 18c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+            </div>
+            <h4>Transparent Trust Layout</h4>
+            <p>Placed security seals, reviews, and real pricing right up front. It turns out that if you don't sneak in hidden fees, users are surprisingly willing to check out.</p>
           </div>
           <div class="cs-grid-item">
-            <h4>📱 Responsive from Day One</h4>
-            <p>Designed for mobile-first with component variants for tablet and desktop. Every form, button, and card adapts gracefully across screen sizes.</p>
+            <div class="cs-grid-icon cs-grid-icon--red">
+              <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            </div>
+            <h4>True Responsive Design</h4>
+            <p>Designed for mobile screens first and scaled up. Every form field and card scales down beautifully so users on older smartphones don't have to squint.</p>
           </div>
         </div>
       </section>
