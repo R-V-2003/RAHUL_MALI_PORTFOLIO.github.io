@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+import re
+
+with open('case-study-chalo.html', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+new_content = """<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -361,4 +366,7 @@
       document.querySelectorAll('.cs-fade-in').forEach(el => observer.observe(el));
     </script>
   </body>
-</html>
+</html>"""
+
+with open('case-study-chalo.html', 'w', encoding='utf-8') as f:
+    f.write(new_content)
