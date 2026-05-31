@@ -102,6 +102,43 @@
         backdrop-filter: blur(14px);
       }
 
+      /* ── Showcase Images ── */
+      .cs-showcase {
+        margin: 40px 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 32px;
+      }
+      .cs-showcase-item {
+        border-radius: 24px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid rgba(14,107,255,0.12);
+        box-shadow: 0 16px 36px rgba(20,42,75,0.08);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .cs-showcase-item img {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        display: block;
+        margin-bottom: 16px;
+      }
+      .cs-showcase-caption {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .cs-showcase-caption strong {
+        color: var(--text-dark);
+      }
+
       /* ── Problem / Goals Grid ── */
       .cs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
       .cs-grid-item {
@@ -261,24 +298,24 @@
         <h2>What problems existed?</h2>
         <div class="cs-grid">
           <div class="cs-grid-item">
-            <div class="cs-grid-icon cs-grid-icon--red">⚠️</div>
-            <h4>Weak Visual Hierarchy</h4>
-            <p>Content lacked clear structure — users couldn't quickly understand what PTENote offers or why they should trust it.</p>
+            <div class="cs-grid-icon cs-grid-icon--red">🎨</div>
+            <h4>Outdated Visuals</h4>
+            <p>The original UI looked dated and uninspired, which failed to reflect a modern academic platform and hurt brand credibility.</p>
           </div>
           <div class="cs-grid-item">
-            <div class="cs-grid-icon cs-grid-icon--blue">📱</div>
-            <h4>Poor Mobile Experience</h4>
-            <p>The original site wasn't optimized for mobile devices, where a significant portion of PTE aspirants browse and study.</p>
+            <div class="cs-grid-icon cs-grid-icon--blue">📚</div>
+            <h4>Dry & Heavy Content</h4>
+            <p>Content was dry, direct, and presented in massive text blocks. It ignored basic principles of user knowledge grasping power, leading to cognitive fatigue.</p>
           </div>
           <div class="cs-grid-item">
-            <div class="cs-grid-icon cs-grid-icon--green">🎨</div>
-            <h4>Outdated Visual Design</h4>
-            <p>The UI felt dated — lacking modern aesthetics, consistent spacing, and cohesive branding that builds credibility.</p>
+            <div class="cs-grid-icon cs-grid-icon--green">🚪</div>
+            <h4>Low Page Accessibility</h4>
+            <p>On mobile screens, other critical sections (such as mock tests, voucher booking, and about us) were hidden away, leaving them completely unvisited.</p>
           </div>
           <div class="cs-grid-item">
-            <div class="cs-grid-icon cs-grid-icon--purple">🔗</div>
-            <h4>Unclear Call-to-Actions</h4>
-            <p>Users weren't guided toward signing up or exploring features. The conversion funnel was fragmented.</p>
+            <div class="cs-grid-icon cs-grid-icon--purple">🤝</div>
+            <h4>Missing Trust Factors</h4>
+            <p>Because it's a paid preparation platform, the layout didn't establish a human connection or build instant legitimacy with student audiences.</p>
           </div>
         </div>
       </section>
@@ -306,8 +343,8 @@
             </div>
             <div class="cs-timeline-step">
               <div class="cs-timeline-dot"></div>
-              <h4>4. Iterative Development</h4>
-              <p>Built the landing page using HTML, Tailwind CSS, and JavaScript. Iterated on the design during development — refining spacing, animations, and interactions based on how they felt in the browser vs. Figma.</p>
+              <h4>4. Iterative Development & AI Loops</h4>
+              <p>Since we leverage AI for design and development, we followed a strictly iterative model. A great product is not built in one shot—it requires continuous cycles of design refinement, testing, and development to improve user flows compared to the older versions.</p>
             </div>
             <div class="cs-timeline-step">
               <div class="cs-timeline-dot"></div>
@@ -323,26 +360,41 @@
         <div class="cs-section-label">Solution</div>
         <h2>The final design</h2>
         <p>
-          The redesigned PTENote website features a <strong>clean, modern interface</strong>
-          with strong visual hierarchy, responsive layouts, and clear conversion paths.
-          Key design decisions included:
+          The redesigned PTENote platform transitions to a high-converting, highly engaging experience. 
+          By combining user psychology with modern UI patterns, the new version delivers:
         </p>
         <div class="cs-grid" style="margin-top: 24px;">
           <div class="cs-grid-item">
-            <h4>🎯 Hero Section with Clear Value Prop</h4>
-            <p>Immediately communicates what PTENote does with a compelling headline, trust indicators, and a prominent CTA button.</p>
+            <h4>🎭 Sarcastic & Funny Copywriting</h4>
+            <p>Instead of dry academic text, content is rewritten in a sarcastic, humorous, and relatable tone that matches students' mindsets and keeps them reading.</p>
           </div>
           <div class="cs-grid-item">
-            <h4>⭐ Social Proof Integration</h4>
-            <p>Added testimonials, student success stats, and platform ratings to build trust quickly with new visitors.</p>
+            <h4>✨ Animated Illustrations</h4>
+            <p>Complex platform features and exam metrics are broken down using smooth animated illustrations, making the site easier to grasp and understand.</p>
           </div>
           <div class="cs-grid-item">
-            <h4>📐 Modular Component System</h4>
-            <p>Built with reusable Tailwind utility classes and consistent spacing tokens, making future iterations fast and maintainable.</p>
+            <h4>🎥 Social Reels with Real People</h4>
+            <p>Embedded video reels featuring actual individuals explaining PTENote. This humanizes the brand and establishes immediate legitimacy and trust.</p>
           </div>
           <div class="cs-grid-item">
-            <h4>📱 Mobile-First Responsive Layout</h4>
-            <p>Every section adapts gracefully from mobile to desktop with optimized touch targets, readable type scales, and logical content reflow.</p>
+            <h4>📱 Bottom Navigation Bar (Mobile)</h4>
+            <p>A native-feeling bottom nav bar was implemented for mobile screens. Placing core sections (Book Exam, Voucher, Mock Tests, About Us) at the bottom drives user curiosity and enables effortless, single-hand thumb navigation to other pages.</p>
+          </div>
+        </div>
+
+        <!-- Showcase of Mobile Layout and Bottom Nav -->
+        <div class="cs-showcase">
+          <div class="cs-showcase-item">
+            <img src="./ptenote-mobile-screen.png" alt="PTENote Mobile Redesign Screen" />
+            <div class="cs-showcase-caption">
+              <strong>Mobile Interface Redesign</strong>: Features engaging mascot illustrations, clean registration forms, custom colors, and the accessible bottom navigation bar.
+            </div>
+          </div>
+          <div class="cs-showcase-item">
+            <img src="./ptenote-mobile-nav-bar.png" alt="PTENote Mobile Bottom Navigation Close-up" />
+            <div class="cs-showcase-caption">
+              <strong>App-Like Bottom Navigation</strong>: Familiar social media app pattern placed within thumbs' reach, boosting mobile page accessibility and exploration.
+            </div>
           </div>
         </div>
       </section>
