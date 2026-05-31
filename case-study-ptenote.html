@@ -175,9 +175,39 @@
         font-size: 13px;
         color: var(--text-muted);
         line-height: 1.6;
+        margin-bottom: 16px;
       }
       .cs-showcase-caption strong {
         color: var(--text-dark);
+      }
+      .cs-showcase-features {
+        margin-top: auto;
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 16px;
+        border-top: 1px dashed rgba(14,107,255,0.15);
+      }
+      .cs-showcase-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--text-muted);
+      }
+      .cs-showcase-feature svg {
+        width: 14px;
+        height: 14px;
+        fill: var(--primary);
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+      .cs-showcase-feature strong {
+        color: var(--text-dark);
+        font-weight: 600;
       }
 
       /* ── Problem / Goals Grid ── */
@@ -528,11 +558,47 @@
             <div class="cs-showcase-caption">
               <strong>Mobile Interface Redesign</strong>: Features engaging mascot illustrations, clean registration forms, custom colors, and the accessible bottom navigation bar.
             </div>
+            <div class="cs-showcase-features">
+              <div class="cs-showcase-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span><strong>Friendly Mascot Hook:</strong> A warm owl mascot greetings future PTE champions at the top to build immediate brand trust and emotional connection.</span>
+              </div>
+              <div class="cs-showcase-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span><strong>High-Converting Form:</strong> Streamlined input fields (Name, Email, Phone) placed above the fold to capture leads in less than 30 seconds.</span>
+              </div>
+              <div class="cs-showcase-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span><strong>Visual Anchors:</strong> Contrast-heavy yellow "Get Started" CTA button acting as a magnet for user action.</span>
+              </div>
+              <div class="cs-showcase-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span><strong>Glassmorphism Cards:</strong> Clean floating glass cards separated by dash dividers to make complex forms digestible and visually engaging.</span>
+              </div>
+            </div>
           </div>
           <div class="cs-showcase-item">
             <img src="./ptenote-mobile-nav-bar.png" alt="PTENote Mobile Bottom Navigation Close-up" />
             <div class="cs-showcase-caption">
               <strong>App-Like Bottom Navigation</strong>: Moving navigation to the bottom puts core pages directly in the "Thumb Zone"—unlike traditional top-corner hamburger menus which require thumb gymnastics to reach on modern giant screens. By mimicking social media apps (where users spend 90% of their waking hours), we kept options visible at all times, driving curiosity clicks to secondary pages like Mock Tests and Vouchers that were previously left to gather digital dust.
+            </div>
+            <div class="cs-showcase-features">
+              <div class="cs-showcase-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span><strong>Thumb-Zone Placement:</strong> Places the critical booking links at the bottom of mobile screens, eliminating the need to stretch fingers to the top corners.</span>
+              </div>
+              <div class="cs-showcase-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span><strong>Persistent Discoverability:</strong> Keeps secondary services (Mock Tests, Vouchers, and About Info) visible continuously, avoiding out-of-sight menus.</span>
+              </div>
+              <div class="cs-showcase-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span><strong>Habitual Familiarity:</strong> Leverages existing muscle memory from apps like Instagram or YouTube, sparking natural user exploration out of curiosity.</span>
+              </div>
+              <div class="cs-showcase-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span><strong>Clutter-Free Layout:</strong> Features crisp, labeled SVG icons representing each destination for clear, direct mobile accessibility.</span>
+              </div>
             </div>
           </div>
         </div>
