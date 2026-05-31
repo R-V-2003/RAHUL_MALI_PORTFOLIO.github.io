@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PTENote Case Study | Rahul Mali</title>
+    <meta name="description" content="UI/UX Case Study — Redesigning PTENote's landing page for better conversion, clearer visual hierarchy, and a responsive, accessible user experience." />
+    <link href="./Rahul Mali _ Portfolio_files/css2" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f2f5fb;
+        --card: #ffffffd9;
+        --glass-border: #ffffff55;
+        --primary: #0e6bff;
+        --text-dark: #262c35;
+        --text-muted: #6f7b8a;
+        --accent-gradient: linear-gradient(135deg, #1d7cff, #7e65ff);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: radial-gradient(circle at top, #f8fbff 0%, var(--bg) 70%);
+        color: var(--text-dark);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── Back Button ── */
+      .back-btn {
+        position: fixed; top: 24px; left: 24px; z-index: 100;
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 12px 24px; border-radius: 999px;
+        background: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.6);
+        box-shadow: 0 12px 28px rgba(20,42,75,0.14);
+        backdrop-filter: blur(14px);
+        text-decoration: none; color: var(--text-dark);
+        font-weight: 600; font-size: 14px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .back-btn:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(20,42,75,0.2); }
+      .back-btn svg { width: 18px; height: 18px; fill: var(--primary); }
+
+      /* ── Hero ── */
+      .cs-hero {
+        position: relative; width: 100%; min-height: 420px;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden; padding: 80px 24px 60px;
+      }
+      .cs-hero::before {
+        content: ""; position: absolute; inset: 0;
+        background: url('./Rahul Mali _ Portfolio_files/ptenote-hero.png') center/cover no-repeat;
+        opacity: 0.35; z-index: 0;
+      }
+      .cs-hero-content { position: relative; z-index: 2; text-align: center; max-width: 720px; }
+      .cs-hero-badge {
+        display: inline-block; padding: 8px 20px; border-radius: 999px;
+        background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+        color: rgba(255,255,255,0.9); font-size: 12px; font-weight: 600;
+        letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px;
+        backdrop-filter: blur(8px);
+      }
+      .cs-hero h1 {
+        color: #fff; font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 700; line-height: 1.15; margin-bottom: 16px;
+      }
+      .cs-hero h1 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .cs-hero-sub { color: rgba(255,255,255,0.7); font-size: 17px; line-height: 1.6; max-width: 560px; margin: 0 auto; }
+      .cs-hero-meta {
+        display: flex; gap: 32px; justify-content: center; margin-top: 32px; flex-wrap: wrap;
+      }
+      .cs-hero-meta-item { text-align: center; }
+      .cs-hero-meta-item dt { color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; }
+      .cs-hero-meta-item dd { color: #fff; font-weight: 600; font-size: 15px; margin-top: 4px; }
+
+      /* ── Container ── */
+      .cs-container {
+        width: min(860px, 92vw); margin: 0 auto; padding: 0 24px;
+      }
+
+      /* ── Section ── */
+      .cs-section { margin-top: 64px; }
+      .cs-section-label {
+        display: inline-flex; align-items: center; gap: 10px;
+        font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--primary); margin-bottom: 12px;
+      }
+      .cs-section-label::before {
+        content: ""; width: 32px; height: 2px; background: var(--primary); border-radius: 2px;
+      }
+      .cs-section h2 { font-size: 28px; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+      .cs-section p { color: var(--text-muted); line-height: 1.75; font-size: 16px; margin-bottom: 16px; }
+
+      /* ── Glass Card ── */
+      .cs-card {
+        padding: 36px; border-radius: 28px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(242,246,255,0.88));
+        border: 1px solid rgba(255,255,255,0.6);
+        box-shadow: 0 24px 48px rgba(20,42,75,0.1);
+        backdrop-filter: blur(14px);
+      }
+
+      /* ── Problem / Goals Grid ── */
+      .cs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+      .cs-grid-item {
+        padding: 24px; border-radius: 22px;
+        background: rgba(255,255,255,0.8); border: 1px solid rgba(14,107,255,0.1);
+        box-shadow: 0 14px 28px rgba(20,42,75,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .cs-grid-item:hover { transform: translateY(-6px); box-shadow: 0 22px 44px rgba(20,42,75,0.14); }
+      .cs-grid-icon {
+        width: 48px; height: 48px; border-radius: 14px; margin-bottom: 16px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 22px;
+      }
+      .cs-grid-icon--red { background: rgba(255,92,141,0.12); }
+      .cs-grid-icon--blue { background: rgba(14,107,255,0.12); }
+      .cs-grid-icon--green { background: rgba(46,213,115,0.12); }
+      .cs-grid-icon--purple { background: rgba(126,101,255,0.12); }
+      .cs-grid-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+      .cs-grid-item p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin: 0; }
+
+      /* ── Process Timeline ── */
+      .cs-timeline { position: relative; padding-left: 40px; }
+      .cs-timeline::before {
+        content: ""; position: absolute; left: 14px; top: 0; bottom: 0;
+        width: 2px; background: linear-gradient(180deg, var(--primary), rgba(14,107,255,0.1));
+        border-radius: 2px;
+      }
+      .cs-timeline-step { position: relative; margin-bottom: 40px; }
+      .cs-timeline-step:last-child { margin-bottom: 0; }
+      .cs-timeline-dot {
+        position: absolute; left: -33px; top: 4px;
+        width: 18px; height: 18px; border-radius: 50%;
+        background: var(--primary); border: 3px solid #fff;
+        box-shadow: 0 4px 12px rgba(14,107,255,0.35);
+      }
+      .cs-timeline-step h4 { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: var(--text-dark); }
+      .cs-timeline-step p { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+
+      /* ── Results ── */
+      .cs-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 28px; }
+      .cs-result {
+        text-align: center; padding: 28px 20px; border-radius: 22px;
+        background: linear-gradient(135deg, rgba(14,107,255,0.08), rgba(126,101,255,0.06));
+        border: 1px solid rgba(14,107,255,0.12);
+      }
+      .cs-result-value {
+        font-size: 36px; font-weight: 800; line-height: 1;
+        background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
+      }
+      .cs-result-label { color: var(--text-muted); font-size: 13px; font-weight: 500; }
+
+      /* ── Tech Stack ── */
+      .cs-tech-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+      .cs-tech-chip {
+        padding: 10px 20px; border-radius: 999px;
+        background: rgba(255,255,255,0.85); border: 1px solid rgba(14,107,255,0.15);
+        font-size: 13px; font-weight: 600; color: var(--text-dark);
+        box-shadow: 0 8px 18px rgba(20,42,75,0.08);
+        transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+      .cs-tech-chip:hover { transform: translateY(-3px); background: var(--primary); color: #fff; }
+
+      /* ── CTA ── */
+      .cs-cta {
+        margin: 80px auto 48px; text-align: center; padding: 48px 36px;
+        border-radius: 32px;
+        background: linear-gradient(135deg, rgba(14,107,255,0.06), rgba(255,255,255,0.95));
+        border: 1px solid rgba(14,107,255,0.12);
+        box-shadow: 0 20px 40px rgba(20,42,75,0.08);
+      }
+      .cs-cta h3 { font-size: 24px; margin-bottom: 16px; }
+      .cs-cta p { color: var(--text-muted); margin-bottom: 24px; }
+      .cs-cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .cs-cta-btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 14px 32px; border-radius: 999px;
+        font-weight: 600; font-size: 14px; text-decoration: none;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .cs-cta-btn--primary {
+        background: var(--primary); color: #fff;
+        box-shadow: 0 14px 28px rgba(14,107,255,0.3);
+      }
+      .cs-cta-btn--primary:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(14,107,255,0.4); }
+      .cs-cta-btn--secondary {
+        background: rgba(255,255,255,0.8); color: var(--primary);
+        border: 1px solid rgba(14,107,255,0.3);
+        box-shadow: 0 12px 24px rgba(14,107,255,0.12);
+      }
+      .cs-cta-btn--secondary:hover { transform: translateY(-4px); }
+      .cs-cta-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+      /* ── Responsive ── */
+      @media (max-width: 640px) {
+        .cs-hero { min-height: 340px; padding: 72px 16px 40px; }
+        .cs-hero h1 { font-size: 1.8rem; }
+        .cs-hero-sub { font-size: 15px; }
+        .cs-section h2 { font-size: 22px; }
+        .cs-card { padding: 24px 20px; border-radius: 22px; }
+        .back-btn { top: 16px; left: 16px; padding: 10px 18px; font-size: 13px; }
+        .cs-result-value { font-size: 28px; }
+      }
+
+      /* ── Fade-in animation ── */
+      .cs-fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .cs-fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+  </head>
+  <body>
+    <a class="back-btn" href="./index.html">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12Z"></path></svg>
+      Back to Portfolio
+    </a>
+
+    <!-- ── Hero ── -->
+    <section class="cs-hero">
+      <div class="cs-hero-content">
+        <span class="cs-hero-badge">UI/UX Case Study</span>
+        <h1>PTENote — <span>Website Redesign</span></h1>
+        <p class="cs-hero-sub">
+          Redesigning the PTENote landing page to boost trust, clarify value,
+          and create a responsive, accessible experience for PTE exam takers worldwide.
+        </p>
+        <dl class="cs-hero-meta">
+          <div class="cs-hero-meta-item"><dt>Role</dt><dd>UI/UX Designer & Frontend Dev</dd></div>
+          <div class="cs-hero-meta-item"><dt>Timeline</dt><dd>Nov 2025 — Mar 2026</dd></div>
+          <div class="cs-hero-meta-item"><dt>Tools</dt><dd>Figma · HTML · Tailwind CSS · JS</dd></div>
+          <div class="cs-hero-meta-item"><dt>Type</dt><dd>Client Project @ Sedani Digital</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="cs-container">
+
+      <!-- ── Overview ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">Overview</div>
+        <h2>What is PTENote?</h2>
+        <p>
+          PTENote is an online platform that helps students prepare for the
+          <strong>Pearson Test of English (PTE) Academic exam</strong>. It provides
+          practice tests, score predictions, and study resources for test-takers globally.
+        </p>
+        <p>
+          I was tasked with <strong>completely redesigning their marketing website</strong>
+          during my internship at Sedani Digital — improving the visual design,
+          information architecture, responsive layout, and overall user experience
+          to drive trust and conversions.
+        </p>
+      </section>
+
+      <!-- ── Problem ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">Problem</div>
+        <h2>What problems existed?</h2>
+        <div class="cs-grid">
+          <div class="cs-grid-item">
+            <div class="cs-grid-icon cs-grid-icon--red">⚠️</div>
+            <h4>Weak Visual Hierarchy</h4>
+            <p>Content lacked clear structure — users couldn't quickly understand what PTENote offers or why they should trust it.</p>
+          </div>
+          <div class="cs-grid-item">
+            <div class="cs-grid-icon cs-grid-icon--blue">📱</div>
+            <h4>Poor Mobile Experience</h4>
+            <p>The original site wasn't optimized for mobile devices, where a significant portion of PTE aspirants browse and study.</p>
+          </div>
+          <div class="cs-grid-item">
+            <div class="cs-grid-icon cs-grid-icon--green">🎨</div>
+            <h4>Outdated Visual Design</h4>
+            <p>The UI felt dated — lacking modern aesthetics, consistent spacing, and cohesive branding that builds credibility.</p>
+          </div>
+          <div class="cs-grid-item">
+            <div class="cs-grid-icon cs-grid-icon--purple">🔗</div>
+            <h4>Unclear Call-to-Actions</h4>
+            <p>Users weren't guided toward signing up or exploring features. The conversion funnel was fragmented.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Process ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">Process</div>
+        <h2>How I approached the redesign</h2>
+        <div class="cs-card">
+          <div class="cs-timeline">
+            <div class="cs-timeline-step">
+              <div class="cs-timeline-dot"></div>
+              <h4>1. Research & Audit</h4>
+              <p>Audited the existing PTENote website to identify pain points. Analyzed competitor platforms (Magoosh, E2Language, MockPTE) for UX patterns. Documented gaps in information hierarchy, mobile usability, and conversion flows.</p>
+            </div>
+            <div class="cs-timeline-step">
+              <div class="cs-timeline-dot"></div>
+              <h4>2. Wireframing & Information Architecture</h4>
+              <p>Created low-fidelity wireframes in Figma mapping out the new page structure: hero → social proof → features → pricing → CTA. Focused on reducing cognitive load and guiding users toward signup.</p>
+            </div>
+            <div class="cs-timeline-step">
+              <div class="cs-timeline-dot"></div>
+              <h4>3. High-Fidelity Design in Figma</h4>
+              <p>Designed the complete UI in Figma with a refreshed color palette, modern typography (Inter + Poppins), glassmorphism cards, and a clear visual hierarchy. Created component variants for responsive breakpoints (desktop, tablet, mobile).</p>
+            </div>
+            <div class="cs-timeline-step">
+              <div class="cs-timeline-dot"></div>
+              <h4>4. Iterative Development</h4>
+              <p>Built the landing page using HTML, Tailwind CSS, and JavaScript. Iterated on the design during development — refining spacing, animations, and interactions based on how they felt in the browser vs. Figma.</p>
+            </div>
+            <div class="cs-timeline-step">
+              <div class="cs-timeline-dot"></div>
+              <h4>5. Testing & Launch</h4>
+              <p>Tested across Chrome, Safari, Firefox on desktop and mobile. Validated accessibility with keyboard navigation and screen reader checks. Optimized images and loading performance before deployment.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Solution ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">Solution</div>
+        <h2>The final design</h2>
+        <p>
+          The redesigned PTENote website features a <strong>clean, modern interface</strong>
+          with strong visual hierarchy, responsive layouts, and clear conversion paths.
+          Key design decisions included:
+        </p>
+        <div class="cs-grid" style="margin-top: 24px;">
+          <div class="cs-grid-item">
+            <h4>🎯 Hero Section with Clear Value Prop</h4>
+            <p>Immediately communicates what PTENote does with a compelling headline, trust indicators, and a prominent CTA button.</p>
+          </div>
+          <div class="cs-grid-item">
+            <h4>⭐ Social Proof Integration</h4>
+            <p>Added testimonials, student success stats, and platform ratings to build trust quickly with new visitors.</p>
+          </div>
+          <div class="cs-grid-item">
+            <h4>📐 Modular Component System</h4>
+            <p>Built with reusable Tailwind utility classes and consistent spacing tokens, making future iterations fast and maintainable.</p>
+          </div>
+          <div class="cs-grid-item">
+            <h4>📱 Mobile-First Responsive Layout</h4>
+            <p>Every section adapts gracefully from mobile to desktop with optimized touch targets, readable type scales, and logical content reflow.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Tech Stack ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">Tech Stack</div>
+        <h2>Tools & Technologies</h2>
+        <div class="cs-tech-chips">
+          <span class="cs-tech-chip">Figma</span>
+          <span class="cs-tech-chip">HTML5</span>
+          <span class="cs-tech-chip">Tailwind CSS</span>
+          <span class="cs-tech-chip">JavaScript</span>
+          <span class="cs-tech-chip">Responsive Design</span>
+          <span class="cs-tech-chip">Accessibility (A11y)</span>
+          <span class="cs-tech-chip">Git & GitHub</span>
+        </div>
+      </section>
+
+      <!-- ── Impact ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">Impact</div>
+        <h2>Results & Takeaways</h2>
+        <p>
+          The redesigned landing page was launched and is now live at
+          <a href="https://ptenote.com" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">ptenote.com</a>.
+        </p>
+        <div class="cs-results">
+          <div class="cs-result">
+            <div class="cs-result-value">100%</div>
+            <div class="cs-result-label">Responsive across all devices</div>
+          </div>
+          <div class="cs-result">
+            <div class="cs-result-value">5+</div>
+            <div class="cs-result-label">Months of iterative design</div>
+          </div>
+          <div class="cs-result">
+            <div class="cs-result-value">3x</div>
+            <div class="cs-result-label">Clearer information hierarchy</div>
+          </div>
+          <div class="cs-result">
+            <div class="cs-result-value">A11y</div>
+            <div class="cs-result-label">Accessible & keyboard-friendly</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Learnings ── -->
+      <section class="cs-section cs-fade-in">
+        <div class="cs-section-label">Reflection</div>
+        <h2>What I learned</h2>
+        <div class="cs-card">
+          <p style="margin-bottom: 14px;">
+            <strong>Designing in Figma ≠ building in browser.</strong> Many decisions I made in Figma
+            needed refinement during development — spacing felt different, animations needed tuning,
+            and real content (not lorem ipsum) changed the visual weight of sections.
+          </p>
+          <p style="margin-bottom: 14px;">
+            <strong>Iterative design is the way.</strong> The final result came from constant
+            back-and-forth between Figma and code — not from a single "hand-off" moment. This
+            taught me the value of being both the designer and developer.
+          </p>
+          <p>
+            <strong>Performance matters.</strong> Optimizing images, reducing layout shifts, and
+            ensuring fast load times are just as important as the visual design itself.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── CTA ── -->
+      <section class="cs-cta cs-fade-in">
+        <h3>Interested in working together?</h3>
+        <p>I'm looking for UI/UX design internship opportunities in Ahmedabad.</p>
+        <div class="cs-cta-actions">
+          <a class="cs-cta-btn cs-cta-btn--primary" href="https://ptenote.com/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"></path></svg>
+            Visit Live Site
+          </a>
+          <a class="cs-cta-btn cs-cta-btn--secondary" href="./index.html#contact">
+            <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3Zm9 7 9-6H3Z"></path></svg>
+            Get in Touch
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <script>
+      // Intersection Observer for fade-in animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.cs-fade-in').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

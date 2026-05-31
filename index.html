@@ -1946,6 +1946,58 @@
         gap: 32px;
       }
 
+      .work-card--has-study {
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      .work-card--has-study:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 32px 56px rgba(20, 42, 75, 0.18);
+      }
+      .work-card__study-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #0e6bff, #7e65ff);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: 0 8px 18px rgba(14, 107, 255, 0.3);
+      }
+      .work-card__study-badge svg {
+        width: 14px;
+        height: 14px;
+        fill: #fff;
+      }
+      .work-card__study-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #fff;
+        background: var(--primary);
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 13px;
+        text-decoration: none;
+        box-shadow: 0 10px 22px rgba(14, 107, 255, 0.3);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .work-card__study-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 28px rgba(14, 107, 255, 0.4);
+      }
+      .work-card__study-link svg {
+        width: 16px;
+        height: 16px;
+        fill: #fff;
+      }
+
       .work-card {
         padding: 24px;
 
@@ -3714,7 +3766,7 @@
           <h3 class="section-heading">Selected Projects</h3>
 
           <div class="project-grid">
-            <article class="work-card">
+            <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-ptenote.html'">
               <div class="work-card__media">
                 <img
                   src="https://ptenote.com/og-image.png"
@@ -3722,6 +3774,8 @@
                   onerror="this.style.background='linear-gradient(135deg,#1d7cff,#7e65ff)';this.style.height='190px';this.alt='PTENote'"
                 />
               </div>
+
+              <span class="work-card__study-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>Case Study</span>
 
               <div class="work-card__tags">HTML / Tailwind CSS / JavaScript</div>
 
@@ -3736,9 +3790,21 @@
 
               <div class="work-card__links">
                 <a
+                  class="work-card__study-link"
+                  href="./case-study-ptenote.html"
+                  onclick="event.stopPropagation()"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
+                    ></path></svg
+                  >View Case Study</a
+                >
+
+                <a
                   href="https://ptenote.com/"
                   target="_blank"
                   rel="noopener"
+                  onclick="event.stopPropagation()"
                   ><svg viewBox="0 0 24 24">
                     <path
                       d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
@@ -3750,7 +3816,7 @@
               </div>
             </article>
 
-            <article class="work-card">
+            <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-detnote.html'">
               <div class="work-card__media">
                 <img
                   src="https://detnote.com/og-image.png"
@@ -3758,6 +3824,8 @@
                   onerror="this.style.background='linear-gradient(135deg,#ff8f4f,#ff5c8d)';this.style.height='190px';this.alt='DetNote'"
                 />
               </div>
+
+              <span class="work-card__study-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>Case Study</span>
 
               <div class="work-card__tags">Figma / UI Design</div>
 
@@ -3772,9 +3840,21 @@
 
               <div class="work-card__links">
                 <a
+                  class="work-card__study-link"
+                  href="./case-study-detnote.html"
+                  onclick="event.stopPropagation()"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
+                    ></path></svg
+                  >View Case Study</a
+                >
+
+                <a
                   href="https://detnote.com/"
                   target="_blank"
                   rel="noopener"
+                  onclick="event.stopPropagation()"
                   ><svg viewBox="0 0 24 24">
                     <path
                       d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
