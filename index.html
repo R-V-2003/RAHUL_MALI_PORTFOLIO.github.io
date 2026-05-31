@@ -2020,36 +2020,22 @@
 
       .work-card__media {
         position: relative;
-        border-radius: 16px 16px 8px 8px;
+
+        border-radius: 22px;
+
         overflow: hidden;
+
         box-shadow: 0 18px 32px rgba(20, 42, 75, 0.18);
-        
-        /* Browser mockup styling */
-        border-top: 24px solid rgba(38, 44, 53, 0.1);
-        background: #fff;
-        aspect-ratio: 16 / 10;
-        display: flex;
-        align-items: flex-start;
-      }
-      
-      .work-card__media::before {
-        content: '';
-        position: absolute;
-        top: -16px;
-        left: 12px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #ff5f56;
-        box-shadow: 16px 0 0 #ffbd2e, 32px 0 0 #27c93f;
-        z-index: 2;
       }
 
       .work-card__media img {
         width: 100%;
-        height: 100%;
+
+        display: block;
+
         object-fit: cover;
-        object-position: top;
+
+        height: 190px;
       }
 
       .work-card__tags {
@@ -3783,8 +3769,8 @@
             <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-ptenote.html'">
               <div class="work-card__media">
                 <img
-                  src="./ptenote-hero-ss.png"
-                  alt="PTENote live website screenshot"
+                  src="./ptenote_mockup.png"
+                  alt="PTENote website redesign mockup"
                   onerror="this.style.background='linear-gradient(135deg,#1d7cff,#7e65ff)';this.style.height='190px';this.alt='PTENote'"
                 />
               </div>
@@ -3833,8 +3819,8 @@
             <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-detnote.html'">
               <div class="work-card__media">
                 <img
-                  src="./detnote-hero-ss.png"
-                  alt="DetNote live website screenshot"
+                  src="./detnote_mockup.png"
+                  alt="DetNote booking platform mockup"
                   onerror="this.style.background='linear-gradient(135deg,#ff8f4f,#ff5c8d)';this.style.height='190px';this.alt='DetNote'"
                 />
               </div>
@@ -3883,8 +3869,8 @@
             <article class="work-card">
               <div class="work-card__media">
                 <img
-                  src="https://www.figma.com/community/resource/ehxh8y2eAXcttTr76LXAB3/thumbnail"
-                  alt="Dashboard score overview UI"
+                  src="./dashboard_mockup.png"
+                  alt="Dashboard score overview mockup"
                   onerror="this.style.background='linear-gradient(135deg,#7e65ff,#1d7cff)';this.style.height='190px';this.alt='Dashboard'"
                 />
               </div>
