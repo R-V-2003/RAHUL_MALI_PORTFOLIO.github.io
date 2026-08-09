@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /dashboard.html
 
-Sitemap: https://rahulmali.work.gd/sitemap.xml
+Sitemap: https://r-v-2003.github.io/RAHUL_MALI_PORTFOLIO.github.io/sitemap.xml
