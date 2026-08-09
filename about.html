@@ -3024,9 +3024,152 @@
       }
     
       /* Journey Page Styles */
+      /* Milestone Image Styling */
+      .timeline-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 16px;
+        margin-bottom: 16px;
+        transition: transform 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      }
+
+      .timeline-card:hover .timeline-img {
+        transform: scale(1.02);
+      }
+
+      /* Gallery Section CSS */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+      }
+
+      .gallery-item {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        aspect-ratio: 4/3;
+        cursor: pointer;
+        box-shadow: 0 10px 24px rgba(20, 42, 75, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(4px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 36px rgba(20, 42, 75, 0.14);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.06);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(14, 107, 255, 0.5) 100%);
+        opacity: 0;
+        display: flex;
+        align-items: flex-end;
+        padding: 20px;
+        box-sizing: border-box;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
+
+      .gallery-caption {
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        transform: translateY(10px);
+        transition: transform 0.3s ease;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+
+      .gallery-item:hover .gallery-caption {
+        transform: translateY(0);
+      }
+
+      /* Lightbox Modal CSS */
+      .lightbox-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(13, 20, 30, 0.85);
+        backdrop-filter: blur(16px);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox-modal.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .lightbox-content img {
+        max-width: 100%;
+        max-height: 75vh;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 40px;
+        cursor: pointer;
+        transition: color 0.2s;
+        z-index: 10000;
+      }
+
+      .lightbox-close:hover {
+        color: #fff;
+      }
+
+      .lightbox-caption {
+        color: #fff;
+        margin-top: 16px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-align: center;
+      }
       .timeline-container {
         position: relative;
-        max-width: 900px;
+        max-width: 1200px;
         margin: 40px auto 20px;
         padding: 20px 0 80px;
       }
@@ -3123,7 +3266,7 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         display: inline-block;
         width: 100%;
-        max-width: 440px;
+        max-width: 500px;
         text-align: left;
       }
 
@@ -3299,6 +3442,7 @@
             <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
+                <img class="timeline-img" src="./school_milestone.png" alt="Swami Vivekanand Govt. Model School campus" />
                 <span class="timeline-badge">2021</span>
                 <h4 class="timeline-title">Schooling Completed</h4>
                 <div class="timeline-subtitle">Swami Vivekanand Govt. Model School</div>
@@ -3317,6 +3461,7 @@
             <div class="timeline-item timeline-item--right">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
+                <img class="timeline-img" src="./polytechnic_milestone.png" alt="Gokul Bhai Bhatt Govt. Polytechnic campus" />
                 <span class="timeline-badge">2021 - 2024</span>
                 <h4 class="timeline-title">Diploma in CSE</h4>
                 <div class="timeline-subtitle">Gokul Bhai Bhatt Govt. Polytechnic</div>
@@ -3336,6 +3481,7 @@
             <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
+                <img class="timeline-img" src="./university_milestone.png" alt="JG University campus" />
                 <span class="timeline-badge">2024 - 2027</span>
                 <h4 class="timeline-title">B.Tech in CSE</h4>
                 <div class="timeline-subtitle">JG University, Ahmedabad</div>
@@ -3355,6 +3501,7 @@
             <div class="timeline-item timeline-item--right">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
+                <img class="timeline-img" src="./sedani_milestone.png" alt="Workspace at Sedani Digital" />
                 <span class="timeline-badge">May 2025 - May 2026</span>
                 <h4 class="timeline-title">Frontend Developer Intern</h4>
                 <div class="timeline-subtitle">Sedani Digital Pvt. Ltd.</div>
@@ -3374,6 +3521,7 @@
             <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
+                <img class="timeline-img" src="./ruut_milestone.png" alt="CTO workspace at Ruut" />
                 <span class="timeline-badge">Jun 2026 - Present</span>
                 <h4 class="timeline-title">Founding Engineer &amp; CTO</h4>
                 <div class="timeline-subtitle">Ṛuut</div>
@@ -3392,7 +3540,70 @@
           </div>
         </section>
 
-<section class="section-card cta" id="contact">
+        <section class="section-card works" id="gallery">
+          <h3 class="section-heading">Captured Moments (Gallery)</h3>
+
+          <div class="gallery-grid">
+            <!-- Item 1: Workspace -->
+            <div class="gallery-item" onclick="openLightbox('./sedani_milestone.png', 'Modern Programming Workspace Setup')">
+              <img src="./sedani_milestone.png" alt="Modern Programming Workspace Setup" />
+              <div class="gallery-overlay">
+                <div class="gallery-caption">Modern Programming Workspace Setup</div>
+              </div>
+            </div>
+
+            <!-- Item 2: Design brainstorming -->
+            <div class="gallery-item" onclick="openLightbox('./gallery_brainstorm.png', 'Startup UI/UX Design Brainstorming')">
+              <img src="./gallery_brainstorm.png" alt="Startup UI/UX Design Brainstorming" />
+              <div class="gallery-overlay">
+                <div class="gallery-caption">Startup UI/UX Design Brainstorming</div>
+              </div>
+            </div>
+
+            <!-- Item 3: Wireframe -->
+            <div class="gallery-item" onclick="openLightbox('./gallery_wireframe.png', 'Drawing App UI wireframes on tablet')">
+              <img src="./gallery_wireframe.png" alt="Drawing App UI wireframes on tablet" />
+              <div class="gallery-overlay">
+                <div class="gallery-caption">Drawing App UI Wireframing</div>
+              </div>
+            </div>
+
+            <!-- Item 4: Hackathon -->
+            <div class="gallery-item" onclick="openLightbox('./gallery_hackathon.png', 'University Coding Hackathon Event')">
+              <img src="./gallery_hackathon.png" alt="University Coding Hackathon Event" />
+              <div class="gallery-overlay">
+                <div class="gallery-caption">University Coding Hackathon Event</div>
+              </div>
+            </div>
+
+            <!-- Item 5: Ruut CTO -->
+            <div class="gallery-item" onclick="openLightbox('./ruut_milestone.png', 'Ṛuut Startup Engineering & Operations')">
+              <img src="./ruut_milestone.png" alt="Ṛuut Startup Engineering & Operations" />
+              <div class="gallery-overlay">
+                <div class="gallery-caption">Ṛuut Startup Engineering</div>
+              </div>
+            </div>
+
+            <!-- Item 6: JG University -->
+            <div class="gallery-item" onclick="openLightbox('./university_milestone.png', 'JG University Campus Life')">
+              <img src="./university_milestone.png" alt="JG University Campus Life" />
+              <div class="gallery-overlay">
+                <div class="gallery-caption">JG University Campus Life</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox-modal">
+          <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+          <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Lightbox image" />
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+          </div>
+        </div>
+
+        <section class="section-card cta" id="contact">
           <div>
             <h3>Let's build web experiences that don't suck.</h3>
 
@@ -3537,6 +3748,36 @@
         
         // Execute on load
         setTimeout(updateTimelineLine, 100);
+
+        // Lightbox Functions
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        window.openLightbox = function (src, caption) {
+          lightboxImg.src = src;
+          lightboxCaption.textContent = caption;
+          lightbox.style.display = 'flex';
+          setTimeout(() => {
+            lightbox.classList.add('active');
+          }, 10);
+          document.body.style.overflow = 'hidden'; // Disable page scrolling
+        };
+
+        window.closeLightbox = function () {
+          lightbox.classList.remove('active');
+          setTimeout(() => {
+            lightbox.style.display = 'none';
+          }, 300);
+          document.body.style.overflow = ''; // Enable page scrolling
+        };
+
+        // Close lightbox when clicking outside the content
+        lightbox.addEventListener('click', function (e) {
+          if (e.target === lightbox) {
+            closeLightbox();
+          }
+        });
       })();
     </script>
   </body>
