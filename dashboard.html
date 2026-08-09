@@ -800,7 +800,7 @@
     <!-- JavaScript CMS Operations Logic -->
     <script>
       // CONFIGURATION CONSTANTS (AUTO-FILLED IN SETUP)
-      const ENCRYPTED_GITHUB_TOKEN = ""; 
+      const ENCRYPTED_GITHUB_TOKEN = "U2FsdGVkX1+CyR9rutDtihmyoWVcqlaH7TOnCEB2pSTH0Wh+MjMi2Bzyg4kZfJ3eINPEMTuJXDcG/BTqhwhGcQ=="; 
       const GITHUB_OWNER = "R-V-2003";
       const GITHUB_REPO = "RAHUL_MALI_PORTFOLIO.github.io";
       const GITHUB_BRANCH = "main";
@@ -881,8 +881,8 @@
         const token = document.getElementById('setup-token').value.trim();
         const password = document.getElementById('setup-pass').value.trim();
 
-        if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
-          alert("Error: Please enter a valid GitHub Personal Access Token (starts with ghp_ or github_pat_).");
+        if (token.length < 10) {
+          alert("Error: Please enter a valid GitHub Personal Access Token.");
           return;
         }
 
@@ -931,9 +931,32 @@
         }
       }
 
-      // Reset local setup (only works in Local Mode by manual edits)
-      function resetSetup() {
-        alert("To reset the login setup, connect your local project folder in editor or edit 'dashboard.html' and set 'const ENCRYPTED_GITHUB_TOKEN = \"\";' at the top of the file.");
+      // Reset local setup (writes empty config to disk)
+      async function resetSetup() {
+        if (!confirm("Do you want to reset the login setup? This will clear the encrypted token and let you configure it again. You will need to select your local project folder to apply the reset.")) return;
+        try {
+          const resetHandle = await window.showDirectoryPicker();
+          const fileHandle = await resetHandle.getFileHandle('dashboard.html');
+          const file = await fileHandle.getFile();
+          let dashboardHTMLContent = await file.text();
+
+          // Reset config variables
+          dashboardHTMLContent = dashboardHTMLContent.replace(
+            /const ENCRYPTED_GITHUB_TOKEN = "[^"]*";/,
+            'const ENCRYPTED_GITHUB_TOKEN = "";'
+          );
+
+          // Write back to dashboard.html on disk
+          const writable = await fileHandle.createWritable();
+          await writable.write(dashboardHTMLContent);
+          await writable.close();
+
+          alert("Dashboard has been reset successfully! The page will now reload to Setup Mode.");
+          window.location.reload();
+        } catch (e) {
+          console.error(e);
+          alert("Error resetting dashboard: " + e.message);
+        }
       }
 
       // ----------------------------------------------------
@@ -954,7 +977,7 @@
           const decryptedToken = decryptedBytes.toString(CryptoJS.enc.Utf8).trim();
 
           // Validate token structure
-          if (decryptedToken.startsWith('ghp_') || decryptedToken.startsWith('github_pat_')) {
+          if (decryptedToken && decryptedToken.length > 5) {
             // Authentication Succeeded!
             githubConfig.token = decryptedToken;
             connectionMode = 'github';
