@@ -1417,10 +1417,13 @@
         const cards = projectsDoc.querySelectorAll('.project-grid article.work-card');
         
         cards.forEach(card => {
-          const title = card.querySelector('.work-card__title').textContent.trim();
-          const desc = card.querySelector('.work-card__desc').textContent.trim();
+          const titleEl = card.querySelector('.work-card__title');
+          const title = titleEl ? titleEl.textContent.trim() : 'Untitled';
+          const descEl = card.querySelector('.work-card__desc') || card.querySelector('p');
+          const desc = descEl ? descEl.textContent.trim() : '';
           const category = card.getAttribute('data-category') || 'frontend';
-          const img = card.querySelector('.work-card__media img').getAttribute('src');
+          const imgEl = card.querySelector('.work-card__media img');
+          const img = imgEl ? imgEl.getAttribute('src') : '';
           
           const tagsList = [];
           card.querySelectorAll('.work-card__tags .tag').forEach(t => tagsList.push(t.textContent.trim()));
