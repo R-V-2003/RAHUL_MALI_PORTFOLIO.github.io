@@ -631,6 +631,14 @@
                 <label for="gen-social-github">GitHub Profile URL</label>
                 <input type="text" id="gen-social-github" class="form-control" />
               </div>
+
+              <h4 style="font-size: 15px; font-weight:700; margin: 30px 0 15px; border-bottom:1px solid var(--glass-border); padding-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                Technical Skills (Homepage Chips)
+                <button type="button" class="btn btn-secondary btn-sm" onclick="addSkillInputRow()" style="padding: 4px 12px; font-size:11px;">+ Add Skill</button>
+              </h4>
+              <div id="gen-skills-rows">
+                <!-- Dynamic skill rows loaded here -->
+              </div>
               
               <div style="text-align: right; margin-top: 30px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
                 <button type="submit" class="btn btn-primary" id="general-save-btn">Save General Info</button>
@@ -1303,6 +1311,60 @@
         document.getElementById('gen-social-email').value = email;
         document.getElementById('gen-social-linkedin').value = linkedin;
         document.getElementById('gen-social-github').value = github;
+
+        // Load Skills
+        const skillsRows = document.getElementById('gen-skills-rows');
+        skillsRows.innerHTML = '';
+        const chips = indexDoc.querySelectorAll('.skill-chip-grid .skill-chip');
+        chips.forEach((chip) => {
+          const name = chip.querySelector('.chip-label').textContent.trim();
+          const neon = chip.getAttribute('data-neon') || 'cyan';
+          const imgEl = chip.querySelector('.chip-icon');
+          const img = imgEl ? imgEl.getAttribute('src') : '';
+          addSkillRowElement(img, name, neon);
+        });
+        if (chips.length === 0) {
+          addSkillRowElement();
+        }
+      }
+
+      window.addSkillInputRow = function() {
+        addSkillRowElement('', '', 'cyan');
+      };
+
+      function addSkillRowElement(src = '', name = '', neon = 'cyan') {
+        const container = document.getElementById('gen-skills-rows');
+        const index = container.children.length;
+        
+        const row = document.createElement('div');
+        row.className = 'dynamic-media-row';
+        row.innerHTML = `
+          <div>
+            <input type="file" id="gen-skill-file-${index}" class="form-control" style="font-size:11px;" onchange="updateSkillRowFileName(this, ${index})" />
+            <input type="hidden" id="gen-skill-src-${index}" value="${src}" />
+            <span id="gen-skill-label-${index}" style="font-size:10px; color:var(--text-muted); display:block; margin-top:4px;">${src ? src.replace('./', '') : 'Choose logo...'}</span>
+          </div>
+          <input type="text" id="gen-skill-name-${index}" class="form-control" placeholder="Skill Name" value="${escapeHtml(name)}" required />
+          <select id="gen-skill-neon-${index}" class="form-control" style="background:#1f2937;">
+            <option value="cyan" ${neon === 'cyan' ? 'selected' : ''}>Cyan</option>
+            <option value="blue" ${neon === 'blue' ? 'selected' : ''}>Blue</option>
+            <option value="amber" ${neon === 'amber' ? 'selected' : ''}>Amber</option>
+            <option value="pink" ${neon === 'pink' ? 'selected' : ''}>Pink</option>
+            <option value="lime" ${neon === 'lime' ? 'selected' : ''}>Lime</option>
+            <option value="purple" ${neon === 'purple' ? 'selected' : ''}>Purple</option>
+            <option value="red" ${neon === 'red' ? 'selected' : ''}>Red</option>
+            <option value="teal" ${neon === 'teal' ? 'selected' : ''}>Teal</option>
+          </select>
+          <button type="button" class="btn-icon-del" onclick="this.parentNode.remove()">&times;</button>
+        `;
+        container.appendChild(row);
+      }
+
+      window.updateSkillRowFileName = function(input, idx) {
+        const file = input.files[0];
+        if (file) {
+          document.getElementById('gen-skill-label-' + idx).textContent = file.name;
+        }
       }
 
       async function saveGeneralInfo(event) {
@@ -1320,7 +1382,7 @@
           const linkedin = document.getElementById('gen-social-linkedin').value.trim();
           const github = document.getElementById('gen-social-github').value.trim();
 
-          // Update indexDoc Hero
+          // Update index.html Hero
           if (indexDoc.querySelector('.intro h2')) indexDoc.querySelector('.intro h2').textContent = intro;
           if (indexDoc.querySelector('.intro h1')) indexDoc.querySelector('.intro h1').textContent = headline;
           if (indexDoc.querySelector('.intro p')) indexDoc.querySelector('.intro p').textContent = bio;
@@ -1336,6 +1398,44 @@
 
           const ghLink = indexDoc.querySelector('.intro-socials a[href*="github.com"]');
           if (ghLink && github) ghLink.setAttribute('href', github);
+
+          // Save Skills List
+          const skillRows = document.getElementById('gen-skills-rows').children;
+          const skillsList = [];
+          for (let i = 0; i < skillRows.length; i++) {
+            const fileInput = skillRows[i].querySelector('input[type="file"]');
+            const srcHidden = skillRows[i].querySelector('input[type="hidden"]');
+            const nameInput = skillRows[i].querySelector('input[type="text"]');
+            const neonSelect = skillRows[i].querySelector('select');
+
+            let src = srcHidden.value || './Rahul Mali _ Portfolio_files/javascript-original.svg';
+            if (fileInput.files && fileInput.files[0]) {
+              const file = fileInput.files[0];
+              await writeBinaryFile(file.name, file);
+              src = './' + file.name;
+            }
+
+            skillsList.push({
+              name: nameInput.value.trim(),
+              neon: neonSelect.value,
+              image: src
+            });
+          }
+
+          const skillsHTML = skillsList.map(s => `
+            <span class="skill-chip" data-neon="${escapeHtml(s.neon)}">
+              <img
+                class="chip-icon"
+                src="${escapeHtml(s.image)}"
+                alt="${escapeHtml(s.name)} logo"
+              />
+              <span class="chip-label">${escapeHtml(s.name)}</span>
+            </span>`).join('\n\n            ');
+
+          const skillsGrid = indexDoc.querySelector('.skill-chip-grid');
+          if (skillsGrid) {
+            skillsGrid.innerHTML = skillsHTML;
+          }
 
           // Update files
           const updatedIndexHTML = '<!DOCTYPE html>\n' + indexDoc.documentElement.outerHTML;
