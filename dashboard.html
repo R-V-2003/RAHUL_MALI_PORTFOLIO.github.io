@@ -10,6 +10,8 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <!-- CryptoJS Library for secure client-side AES decryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
       :root {
         --bg-dark: #070b13;
@@ -115,26 +117,31 @@
         border: 1px solid var(--glass-border);
         border-radius: 28px;
         padding: 40px;
-        text-align: center;
         backdrop-filter: blur(20px);
         box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        margin-bottom: 30px;
+        margin: 0 auto 30px;
+        max-width: 600px;
         transition: all 0.3s ease;
       }
 
+      .connection-card.setup-mode {
+        max-width: 700px;
+      }
+
       .connection-card h2 {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 700;
         margin-bottom: 12px;
         letter-spacing: -0.02em;
+        text-align: center;
       }
 
       .connection-card p {
         color: var(--text-muted);
-        max-width: 600px;
         margin: 0 auto 30px;
-        font-size: 15px;
+        font-size: 14px;
         line-height: 1.6;
+        text-align: center;
       }
 
       .btn {
@@ -180,6 +187,11 @@
       .btn-danger:hover {
         transform: translateY(-2px);
         box-shadow: 0 14px 28px var(--danger-glow);
+      }
+
+      .btn-block {
+        width: 100%;
+        justify-content: center;
       }
 
       /* Main Editor Workspace */
@@ -518,41 +530,79 @@
         </div>
       </header>
 
-      <!-- Connection Panel -->
-      <section class="connection-card" id="connection-card">
-        <h2>Connect Portfolio Directory</h2>
-        <p style="margin-bottom: 25px;">
-          Choose a method to retrieve and edit your portfolio content. Local Folder Mode edits files directly on your computer (desktop only). GitHub Cloud Mode allows you to manage content from any device, including your mobile phone.
-        </p>
-
-        <div class="connection-modes" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto 10px;">
-          <!-- Local Mode Card -->
-          <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--glass-border); padding: 25px; border-radius: 18px; display: flex; flex-direction: column; align-items: center;">
-            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">Local Folder Mode</h4>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; min-height: 50px;">
-              Read/write local workspace files directly. Supported on desktop Chrome/Edge/Opera.
-            </p>
-            <button class="btn btn-secondary" onclick="connectLocal()" style="padding: 10px 24px; font-size: 13px; margin-top: auto; display: inline-flex; align-items: center; gap: 6px;">
-              <svg viewBox="0 0 24 24" style="fill:currentColor; width:16px; height:16px;"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg>
-              Connect Folder
+      <!-- Connection Panels (Setup vs Login vs Choices) -->
+      <div id="connection-panels">
+        <!-- 1. Choices / Default Connection (if token is not configured yet) -->
+        <section class="connection-card" id="connection-choices">
+          <h2>Configure CMS Connection</h2>
+          <p>
+            Welcome to your Portfolio CMS. Connect your local workspace folder to begin setup. You will generate a password-protected encrypted key, which will let you manage your website from anywhere (including your mobile phone)!
+          </p>
+          <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="connectLocalSetup()" style="display: inline-flex; align-items: center; gap: 6px;">
+              <svg viewBox="0 0 24 24" style="fill:currentColor; width:18px; height:18px;"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg>
+              Select Local Project Folder to Start
             </button>
           </div>
+        </section>
+
+        <!-- 2. Setup Wizard Form (revealed in Local Mode when config is empty) -->
+        <section class="connection-card setup-mode" id="connection-setup" style="display: none;">
+          <h2>1-Time Login Setup Wizard</h2>
+          <p>
+            Create an Admin Password. Your GitHub Token will be encrypted with this password and saved securely in your project file.
+          </p>
+          <form onsubmit="generateSecureConfig(event)">
+            <div class="form-group">
+              <label for="setup-username">GitHub Username</label>
+              <input type="text" id="setup-username" class="form-control" value="R-V-2003" required />
+            </div>
+            <div class="form-group">
+              <label for="setup-repo">Repository Name</label>
+              <input type="text" id="setup-repo" class="form-control" value="RAHUL_MALI_PORTFOLIO.github.io" required />
+            </div>
+            <div class="form-group">
+              <label for="setup-branch">Deploy Branch</label>
+              <input type="text" id="setup-branch" class="form-control" value="main" required />
+            </div>
+            <div class="form-group">
+              <label for="setup-token">GitHub Personal Access Token (PAT)</label>
+              <input type="password" id="setup-token" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxx" required />
+            </div>
+            <div class="form-group">
+              <label for="setup-pass">Create Admin Password</label>
+              <input type="password" id="setup-pass" class="form-control" placeholder="Enter a secure password to unlock CMS" required />
+            </div>
+            
+            <div style="text-align: right; margin-top: 30px;">
+              <button type="submit" class="btn btn-primary" id="setup-save-btn">Save &amp; Lock Configuration</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- 3. Dynamic Password Login Screen (shown when encrypted token is configured) -->
+        <section class="connection-card" id="connection-login" style="display: none;">
+          <div style="text-align: center; margin-bottom: 25px;">
+            <svg viewBox="0 0 24 24" style="fill: var(--primary); width: 60px; height: 60px; filter: drop-shadow(0 0 10px var(--primary-glow));">
+              <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+            </svg>
+          </div>
+          <h2>CMS Admin Login</h2>
+          <p>Enter your Admin Password to unlock the content editor.</p>
+          <form onsubmit="authenticateUser(event)">
+            <div class="form-group" style="margin-bottom: 25px;">
+              <input type="password" id="login-password" class="form-control" placeholder="Password" style="text-align: center; font-size: 16px;" required autofocus />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="login-btn">Log In</button>
+          </form>
           
-          <!-- Cloud Mode Card -->
-          <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--glass-border); padding: 25px; border-radius: 18px; display: flex; flex-direction: column; align-items: center;">
-            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">GitHub Cloud Mode</h4>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; min-height: 50px;">
-              Manage pages from anywhere (including your phone). Commits changes directly to your GitHub repo.
-            </p>
-            <button class="btn btn-primary" onclick="showGitHubModal()" style="padding: 10px 24px; font-size: 13px; margin-top: auto; display: inline-flex; align-items: center; gap: 6px;">
-              <svg viewBox="0 0 24 24" style="fill:currentColor; width:16px; height:16px;"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.7.37-1.07.66-1.32-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
-              Connect via GitHub
-            </button>
+          <div style="text-align: center; margin-top: 25px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+            <a href="#" onclick="resetSetup()" style="font-size: 12px; color: var(--text-muted); text-decoration: none;">Reset Login Setup</a>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <!-- Main Editor Workspace (revealed on connection) -->
+      <!-- Main Editor Workspace (revealed on login) -->
       <section class="editor-workspace" id="editor-workspace">
         <div class="tabs-bar">
           <button class="tab-btn active" onclick="switchTab('journey')">Manage Journey (Timeline)</button>
@@ -611,40 +661,6 @@
           </div>
         </div>
       </section>
-    </div>
-
-    <!-- GitHub Connection Modal -->
-    <div class="form-overlay" id="github-conn-overlay">
-      <div class="form-card" style="max-width: 500px;">
-        <button class="close-form" onclick="closeGitHubModal()">&times;</button>
-        <h3>GitHub Cloud Connection</h3>
-        <form onsubmit="connectGitHub(event)">
-          <div class="form-group">
-            <label for="gh-username">GitHub Username</label>
-            <input type="text" id="gh-username" class="form-control" value="R-V-2003" required />
-          </div>
-          <div class="form-group">
-            <label for="gh-repo">Repository Name</label>
-            <input type="text" id="gh-repo" class="form-control" value="RAHUL_MALI_PORTFOLIO.github.io" required />
-          </div>
-          <div class="form-group">
-            <label for="gh-branch">Branch</label>
-            <input type="text" id="gh-branch" class="form-control" value="main" required />
-          </div>
-          <div class="form-group">
-            <label for="gh-token">Personal Access Token (PAT)</label>
-            <input type="password" id="gh-token" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxx" required />
-            <p style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">
-              Ensure your token has <strong>repo</strong> permissions. It stays stored locally in your browser.
-            </p>
-          </div>
-          
-          <div class="form-actions">
-            <button type="button" class="btn btn-secondary" onclick="closeGitHubModal()">Cancel</button>
-            <button type="submit" class="btn btn-primary" id="github-conn-btn">Connect API</button>
-          </div>
-        </form>
-      </div>
     </div>
 
     <!-- Milestone Form Overlay -->
@@ -783,17 +799,23 @@
 
     <!-- JavaScript CMS Operations Logic -->
     <script>
+      // CONFIGURATION CONSTANTS (AUTO-FILLED IN SETUP)
+      const ENCRYPTED_GITHUB_TOKEN = ""; 
+      const GITHUB_OWNER = "R-V-2003";
+      const GITHUB_REPO = "RAHUL_MALI_PORTFOLIO.github.io";
+      const GITHUB_BRANCH = "main";
+
+      let connectionMode = 'github'; // 'local' or 'github'
       let dirHandle = null;
-      let connectionMode = 'local'; // 'local' or 'github'
 
       let githubConfig = {
         token: '',
-        owner: 'R-V-2003',
-        repo: 'RAHUL_MALI_PORTFOLIO.github.io',
-        branch: 'main'
+        owner: GITHUB_OWNER,
+        repo: GITHUB_REPO,
+        branch: GITHUB_BRANCH
       };
 
-      // Store fetched file SHAs for Github commit payload
+      // Store fetched file SHAs for Github commit payloads
       let fileShas = {
         'about.html': '',
         'projects.html': '',
@@ -811,94 +833,150 @@
       let milestonesList = [];
       let projectsList = [];
 
-      // Check cached GitHub settings on load
+      // Initialize UI based on configuration
       window.onload = function() {
-        const cachedToken = localStorage.getItem('gh_token');
-        const cachedOwner = localStorage.getItem('gh_owner') || 'R-V-2003';
-        const cachedRepo = localStorage.getItem('gh_repo') || 'RAHUL_MALI_PORTFOLIO.github.io';
-        const cachedBranch = localStorage.getItem('gh_branch') || 'main';
-
-        if (cachedToken) {
-          document.getElementById('gh-username').value = cachedOwner;
-          document.getElementById('gh-repo').value = cachedRepo;
-          document.getElementById('gh-branch').value = cachedBranch;
-          document.getElementById('gh-token').value = cachedToken;
+        if (ENCRYPTED_GITHUB_TOKEN) {
+          // Encrypted Token is configured -> Show Password Login Panel
+          document.getElementById('connection-choices').style.display = 'none';
+          document.getElementById('connection-login').style.display = 'block';
+        } else {
+          // Token is NOT configured -> Prompt User to connect local folder and perform setup
+          document.getElementById('connection-choices').style.display = 'block';
+          document.getElementById('connection-login').style.display = 'none';
         }
       };
 
-      // Open and close GitHub connection modal
-      function showGitHubModal() {
-        document.getElementById('github-conn-overlay').classList.add('active');
-      }
+      // ----------------------------------------------------
+      // SETUP WIZARD (RUNS IN LOCAL FOLDER MODE)
+      // ----------------------------------------------------
 
-      function closeGitHubModal() {
-        document.getElementById('github-conn-overlay').classList.remove('active');
-      }
-
-      // Connect via local folder Mode
-      async function connectLocal() {
+      async function connectLocalSetup() {
         try {
           connectionMode = 'local';
           dirHandle = await window.showDirectoryPicker();
           
-          // Verify files exist in directory
+          // Verify required files
           try {
-            await dirHandle.getFileHandle('about.html');
-            await dirHandle.getFileHandle('projects.html');
-            await dirHandle.getFileHandle('index.html');
+            await dirHandle.getFileHandle('dashboard.html');
           } catch (e) {
-            alert("Error: The selected folder does not contain about.html, projects.html, and index.html. Please verify you selected the correct portfolio root directory.");
+            alert("Error: Please select the root directory containing 'dashboard.html' to configure logins.");
             return;
           }
 
-          await loadWorkspaceData();
-
-          // Update Status
-          document.getElementById('status-badge').classList.add('connected');
-          document.getElementById('status-text').textContent = 'Local Mode: ' + dirHandle.name;
-          document.getElementById('connection-card').style.display = 'none';
-          document.getElementById('editor-workspace').style.display = 'block';
-        } catch (err) {
-          console.error(err);
-          alert("Directory connection failed. Error: " + err.message);
+          // Show setup wizard form
+          document.getElementById('connection-choices').style.display = 'none';
+          document.getElementById('connection-setup').style.display = 'block';
+        } catch (e) {
+          console.error(e);
+          alert("Directory access cancelled.");
         }
       }
 
-      // Connect via GitHub REST API Mode
-      async function connectGitHub(event) {
+      // Generate encrypted key and write back to dashboard.html on local disk
+      async function generateSecureConfig(event) {
         event.preventDefault();
-        const username = document.getElementById('gh-username').value.trim();
-        const repo = document.getElementById('gh-repo').value.trim();
-        const branch = document.getElementById('gh-branch').value.trim();
-        const token = document.getElementById('gh-token').value.trim();
+        const username = document.getElementById('setup-username').value.trim();
+        const repo = document.getElementById('setup-repo').value.trim();
+        const branch = document.getElementById('setup-branch').value.trim();
+        const token = document.getElementById('setup-token').value.trim();
+        const password = document.getElementById('setup-pass').value.trim();
 
-        document.getElementById('github-conn-btn').disabled = true;
-        document.getElementById('github-conn-btn').textContent = 'Connecting...';
+        if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+          alert("Error: Please enter a valid GitHub Personal Access Token (starts with ghp_ or github_pat_).");
+          return;
+        }
+
+        document.getElementById('setup-save-btn').disabled = true;
+        document.getElementById('setup-save-btn').textContent = 'Encrypting & Saving...';
 
         try {
-          connectionMode = 'github';
-          githubConfig = { token, owner: username, repo, branch };
+          // Encrypt token using password (AES-256)
+          const encryptedToken = CryptoJS.AES.encrypt(token, password).toString();
 
-          // Cache credentials in local storage
-          localStorage.setItem('gh_token', token);
-          localStorage.setItem('gh_owner', username);
-          localStorage.setItem('gh_repo', repo);
-          localStorage.setItem('gh_branch', branch);
+          // Read the current local dashboard.html content
+          const fileHandle = await dirHandle.getFileHandle('dashboard.html');
+          const file = await fileHandle.getFile();
+          let dashboardHTMLContent = await file.text();
 
-          await loadWorkspaceData();
+          // Update GITHUB_OWNER, GITHUB_REPO, GITHUB_BRANCH, and ENCRYPTED_GITHUB_TOKEN configs
+          dashboardHTMLContent = dashboardHTMLContent.replace(
+            /const ENCRYPTED_GITHUB_TOKEN = "[^"]*";/,
+            `const ENCRYPTED_GITHUB_TOKEN = "${encryptedToken}";`
+          );
+          dashboardHTMLContent = dashboardHTMLContent.replace(
+            /const GITHUB_OWNER = "[^"]*";/,
+            `const GITHUB_OWNER = "${username}";`
+          );
+          dashboardHTMLContent = dashboardHTMLContent.replace(
+            /const GITHUB_REPO = "[^"]*";/,
+            `const GITHUB_REPO = "${repo}";`
+          );
+          dashboardHTMLContent = dashboardHTMLContent.replace(
+            /const GITHUB_BRANCH = "[^"]*";/,
+            `const GITHUB_BRANCH = "${branch}";`
+          );
 
-          // Update Status
-          document.getElementById('status-badge').classList.add('connected');
-          document.getElementById('status-text').textContent = 'Cloud Mode: ' + repo + '/' + branch;
-          document.getElementById('connection-card').style.display = 'none';
-          document.getElementById('editor-workspace').style.display = 'block';
-          closeGitHubModal();
-        } catch (err) {
-          console.error(err);
-          alert("GitHub Connection Failed: " + err.message);
-        } finally {
-          document.getElementById('github-conn-btn').disabled = false;
-          document.getElementById('github-conn-btn').textContent = 'Connect API';
+          // Write back to dashboard.html on disk
+          const writable = await fileHandle.createWritable();
+          await writable.write(dashboardHTMLContent);
+          await writable.close();
+
+          alert("Configuration successfully saved and encrypted! The page will now reload. You will log in using your Admin Password from now on.");
+          window.location.reload();
+        } catch (e) {
+          console.error(e);
+          alert("Error writing secure configuration: " + e.message);
+          document.getElementById('setup-save-btn').disabled = false;
+          document.getElementById('setup-save-btn').textContent = 'Save & Lock Configuration';
+        }
+      }
+
+      // Reset local setup (only works in Local Mode by manual edits)
+      function resetSetup() {
+        alert("To reset the login setup, connect your local project folder in editor or edit 'dashboard.html' and set 'const ENCRYPTED_GITHUB_TOKEN = \"\";' at the top of the file.");
+      }
+
+      // ----------------------------------------------------
+      // AUTHENTICATION LOGIC (AES DECRYPTION)
+      // ----------------------------------------------------
+
+      async function authenticateUser(event) {
+        event.preventDefault();
+        const password = document.getElementById('login-password').value.trim();
+        const loginBtn = document.getElementById('login-btn');
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Authenticating...';
+
+        try {
+          // Decrypt token using the password
+          const decryptedBytes = CryptoJS.AES.decrypt(ENCRYPTED_GITHUB_TOKEN, password);
+          const decryptedToken = decryptedBytes.toString(CryptoJS.enc.Utf8).trim();
+
+          // Validate token structure
+          if (decryptedToken.startsWith('ghp_') || decryptedToken.startsWith('github_pat_')) {
+            // Authentication Succeeded!
+            githubConfig.token = decryptedToken;
+            connectionMode = 'github';
+
+            // Connect to GitHub API and load data
+            await loadWorkspaceData();
+
+            // Reveal Workspace
+            document.getElementById('status-badge').classList.add('connected');
+            document.getElementById('status-text').textContent = 'Cloud Mode: ' + githubConfig.repo + '/' + githubConfig.branch;
+            document.getElementById('connection-login').style.display = 'none';
+            document.getElementById('editor-workspace').style.display = 'block';
+          } else {
+            alert("Incorrect Admin Password! Please try again.");
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Log In';
+          }
+        } catch (e) {
+          console.error(e);
+          alert("Incorrect Admin Password! Please try again.");
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Log In';
         }
       }
 
@@ -920,7 +998,7 @@
         renderProjectsTable();
       }
 
-      // Tab Switcher
+      // Tab switcher
       function switchTab(tabId) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(cont => cont.classList.remove('active'));
@@ -1015,7 +1093,7 @@
               sha = checkData.sha;
             }
           } catch (e) {
-            // File does not exist yet (expected)
+            // File does not exist yet
           }
 
           const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}`;
@@ -1044,7 +1122,7 @@
         }
       }
 
-      // Base64 helper converters
+      // Base64 Helpers
       function decodeBase64Utf8(base64) {
         const clean = base64.replace(/\s/g, '');
         const bin = atob(clean);
