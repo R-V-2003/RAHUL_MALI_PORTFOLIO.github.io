@@ -528,7 +528,7 @@
       <header>
         <div class="logo">
           <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.012 10.012 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm3.5-8.5a.999.999 0 0 1-.293.707l-3 3a1 1 0 1 1-1.414-1.414L12.586 12 10.8 10.207a1 1 0 0 1 1.414-1.414l3 3a.999.999 0 0 1 .286.707Z"></path></svg>
-          rah.
+          rah<span class="logo-dot" style="cursor: pointer;">.</span>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -778,6 +778,27 @@
         else if (e.key === 'ArrowRight') nextImage();
         else if (e.key === 'Escape') closeLightbox();
       });
-    </script>
+    
+      // Easter Egg: Click/tap the logo dot 5 times to open CMS Dashboard
+      let logoDotClickCount = 0;
+      let logoDotTimer;
+      const logoDot = document.querySelector('.logo-dot');
+      if (logoDot) {
+        logoDot.addEventListener('click', function(e) {
+          e.preventDefault();
+          logoDotClickCount++;
+          clearTimeout(logoDotTimer);
+          
+          if (logoDotClickCount >= 5) {
+            logoDotClickCount = 0;
+            window.location.href = './dashboard.html';
+          } else {
+            logoDotTimer = setTimeout(() => {
+              logoDotClickCount = 0;
+            }, 2000);
+          }
+        });
+      }
+</script>
   </body>
 </html>

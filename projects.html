@@ -3092,7 +3092,7 @@
             ></path>
           </svg>
 
-          rah.
+          rah<span class="logo-dot" style="cursor: pointer;">.</span>
         </div>
 
         <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -3744,6 +3744,27 @@
           });
         });
       })();
-    </script>
+    
+      // Easter Egg: Click/tap the logo dot 5 times to open CMS Dashboard
+      let logoDotClickCount = 0;
+      let logoDotTimer;
+      const logoDot = document.querySelector('.logo-dot');
+      if (logoDot) {
+        logoDot.addEventListener('click', function(e) {
+          e.preventDefault();
+          logoDotClickCount++;
+          clearTimeout(logoDotTimer);
+          
+          if (logoDotClickCount >= 5) {
+            logoDotClickCount = 0;
+            window.location.href = './dashboard.html';
+          } else {
+            logoDotTimer = setTimeout(() => {
+              logoDotClickCount = 0;
+            }, 2000);
+          }
+        });
+      }
+</script>
   </body>
 </html>
