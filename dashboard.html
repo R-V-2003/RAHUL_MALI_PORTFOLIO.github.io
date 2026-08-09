@@ -430,6 +430,18 @@
         border: 1px solid var(--glass-border);
       }
 
+      .dynamic-ai-row {
+        display: grid;
+        grid-template-columns: 1.5fr 2fr 2fr 1.2fr auto;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 12px;
+        background: rgba(255,255,255,0.02);
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid var(--glass-border);
+      }
+
       .btn-icon-del {
         background: rgba(239, 68, 68, 0.15);
         color: var(--danger);
@@ -638,6 +650,14 @@
               </h4>
               <div id="gen-skills-rows">
                 <!-- Dynamic skill rows loaded here -->
+              </div>
+
+              <h4 style="font-size: 15px; font-weight:700; margin: 30px 0 15px; border-bottom:1px solid var(--glass-border); padding-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                AI Tools &amp; LLMs (Homepage Stacked Chips)
+                <button type="button" class="btn btn-secondary btn-sm" onclick="addAIInputRow()" style="padding: 4px 12px; font-size:11px;">+ Add AI Tool</button>
+              </h4>
+              <div id="gen-ai-rows">
+                <!-- Dynamic AI tool rows loaded here -->
               </div>
               
               <div style="text-align: right; margin-top: 30px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
@@ -1325,8 +1345,22 @@
           const img = imgEl ? imgEl.getAttribute('src') : '';
           addSkillRowElement(img, name, neon);
         });
-        if (chips.length === 0) {
-          addSkillRowElement();
+        // Load AI Tools
+        const aiRows = document.getElementById('gen-ai-rows');
+        aiRows.innerHTML = '';
+        const aiChips = indexDoc.querySelectorAll('.skill-subsection .skill-chip-grid .skill-chip');
+        aiChips.forEach((chip) => {
+          const strongEl = chip.querySelector('.chip-text strong');
+          const name = strongEl ? strongEl.textContent.trim() : 'AI Tool';
+          const smallEl = chip.querySelector('.chip-text small');
+          const desc = smallEl ? smallEl.textContent.trim() : '';
+          const neon = chip.getAttribute('data-neon') || 'cyan';
+          const imgEl = chip.querySelector('.chip-icon');
+          const img = imgEl ? imgEl.getAttribute('src') : '';
+          addAIRowElement(img, name, desc, neon);
+        });
+        if (aiChips.length === 0) {
+          addAIRowElement();
         }
       }
 
@@ -1366,6 +1400,46 @@
         const file = input.files[0];
         if (file) {
           document.getElementById('gen-skill-label-' + idx).textContent = file.name;
+        }
+      }
+
+      window.addAIInputRow = function() {
+        addAIRowElement('', '', '', 'cyan');
+      };
+
+      function addAIRowElement(src = '', name = '', desc = '', neon = 'cyan') {
+        const container = document.getElementById('gen-ai-rows');
+        const index = container.children.length;
+        
+        const row = document.createElement('div');
+        row.className = 'dynamic-ai-row';
+        row.innerHTML = `
+          <div>
+            <input type="file" id="gen-ai-file-${index}" class="form-control" style="font-size:11px;" onchange="updateAIRowFileName(this, ${index})" />
+            <input type="hidden" id="gen-ai-src-${index}" value="${src}" />
+            <span id="gen-ai-label-${index}" style="font-size:10px; color:var(--text-muted); display:block; margin-top:4px;">${src ? src.replace('./', '') : 'Choose logo...'}</span>
+          </div>
+          <input type="text" id="gen-ai-name-${index}" class="form-control" placeholder="AI Tool Name" value="${escapeHtml(name)}" required />
+          <input type="text" id="gen-ai-desc-${index}" class="form-control" placeholder="Purpose / Use" value="${escapeHtml(desc)}" required />
+          <select id="gen-ai-neon-${index}" class="form-control" style="background:#1f2937;">
+            <option value="cyan" ${neon === 'cyan' ? 'selected' : ''}>Cyan</option>
+            <option value="blue" ${neon === 'blue' ? 'selected' : ''}>Blue</option>
+            <option value="amber" ${neon === 'amber' ? 'selected' : ''}>Amber</option>
+            <option value="pink" ${neon === 'pink' ? 'selected' : ''}>Pink</option>
+            <option value="lime" ${neon === 'lime' ? 'selected' : ''}>Lime</option>
+            <option value="purple" ${neon === 'purple' ? 'selected' : ''}>Purple</option>
+            <option value="red" ${neon === 'red' ? 'selected' : ''}>Red</option>
+            <option value="teal" ${neon === 'teal' ? 'selected' : ''}>Teal</option>
+          </select>
+          <button type="button" class="btn-icon-del" onclick="this.parentNode.remove()">&times;</button>
+        `;
+        container.appendChild(row);
+      }
+
+      window.updateAIRowFileName = function(input, idx) {
+        const file = input.files[0];
+        if (file) {
+          document.getElementById('gen-ai-label-' + idx).textContent = file.name;
         }
       }
 
@@ -1437,6 +1511,47 @@
           const skillsGrid = indexDoc.querySelector('.skill-chip-grid');
           if (skillsGrid) {
             skillsGrid.innerHTML = skillsHTML;
+          }
+
+          // Save AI Tools List
+          const aiRowsCollection = document.getElementById('gen-ai-rows').children;
+          const aiList = [];
+          for (let i = 0; i < aiRowsCollection.length; i++) {
+            const fileInput = aiRowsCollection[i].querySelector('input[type="file"]');
+            const srcHidden = aiRowsCollection[i].querySelector('input[type="hidden"]');
+            const textInputs = aiRowsCollection[i].querySelectorAll('input[type="text"]');
+            const nameInput = textInputs[0];
+            const descInput = textInputs[1];
+            const neonSelect = aiRowsCollection[i].querySelector('select');
+
+            let src = srcHidden.value || './Rahul Mali _ Portfolio_files/chatgpt.png';
+            if (fileInput.files && fileInput.files[0]) {
+              const file = fileInput.files[0];
+              await writeBinaryFile(file.name, file);
+              src = './' + file.name;
+            }
+
+            aiList.push({
+              name: nameInput.value.trim(),
+              desc: descInput.value.trim(),
+              neon: neonSelect.value,
+              image: src
+            });
+          }
+
+          const aiHTML = aiList.map(s => `
+            <span class="skill-chip skill-chip--stacked" data-neon="${escapeHtml(s.neon)}">
+              <img
+                class="chip-icon"
+                src="${escapeHtml(s.image)}"
+                alt="${escapeHtml(s.name)} icon"
+              />
+              <span class="chip-text"><strong>${escapeHtml(s.name)}</strong><small>${escapeHtml(s.desc)}</small></span>
+            </span>`).join('\n\n            ');
+
+          const aiGrid = indexDoc.querySelector('.skill-subsection .skill-chip-grid');
+          if (aiGrid) {
+            aiGrid.innerHTML = aiHTML;
           }
 
           // Update files
