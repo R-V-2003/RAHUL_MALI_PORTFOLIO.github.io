@@ -20,8 +20,16 @@ Welcome to the source code of my personal portfolio. If you're looking for stand
 - `exam-prep.apk`: **[Download the BCI-Prep APK here](https://raw.githubusercontent.com/R-V-2003/RAHUL_MALI_PORTFOLIO.github.io/main/exam-prep.apk)**.
 - `Rahul Mali _ Portfolio_files/`: Assorted assets and official brand icons for AI tools.
 
-## ✨ Why Does This Look So Good?
-Because I used modern design tokens, CSS grids, clamp functions for responsiveness, and enough box-shadows to make material design blush. Also, I replaced all the generic AI icons with their actual high-quality SVGs.
+## 🎛️ Static CMS Dashboard & Cryptographic Security
+
+I built a completely serverless, client-side Content Management System (`dashboard.html`) to manage my portfolio's journey timeline, project grid, achievements, and media gallery directly from any browser (desktop or mobile).
+
+### 🔒 How Security is Maintained on a Static Site
+Normally, static sites on GitHub Pages cannot securely store private credentials (like GitHub API tokens) because all front-end code is public. To solve this securely without paying for or maintaining backend servers:
+- **AES-256 Client-Side Encryption:** The GitHub Personal Access Token (PAT) is encrypted using a **Master Admin Password** using the standard AES-256 algorithm.
+- **Zero Raw Tokens in Git:** Only the encrypted ciphertext string is checked into this public repository. Without the Master Password, it is cryptographically impossible for anyone to decrypt and steal the token.
+- **Transient Memory Authentication:** When logging into the dashboard, the token is decrypted locally in the browser's volatile memory and is used in-memory to call GitHub APIs. It is never sent to any external server.
+- **Stealth Access (Easter Egg):** The admin dashboard does not have a visible link anywhere on the site. Instead, there is a **hidden Easter Egg trigger** in the navigation header that redirects to the login panel, keeping the dashboard completely hidden from casual visitors and recruiters.
 
 ---
 *Created by [Rahul Mali](https://r-v-2003.github.io/RAHUL_MALI_PORTFOLIO.github.io/)*
