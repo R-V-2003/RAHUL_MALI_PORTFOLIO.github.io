@@ -521,15 +521,35 @@
       <!-- Connection Panel -->
       <section class="connection-card" id="connection-card">
         <h2>Connect Portfolio Directory</h2>
-        <p>
-          Select your local portfolio folder to retrieve and edit content. Changes will write directly to your local HTML and image files, ready to commit and push to GitHub Pages!
+        <p style="margin-bottom: 25px;">
+          Choose a method to retrieve and edit your portfolio content. Local Folder Mode edits files directly on your computer (desktop only). GitHub Cloud Mode allows you to manage content from any device, including your mobile phone.
         </p>
-        <button class="btn btn-primary" onclick="connectDirectory()">
-          <svg viewBox="0 0 24 24" style="fill:currentColor; width:18px; height:18px;">
-            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/>
-          </svg>
-          Select Project Folder
-        </button>
+
+        <div class="connection-modes" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto 10px;">
+          <!-- Local Mode Card -->
+          <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--glass-border); padding: 25px; border-radius: 18px; display: flex; flex-direction: column; align-items: center;">
+            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">Local Folder Mode</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; min-height: 50px;">
+              Read/write local workspace files directly. Supported on desktop Chrome/Edge/Opera.
+            </p>
+            <button class="btn btn-secondary" onclick="connectLocal()" style="padding: 10px 24px; font-size: 13px; margin-top: auto; display: inline-flex; align-items: center; gap: 6px;">
+              <svg viewBox="0 0 24 24" style="fill:currentColor; width:16px; height:16px;"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg>
+              Connect Folder
+            </button>
+          </div>
+          
+          <!-- Cloud Mode Card -->
+          <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--glass-border); padding: 25px; border-radius: 18px; display: flex; flex-direction: column; align-items: center;">
+            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">GitHub Cloud Mode</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; min-height: 50px;">
+              Manage pages from anywhere (including your phone). Commits changes directly to your GitHub repo.
+            </p>
+            <button class="btn btn-primary" onclick="showGitHubModal()" style="padding: 10px 24px; font-size: 13px; margin-top: auto; display: inline-flex; align-items: center; gap: 6px;">
+              <svg viewBox="0 0 24 24" style="fill:currentColor; width:16px; height:16px;"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.7.37-1.07.66-1.32-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+              Connect via GitHub
+            </button>
+          </div>
+        </div>
       </section>
 
       <!-- Main Editor Workspace (revealed on connection) -->
@@ -591,6 +611,40 @@
           </div>
         </div>
       </section>
+    </div>
+
+    <!-- GitHub Connection Modal -->
+    <div class="form-overlay" id="github-conn-overlay">
+      <div class="form-card" style="max-width: 500px;">
+        <button class="close-form" onclick="closeGitHubModal()">&times;</button>
+        <h3>GitHub Cloud Connection</h3>
+        <form onsubmit="connectGitHub(event)">
+          <div class="form-group">
+            <label for="gh-username">GitHub Username</label>
+            <input type="text" id="gh-username" class="form-control" value="R-V-2003" required />
+          </div>
+          <div class="form-group">
+            <label for="gh-repo">Repository Name</label>
+            <input type="text" id="gh-repo" class="form-control" value="RAHUL_MALI_PORTFOLIO.github.io" required />
+          </div>
+          <div class="form-group">
+            <label for="gh-branch">Branch</label>
+            <input type="text" id="gh-branch" class="form-control" value="main" required />
+          </div>
+          <div class="form-group">
+            <label for="gh-token">Personal Access Token (PAT)</label>
+            <input type="password" id="gh-token" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxx" required />
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">
+              Ensure your token has <strong>repo</strong> permissions. It stays stored locally in your browser.
+            </p>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeGitHubModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="github-conn-btn">Connect API</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Milestone Form Overlay -->
@@ -730,6 +784,22 @@
     <!-- JavaScript CMS Operations Logic -->
     <script>
       let dirHandle = null;
+      let connectionMode = 'local'; // 'local' or 'github'
+
+      let githubConfig = {
+        token: '',
+        owner: 'R-V-2003',
+        repo: 'RAHUL_MALI_PORTFOLIO.github.io',
+        branch: 'main'
+      };
+
+      // Store fetched file SHAs for Github commit payload
+      let fileShas = {
+        'about.html': '',
+        'projects.html': '',
+        'index.html': ''
+      };
+
       let aboutHTMLText = '';
       let projectsHTMLText = '';
       let indexHTMLText = '';
@@ -741,51 +811,116 @@
       let milestonesList = [];
       let projectsList = [];
 
-      // File connection
-      async function connectDirectory() {
+      // Check cached GitHub settings on load
+      window.onload = function() {
+        const cachedToken = localStorage.getItem('gh_token');
+        const cachedOwner = localStorage.getItem('gh_owner') || 'R-V-2003';
+        const cachedRepo = localStorage.getItem('gh_repo') || 'RAHUL_MALI_PORTFOLIO.github.io';
+        const cachedBranch = localStorage.getItem('gh_branch') || 'main';
+
+        if (cachedToken) {
+          document.getElementById('gh-username').value = cachedOwner;
+          document.getElementById('gh-repo').value = cachedRepo;
+          document.getElementById('gh-branch').value = cachedBranch;
+          document.getElementById('gh-token').value = cachedToken;
+        }
+      };
+
+      // Open and close GitHub connection modal
+      function showGitHubModal() {
+        document.getElementById('github-conn-overlay').classList.add('active');
+      }
+
+      function closeGitHubModal() {
+        document.getElementById('github-conn-overlay').classList.remove('active');
+      }
+
+      // Connect via local folder Mode
+      async function connectLocal() {
         try {
+          connectionMode = 'local';
           dirHandle = await window.showDirectoryPicker();
           
-          // Verify required files
+          // Verify files exist in directory
           try {
             await dirHandle.getFileHandle('about.html');
             await dirHandle.getFileHandle('projects.html');
             await dirHandle.getFileHandle('index.html');
           } catch (e) {
-            alert("Error: The selected folder is not your portfolio project directory. It must contain about.html, projects.html, and index.html.");
+            alert("Error: The selected folder does not contain about.html, projects.html, and index.html. Please verify you selected the correct portfolio root directory.");
             return;
           }
 
-          // Read and parse files
-          aboutHTMLText = await readTextFile(dirHandle, 'about.html');
-          projectsHTMLText = await readTextFile(dirHandle, 'projects.html');
-          indexHTMLText = await readTextFile(dirHandle, 'index.html');
-
-          const parser = new DOMParser();
-          aboutDoc = parser.parseFromString(aboutHTMLText, 'text/html');
-          projectsDoc = parser.parseFromString(projectsHTMLText, 'text/html');
-          indexDoc = parser.parseFromString(indexHTMLText, 'text/html');
-
-          // Extract current lists
-          extractMilestones();
-          extractProjects();
-
-          // Render listings
-          renderMilestonesTable();
-          renderProjectsTable();
+          await loadWorkspaceData();
 
           // Update Status
           document.getElementById('status-badge').classList.add('connected');
-          document.getElementById('status-text').textContent = 'Connected: ' + dirHandle.name;
+          document.getElementById('status-text').textContent = 'Local Mode: ' + dirHandle.name;
           document.getElementById('connection-card').style.display = 'none';
           document.getElementById('editor-workspace').style.display = 'block';
         } catch (err) {
           console.error(err);
-          alert("Directory connection cancelled or failed. Error: " + err.message);
+          alert("Directory connection failed. Error: " + err.message);
         }
       }
 
-      // Tab switcher
+      // Connect via GitHub REST API Mode
+      async function connectGitHub(event) {
+        event.preventDefault();
+        const username = document.getElementById('gh-username').value.trim();
+        const repo = document.getElementById('gh-repo').value.trim();
+        const branch = document.getElementById('gh-branch').value.trim();
+        const token = document.getElementById('gh-token').value.trim();
+
+        document.getElementById('github-conn-btn').disabled = true;
+        document.getElementById('github-conn-btn').textContent = 'Connecting...';
+
+        try {
+          connectionMode = 'github';
+          githubConfig = { token, owner: username, repo, branch };
+
+          // Cache credentials in local storage
+          localStorage.setItem('gh_token', token);
+          localStorage.setItem('gh_owner', username);
+          localStorage.setItem('gh_repo', repo);
+          localStorage.setItem('gh_branch', branch);
+
+          await loadWorkspaceData();
+
+          // Update Status
+          document.getElementById('status-badge').classList.add('connected');
+          document.getElementById('status-text').textContent = 'Cloud Mode: ' + repo + '/' + branch;
+          document.getElementById('connection-card').style.display = 'none';
+          document.getElementById('editor-workspace').style.display = 'block';
+          closeGitHubModal();
+        } catch (err) {
+          console.error(err);
+          alert("GitHub Connection Failed: " + err.message);
+        } finally {
+          document.getElementById('github-conn-btn').disabled = false;
+          document.getElementById('github-conn-btn').textContent = 'Connect API';
+        }
+      }
+
+      // Read all portfolio page data
+      async function loadWorkspaceData() {
+        aboutHTMLText = await readTextFile('about.html');
+        projectsHTMLText = await readTextFile('projects.html');
+        indexHTMLText = await readTextFile('index.html');
+
+        const parser = new DOMParser();
+        aboutDoc = parser.parseFromString(aboutHTMLText, 'text/html');
+        projectsDoc = parser.parseFromString(projectsHTMLText, 'text/html');
+        indexDoc = parser.parseFromString(indexHTMLText, 'text/html');
+
+        // Extract and render
+        extractMilestones();
+        extractProjects();
+        renderMilestonesTable();
+        renderProjectsTable();
+      }
+
+      // Tab Switcher
       function switchTab(tabId) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(cont => cont.classList.remove('active'));
@@ -794,31 +929,155 @@
         document.getElementById('tab-' + tabId).classList.add('active');
       }
 
-      // Read text file helper
-      async function readTextFile(handle, name) {
-        const fileHandle = await handle.getFileHandle(name);
-        const file = await fileHandle.getFile();
-        return await file.text();
+      /* ---------------------------------------------------- */
+      /* FILE HANDLERS (DYNAMIC TARGET: LOCAL OR CLOUD)      */
+      /* ---------------------------------------------------- */
+
+      async function readTextFile(name) {
+        if (connectionMode === 'local') {
+          const fileHandle = await dirHandle.getFileHandle(name);
+          const file = await fileHandle.getFile();
+          return await file.text();
+        } else {
+          // GitHub fetch
+          const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}?ref=${githubConfig.branch}`;
+          const res = await fetch(url, {
+            headers: {
+              'Authorization': `Bearer ${githubConfig.token}`,
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          });
+          if (!res.ok) throw new Error(`Could not load ${name} from repository. status: ${res.status}`);
+          const data = await res.json();
+          fileShas[name] = data.sha;
+          return decodeBase64Utf8(data.content);
+        }
       }
 
-      // Write text file helper
-      async function writeTextFile(handle, name, text) {
-        const fileHandle = await handle.getFileHandle(name, { create: true });
-        const writable = await fileHandle.createWritable();
-        await writable.write(text);
-        await writable.close();
+      async function writeTextFile(name, textContent) {
+        if (connectionMode === 'local') {
+          const fileHandle = await dirHandle.getFileHandle(name, { create: true });
+          const writable = await fileHandle.createWritable();
+          await writable.write(textContent);
+          await writable.close();
+        } else {
+          // GitHub commit
+          const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}`;
+          const base64Content = encodeBase64Utf8(textContent);
+          const body = {
+            message: `CMS: Update ${name}`,
+            content: base64Content,
+            branch: githubConfig.branch
+          };
+          if (fileShas[name]) {
+            body.sha = fileShas[name];
+          }
+
+          const res = await fetch(url, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${githubConfig.token}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify(body)
+          });
+          if (!res.ok) {
+            const errData = await res.json();
+            throw new Error(`Failed to commit changes to ${name}. Message: ${errData.message}`);
+          }
+          const data = await res.json();
+          fileShas[name] = data.content.sha; // Save updated SHA
+        }
       }
 
-      // Write binary file helper
-      async function writeBinaryFile(handle, name, fileObj) {
-        const fileHandle = await handle.getFileHandle(name, { create: true });
-        const writable = await fileHandle.createWritable();
-        await writable.write(fileObj);
-        await writable.close();
+      async function writeBinaryFile(name, fileObj) {
+        if (connectionMode === 'local') {
+          const fileHandle = await dirHandle.getFileHandle(name, { create: true });
+          const writable = await fileHandle.createWritable();
+          await writable.write(fileObj);
+          await writable.close();
+        } else {
+          // GitHub binary file upload (read as Base64 first)
+          const base64Content = await fileToBase64(fileObj);
+          
+          let sha = '';
+          try {
+            const checkUrl = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}?ref=${githubConfig.branch}`;
+            const checkRes = await fetch(checkUrl, {
+              headers: {
+                'Authorization': `Bearer ${githubConfig.token}`,
+                'Accept': 'application/vnd.github.v3+json'
+              }
+            });
+            if (checkRes.ok) {
+              const checkData = await checkRes.json();
+              sha = checkData.sha;
+            }
+          } catch (e) {
+            // File does not exist yet (expected)
+          }
+
+          const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}`;
+          const body = {
+            message: `CMS: Upload image ${name}`,
+            content: base64Content,
+            branch: githubConfig.branch
+          };
+          if (sha) {
+            body.sha = sha;
+          }
+
+          const res = await fetch(url, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${githubConfig.token}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify(body)
+          });
+          if (!res.ok) {
+            const errData = await res.json();
+            throw new Error(`Failed to upload ${name}. Message: ${errData.message}`);
+          }
+        }
+      }
+
+      // Base64 helper converters
+      function decodeBase64Utf8(base64) {
+        const clean = base64.replace(/\s/g, '');
+        const bin = atob(clean);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) {
+          bytes[i] = bin.charCodeAt(i);
+        }
+        return new TextDecoder('utf-8').decode(bytes);
+      }
+
+      function encodeBase64Utf8(str) {
+        const bytes = new TextEncoder().encode(str);
+        let bin = '';
+        for (let i = 0; i < bytes.byteLength; i++) {
+          bin += String.fromCharCode(bytes[i]);
+        }
+        return btoa(bin);
+      }
+
+      function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            const base64 = reader.result.split(',')[1];
+            resolve(base64);
+          };
+          reader.onerror = err => reject(err);
+        });
       }
 
       /* ---------------------------------------------------- */
-      /* JOURNEY MILESTONE CMS SECTION                        */
+      /* JOURNEY MILESTONE CRUD                               */
       /* ---------------------------------------------------- */
 
       function extractMilestones() {
@@ -885,7 +1144,6 @@
         document.getElementById('milestone-edit-index').value = '';
         document.getElementById('milestone-form-title').textContent = 'Add Journey Milestone';
         
-        // Reset file box names
         document.getElementById('milestone-img-name-1').textContent = 'Choose File...';
         document.getElementById('milestone-img-name-2').textContent = 'Choose File...';
         document.getElementById('milestone-img-name-3').textContent = 'Choose File...';
@@ -920,7 +1178,6 @@
         document.getElementById('milestone-desc').value = m.desc;
         document.getElementById('milestone-tags').value = m.tags;
         
-        // Display image names
         document.getElementById('milestone-img-name-1').textContent = m.images[0] ? m.images[0].replace('./', '') : 'Choose File...';
         document.getElementById('milestone-img-name-2').textContent = m.images[1] ? m.images[1].replace('./', '') : 'Choose File...';
         document.getElementById('milestone-img-name-3').textContent = m.images[2] ? m.images[2].replace('./', '') : 'Choose File...';
@@ -953,32 +1210,23 @@
             document.getElementById('milestone-caption-3').value.trim() || year
           ];
 
-          // Images
           const images = [
             document.getElementById('milestone-img-src-1').value || './school_milestone.png',
             document.getElementById('milestone-img-src-2').value || './polytechnic_milestone.png',
             document.getElementById('milestone-img-src-3').value || './university_milestone.png'
           ];
 
-          // Write uploaded files to directory
+          // Upload new binary images
           for (let i = 1; i <= 3; i++) {
             const fileInput = document.getElementById('milestone-img-file-' + i);
             if (fileInput.files && fileInput.files[0]) {
               const file = fileInput.files[0];
-              await writeBinaryFile(dirHandle, file.name, file);
+              await writeBinaryFile(file.name, file);
               images[i-1] = './' + file.name;
             }
           }
 
-          const milestoneData = {
-            year,
-            title,
-            subtitle,
-            desc,
-            tags,
-            images,
-            captions: caps
-          };
+          const milestoneData = { year, title, subtitle, desc, tags, images, captions: caps };
 
           if (index !== '') {
             milestonesList[parseInt(index)] = milestoneData;
@@ -986,12 +1234,10 @@
             milestonesList.push(milestoneData);
           }
 
-          // Build about.html structure and save
           await syncMilestonesToAboutHTML();
-          
           renderMilestonesTable();
           closeMilestoneForm();
-          alert("Milestones updated successfully!");
+          alert("Timeline Milestones saved successfully!");
         } catch (e) {
           console.error(e);
           alert("Error saving milestone: " + e.message);
@@ -1002,7 +1248,7 @@
       }
 
       async function deleteMilestone(index) {
-        if (!confirm("Are you sure you want to delete this milestone from your timeline?")) return;
+        if (!confirm("Are you sure you want to delete this milestone?")) return;
         try {
           milestonesList.splice(index, 1);
           await syncMilestonesToAboutHTML();
@@ -1056,15 +1302,13 @@
         const lineContainerHTML = `<div class="timeline-line-container">\n              <div class="timeline-line-active"></div>\n            </div>`;
         container.innerHTML = lineContainerHTML + '\n\n' + milestonesHTML;
 
-        // Serialize HTML back
         const updatedHTMLText = '<!DOCTYPE html>\n' + aboutDoc.documentElement.outerHTML;
-        await writeTextFile(dirHandle, 'about.html', updatedHTMLText);
+        await writeTextFile('about.html', updatedHTMLText);
         aboutHTMLText = updatedHTMLText;
       }
 
-
       /* ---------------------------------------------------- */
-      /* PROJECTS CMS SECTION                                 */
+      /* PROJECTS CRUD                                        */
       /* ---------------------------------------------------- */
 
       function extractProjects() {
@@ -1082,14 +1326,12 @@
           
           const links = { case: '', live: '', github: '', download: '' };
           
-          // Check onclick case study
           const clickAttr = card.getAttribute('onclick') || '';
           if (clickAttr.includes('case-study-')) {
             const match = clickAttr.match(/\.\/case-study-[^']+/);
             if (match) links.case = match[0];
           }
 
-          // Sub links
           card.querySelectorAll('.work-card__links a').forEach(a => {
             const href = a.getAttribute('href');
             const txt = a.textContent.trim().toLowerCase();
@@ -1099,7 +1341,6 @@
             else if (txt.includes('study') || txt.includes('case')) links.case = href;
           });
 
-          // Check if displayed on homepage
           const isFeatured = Array.from(indexDoc.querySelectorAll('.project-grid .work-card__title')).some(t => t.textContent.trim() === title);
 
           projectsList.push({
@@ -1194,11 +1435,10 @@
           
           let image = document.getElementById('project-img-src').value || './exem-prep_mockup.png';
           
-          // Image upload
           const imgInput = document.getElementById('project-img-file');
           if (imgInput.files && imgInput.files[0]) {
             const file = imgInput.files[0];
-            await writeBinaryFile(dirHandle, file.name, file);
+            await writeBinaryFile(file.name, file);
             image = './' + file.name;
           }
 
@@ -1210,16 +1450,7 @@
           };
 
           const isFeatured = document.getElementById('project-homepage-display').checked;
-
-          const projectData = {
-            title,
-            category,
-            desc,
-            tags,
-            image,
-            links,
-            isFeatured
-          };
+          const projectData = { title, category, desc, tags, image, links, isFeatured };
 
           if (index !== '') {
             projectsList[parseInt(index)] = projectData;
@@ -1227,12 +1458,10 @@
             projectsList.push(projectData);
           }
 
-          // Write changes to projects.html and index.html
           await syncProjectsToHTML();
-
           renderProjectsTable();
           closeProjectForm();
-          alert("Projects updated successfully!");
+          alert("Project cards saved successfully!");
         } catch (e) {
           console.error(e);
           alert("Error saving project: " + e.message);
@@ -1243,7 +1472,7 @@
       }
 
       async function deleteProject(index) {
-        if (!confirm("Are you sure you want to delete this project from the directory?")) return;
+        if (!confirm("Are you sure you want to delete this project?")) return;
         try {
           projectsList.splice(index, 1);
           await syncProjectsToHTML();
@@ -1256,7 +1485,7 @@
       }
 
       async function syncProjectsToHTML() {
-        // 1. Build projects.html grid
+        // 1. Rebuild projects.html grid
         const projectsHTML = projectsList.map(p => {
           const hasStudy = p.category === 'case-study' && p.links.case;
           const clickAttr = hasStudy ? `onclick="window.location.href='${p.links.case}'"` : '';
@@ -1300,13 +1529,12 @@
         projGrid.innerHTML = projectsHTML;
 
         const updatedProjHTML = '<!DOCTYPE html>\n' + projectsDoc.documentElement.outerHTML;
-        await writeTextFile(dirHandle, 'projects.html', updatedProjHTML);
+        await writeTextFile('projects.html', updatedProjHTML);
         projectsHTMLText = updatedProjHTML;
 
-        // 2. Build index.html top featured projects
+        // 2. Rebuild index.html featured works
         const featuredProjects = projectsList.filter(p => p.isFeatured);
-        // Truncate to top 4 max to match the home page works layout
-        const homeFeatured = featuredProjects.slice(0, 4);
+        const homeFeatured = featuredProjects.slice(0, 4); // Max 4 on home grid
 
         const homeFeaturedHTML = homeFeatured.map(p => {
           const hasStudy = p.category === 'case-study' && p.links.case;
@@ -1351,13 +1579,12 @@
         indexGrid.innerHTML = homeFeaturedHTML;
 
         const updatedIndexHTML = '<!DOCTYPE html>\n' + indexDoc.documentElement.outerHTML;
-        await writeTextFile(dirHandle, 'index.html', updatedIndexHTML);
+        await writeTextFile('index.html', updatedIndexHTML);
         indexHTMLText = updatedIndexHTML;
       }
 
-
       /* ---------------------------------------------------- */
-      /* UTILS                                                */
+      /* UTILITIES                                            */
       /* ---------------------------------------------------- */
 
       function escapeHtml(text) {
