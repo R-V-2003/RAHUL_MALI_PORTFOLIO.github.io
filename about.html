@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <title>Rahul Mali | Portfolio</title>
+    <title>Rahul Mali | Professional Journey</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -3022,6 +3022,187 @@
           height: 48px;
         }
       }
+    
+      /* Journey Page Styles */
+      .timeline-container {
+        position: relative;
+        max-width: 900px;
+        margin: 40px auto 20px;
+        padding: 20px 0 80px;
+      }
+
+      .timeline-line-container {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        transform: translateX(-50%);
+        z-index: 1;
+        background: rgba(38, 44, 53, 0.08);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .timeline-line-active {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0; /* Managed dynamically via JS */
+        background: linear-gradient(180deg, var(--primary) 0%, #7e65ff 100%);
+        box-shadow: 0 0 12px var(--primary);
+        border-radius: 2px;
+        transition: height 0.1s ease-out;
+      }
+
+      .timeline-item {
+        position: relative;
+        width: 50%;
+        padding: 20px 40px;
+        box-sizing: border-box;
+        z-index: 2;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .timeline-item.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .timeline-item--left {
+        left: 0;
+        text-align: right;
+      }
+
+      .timeline-item--right {
+        left: 50%;
+        text-align: left;
+      }
+
+      /* Dots on the line */
+      .timeline-dot {
+        position: absolute;
+        top: 32px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        border: 4px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 0 4px rgba(14, 107, 255, 0.15), 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 3;
+        transition: all 0.3s ease;
+      }
+
+      .timeline-item--left .timeline-dot {
+        right: -9px;
+      }
+
+      .timeline-item--right .timeline-dot {
+        left: -9px;
+      }
+
+      /* Active Dot State */
+      .timeline-item.active .timeline-dot {
+        background: var(--primary);
+        border-color: #fff;
+        box-shadow: 0 0 0 6px rgba(14, 107, 255, 0.35), 0 0 20px var(--primary);
+        transform: scale(1.15);
+      }
+
+      /* Card Styling */
+      .timeline-card {
+        padding: 28px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 22px 38px rgba(20, 42, 75, 0.1);
+        backdrop-filter: blur(14px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: inline-block;
+        width: 100%;
+        max-width: 440px;
+        text-align: left;
+      }
+
+      .timeline-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 26px 48px rgba(20, 42, 75, 0.16);
+      }
+
+      .timeline-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--primary) 0%, #7e65ff 100%);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        margin-bottom: 12px;
+        box-shadow: 0 6px 14px rgba(14, 107, 255, 0.2);
+      }
+
+      .timeline-title {
+        margin: 0 0 6px;
+        font-size: 19px;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+
+      .timeline-subtitle {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .timeline-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 16px;
+      }
+
+      .timeline-tags .tag {
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 8px;
+        background: rgba(14, 107, 255, 0.06);
+        color: var(--primary);
+        border: 1px solid rgba(14, 107, 255, 0.12);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      /* Responsive Layout for Mobile */
+      @media (max-width: 768px) {
+        .timeline-line-container {
+          left: 20px;
+          transform: none;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding: 15px 15px 15px 45px;
+          text-align: left;
+          left: 0;
+        }
+
+        .timeline-item--left .timeline-dot,
+        .timeline-item--right .timeline-dot {
+          left: 11px;
+          right: auto;
+        }
+
+        .timeline-card {
+          max-width: 100%;
+        }
+      }
     </style>
   </head>
 
@@ -3051,7 +3232,7 @@
         </button>
 
         <nav>
-          <a href="#hero">
+          <a href="./index.html#hero">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M12 3 3 10.5V21h7v-6h4v6h7v-10.5L12 3Z"></path>
             </svg>
@@ -3059,7 +3240,7 @@
             Home
           </a>
 
-          <a href="#works">
+          <a href="./projects.html">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path
                 d="M3 3h8v8H3V3Zm10 0h8v8h-8V3Zm-10 10h8v8H3v-8Zm10 0h8v8h-8v-8Z"
@@ -3069,7 +3250,7 @@
             Projects
           </a>
 
-          <a href="#services">
+          <a href="./index.html#services">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path
                 d="M12 3 3 7.5 12 12l9-4.5L12 3Zm-9 7.5L12 15l9-4.5v5L12 20l-9-4.5v-5Z"
@@ -3079,7 +3260,7 @@
             Services
           </a>
 
-          <a href="#skills">
+          <a href="./index.html#skills">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M4 14h3v7H4v-7Zm6-5h3v12h-3V9Zm6-7h3v19h-3V2Z"></path>
             </svg>
@@ -3087,7 +3268,7 @@
             Skills
           </a>
 
-          <a href="./about.html">
+          <a class="active" href="./about.html">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path
                 d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 5v2h16v-2c0-2.99-3.58-5-8-5Z"
@@ -3105,935 +3286,113 @@
         >
       </header>
 
-      <main>
-        <section class="hero" id="hero">
-          <div class="intro">
-            <h2>Apologies in advance, I'm</h2>
+            <main>
+        <section class="section-card works" id="journey">
+          <h3 class="section-heading">My Professional Journey (Timeline)</h3>
 
-            <h1>RAHUL MALI</h1>
+          <div class="timeline-container">
+            <div class="timeline-line-container">
+              <div class="timeline-line-active"></div>
+            </div>
 
-            <p>
-              Computer Science student by day, pixel-pusher by night. Skilled in Figma, React, Tailwind CSS, and pretending I know why my code finally worked. Passionate about designing intuitive experiences that stop users from rage-clicking.
-            </p>
-
-            <div class="role-cards">
-              <div class="role-card">
-                <svg viewBox="0 0 24 24">
-                  <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"></path>
-                </svg>
-
-                <div>
-                  <strong>CTO @ Ṛuut</strong>
-
-                  <span>Architecture · Web · ERP</span>
-                </div>
-              </div>
-
-              <div class="role-card">
-                <svg viewBox="0 0 24 24">
-                  <path d="M4 5h16v4H4Zm0 6h16v4H4Zm0 6h16v2H4Z"></path>
-                </svg>
-
-                <div>
-                  <strong>Front-end Developer</strong>
-
-                  <span>React | Tailwind | Accessibility</span>
-                </div>
-              </div>
-
-              <div class="role-card">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 2 3 9h4v11h10V9h4Zm-1 7v8H9V9Zm4 8h-2V9h2Z"
-                  ></path>
-                </svg>
-
-                <div>
-                  <strong>UI/UX Designer</strong>
-
-                  <span>Figma | Motion | Prototyping</span>
+            <!-- Milestone 1: 2021 -->
+            <div class="timeline-item timeline-item--left">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <span class="timeline-badge">2021</span>
+                <h4 class="timeline-title">Schooling Completed</h4>
+                <div class="timeline-subtitle">Swami Vivekanand Govt. Model School</div>
+                <p>
+                  Completed senior secondary school (12th grade Science) focusing on Mathematics and Physics, providing the mathematical and analytical foundation for my software engineering path.
+                </p>
+                <div class="timeline-tags">
+                  <span class="tag">Science</span>
+                  <span class="tag">Mathematics</span>
+                  <span class="tag">Physics</span>
                 </div>
               </div>
             </div>
 
-            <div class="floating-contact">
-              <a
-                class="floating-contact__link floating-contact__link--mail"
-                href="mailto:rahulmali10394@gmail.com"
-                aria-label="Email Rahul Mali"
-              >
-                <span class="floating-contact__tooltip"
-                  >rahulmali10394@gmail.com</span
-                >
-
-                <span class="floating-contact__icon" aria-hidden="true"
-                  >&#9993;</span
-                >
-              </a>
-
-              <a
-                class="floating-contact__link floating-contact__link--linkedin"
-                href="https://www.linkedin.com/in/rahul-mali-rm/"
-                target="_blank"
-                rel="noopener"
-                >In</a
-              >
-
-              <a
-                class="floating-contact__link floating-contact__link--github"
-                href="https://github.com/R-V-2003"
-                target="_blank"
-                rel="noopener"
-                >GH</a
-              >
-
-              <a
-                class="floating-contact__link floating-contact__link--figma"
-                href="https://www.figma.com/@rahulmali2"
-                target="_blank"
-                rel="noopener"
-                >Fg</a
-              >
-
-              <a
-                class="floating-contact__link floating-contact__link--instagram"
-                href="https://www.behance.net/rahulmali50"
-                target="_blank"
-                rel="noopener"
-                style="color: #1769ff;"
-                >Be</a
-              >
-
-              <a
-                class="floating-contact__link floating-contact__link--instagram"
-                href="https://www.instagram.com/rahul_mali_2003"
-                target="_blank"
-                rel="noopener"
-                >IG</a
-              >
-            </div>
-          </div>
-
-          <div class="portrait">
-            <img
-              src="./Rahul Mali _ Portfolio_files/P_I (2).png"
-              alt="Rahul Mali portrait"
-            />
-          </div>
-
-          <aside class="skills">
-            <div class="skill-card" data-tone="violet">
-              <span class="skill-card__badge">Design Craft</span>
-
-              <div class="skill-card__icon">
-                <img
-                  src="./Rahul Mali _ Portfolio_files/web-design.png"
-                  alt="UI/UX design workspace"
-                />
-              </div>
-
-              <div class="skill-card__text">
-                <span class="skill-card__title">UI/UX Design</span>
-
-                <span class="skill-card__meta"
-                  >Wireframes, flows &amp; interactive prototypes</span
-                >
+            <!-- Milestone 2: 2021-2024 -->
+            <div class="timeline-item timeline-item--right">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <span class="timeline-badge">2021 - 2024</span>
+                <h4 class="timeline-title">Diploma in CSE</h4>
+                <div class="timeline-subtitle">Gokul Bhai Bhatt Govt. Polytechnic</div>
+                <p>
+                  Acquired key fundamentals in Computer Science. Studied database management systems, structures, core programming, and web designs. Graduated with an exceptional CGPA of 9.34.
+                </p>
+                <div class="timeline-tags">
+                  <span class="tag">Programming</span>
+                  <span class="tag">DBMS</span>
+                  <span class="tag">Web Basics</span>
+                  <span class="tag">CGPA 9.34</span>
+                </div>
               </div>
             </div>
 
-            <div class="skill-card" data-tone="blue">
-              <span class="skill-card__badge">Front-end</span>
-
-              <div class="skill-card__icon">
-                <img
-                  src="./Rahul Mali _ Portfolio_files/source-code.png"
-                  alt="Front-end development setup"
-                />
+            <!-- Milestone 3: 2024-2027 -->
+            <div class="timeline-item timeline-item--left">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <span class="timeline-badge">2024 - 2027</span>
+                <h4 class="timeline-title">B.Tech in CSE</h4>
+                <div class="timeline-subtitle">JG University, Ahmedabad</div>
+                <p>
+                  Pursuing my Bachelor's degree in Computer Science. Engaged in project-based learning, building software solutions, studying UI/UX, full-stack frameworks, and integrating modern AI technologies.
+                </p>
+                <div class="timeline-tags">
+                  <span class="tag">B.Tech</span>
+                  <span class="tag">Software Engineering</span>
+                  <span class="tag">UI/UX</span>
+                  <span class="tag">Ahmedabad</span>
+                </div>
               </div>
+            </div>
 
-              <div class="skill-card__text">
-                <span class="skill-card__title">Front-end Development</span>
-
-                <span class="skill-card__meta"
-                  >Responsive interfaces, component systems &amp; testing</span
-                >
+            <!-- Milestone 4: 2025-2026 -->
+            <div class="timeline-item timeline-item--right">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <span class="timeline-badge">May 2025 - May 2026</span>
+                <h4 class="timeline-title">Frontend Developer Intern</h4>
+                <div class="timeline-subtitle">Sedani Digital Pvt. Ltd.</div>
+                <p>
+                  Gained industrial experience building client projects. Crafted reusable React components, worked with modern frontend tooling (Tailwind CSS, React, npm), and bridged designs from Figma to reality.
+                </p>
+                <div class="timeline-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Tailwind CSS</span>
+                  <span class="tag">Figma to HTML</span>
+                  <span class="tag">Internship</span>
+                </div>
               </div>
             </div>
 
-            <div class="skill-card" data-tone="orange">
-              <span class="skill-card__badge">AI Toolkit</span>
-
-              <div class="skill-card__icon">
-                <img
-                  src="./Rahul Mali _ Portfolio_files/artificial-intelligence.png"
-                  alt="AI workflow screens"
-                />
-              </div>
-
-              <div class="skill-card__text">
-                <span class="skill-card__title"
-                  >Integrate AI into Workflow</span
-                >
-
-                <span class="skill-card__meta"
-                  >Automation, co-pilot tooling &amp; intelligent
-                  hand-offs</span
-                >
+            <!-- Milestone 5: 2026-Present -->
+            <div class="timeline-item timeline-item--left">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <span class="timeline-badge">Jun 2026 - Present</span>
+                <h4 class="timeline-title">Founding Engineer &amp; CTO</h4>
+                <div class="timeline-subtitle">Ṛuut</div>
+                <p>
+                  Leading core engineering and design at Ṛuut. Architected and deployed the primary company site and comprehensive ERP platforms. Directing product operations and hybrid infrastructure scaling.
+                </p>
+                <div class="timeline-tags">
+                  <span class="tag">CTO</span>
+                  <span class="tag">Architecture</span>
+                  <span class="tag">ERP Systems</span>
+                  <span class="tag">Fullstack</span>
+                </div>
               </div>
             </div>
-          </aside>
-        </section>
 
-        <section class="section-card about" id="about">
-          <div class="about-grid">
-            <aside class="about__visual">
-              <div class="about__portrait">
-                <img
-                  src="./Rahul Mali _ Portfolio_files/Gemini_Generated_Image_80kdfe80kdfe80kd (3).png"
-                  alt="Rahul Mali portrait - CTO &amp; Founding Software Engineer Intern at Ṛuut"
-                />
-              </div>
-
-              <div class="about__chips">
-                <a
-                  class="about__chip about__chip--link"
-                  href="https://yourruut.com/"
-                  target="_blank"
-                  rel="noopener"
-                  >CTO &amp; Founding Intern - Ṛuut</a
-                >
-
-                <a
-                  class="about__chip about__chip--link"
-                  href="https://jguni.in/"
-                  target="_blank"
-                  rel="noopener"
-                  >B.Tech CSE - JG University (2024-2027)</a
-                >
-
-                <a
-                  class="about__chip about__chip--link"
-                  href="https://hte.rajasthan.gov.in/college/gpcsirohi/about-us-contact-us"
-                  target="_blank"
-                  rel="noopener"
-                  >Diploma CSE - CGPA 9.34</a
-                >
-
-                <span class="about__chip">Design x Development x AI</span>
-              </div>
-            </aside>
-
-            <div class="about__details">
-              <h3 class="section-heading">About Me (The Unfiltered Version)</h3>
-
-              <p class="about__lead">
-                I'm Rahul Mali, a CS student, Founding Software Engineer Intern, and CTO at Ṛuut, with just enough design and development experience to build products that scale.
-              </p>
-
-              <p>
-                At Ṛuut, I design, develop, and deploy our primary website and ERP systems, managing all technology aspects to ensure seamless, hybrid operations. Prior to this, during my frontend internship at Sedani Digital, I built "industry-level" React components and interactive Figma prototypes. I love combining clean code with rich animations, and yes, I utilize AI to optimize workflows when efficiency demands it. Blending solid engineering principles with UI/UX ensures everything I build is fast, accessible, and highly interactive.
-              </p>
-
-              <div class="about__cards">
-                <article class="about-card">
-                  <h4>Experience</h4>
-
-                  <ul>
-                    <li>
-                      <strong>Ṛuut</strong>
-                      <small>Founding Software Engineer Intern &amp; CTO - Jun 2026 to Present</small>
-                    </li>
-
-                    <li>
-                      Design, develop, and deploy the company website and ERP system. Manage all technology-related aspects to ensure seamless operations.
-                    </li>
-
-                    <li>
-                      <strong>Sedani Digital Pvt. Ltd.</strong>
-                      <small>Frontend Developer Intern - May 2025 to May 2026</small>
-                    </li>
-
-                    <li>
-                      Implemented reusable components, iterated on design hand-offs, and improved UI performance with modern tooling.
-                    </li>
-                  </ul>
-                </article>
-
-                <article class="about-card">
-                  <h4>Education</h4>
-
-                  <ul>
-                    <li>
-                      <strong>B.Tech CSE</strong> - JG University, Ahmedabad
-                      (2024-2027)
-                    </li>
-
-                    <li>
-                      <strong>Diploma CSE</strong> - Gokul Bhai Bhatt Govt.
-                      Polytechnic (CGPA 9.34)
-                    </li>
-
-                    <li>
-                      Senior Secondary (Science) - Swami Vivekanand Govt. Model
-                      School (2021)
-                    </li>
-                  </ul>
-                </article>
-
-                <article class="about-card about-card--focus">
-                  <h4>Currently Focused On</h4>
-
-                  <ul>
-                    <li>
-                      Integrating AI copilots into everyday design and
-                      development workflows.
-                    </li>
-
-                    <li>
-                      Building accessible component libraries with React and
-                      Tailwind.
-                    </li>
-
-                    <li>
-                      Crafting motion-rich product prototypes that sell the
-                      story.
-                    </li>
-                  </ul>
-                </article>
-              </div>
-
-              <div class="about__cta" style="margin-top: 32px; display: flex; justify-content: flex-start; width: 100%;">
-                <a class="btn-glass" href="./about.html">
-                  View My Full Journey
-                  <svg viewBox="0 0 24 24" style="fill: currentColor; width: 18px; height: 18px; margin-left: 8px;">
-                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
           </div>
         </section>
 
-        <section class="section-card services" id="services">
-          <h3 class="section-heading">What I Do (Besides Debugging)</h3>
-
-          <p>
-            I partner with product teams to ship polished interfaces, motion-rich prototypes, and AI-assisted workflows because typing everything from scratch is so 2021.
-          </p>
-
-          <div class="service-grid">
-            <article class="service-card" data-tone="blue">
-              <div class="service-card__icon">
-                <img
-                  src="./Rahul Mali _ Portfolio_files/visual-studio-code-2019.png"
-                  alt="Developer coding setup"
-                />
-              </div>
-
-              <span class="service-card__badge">Front-end</span>
-
-              <h4>Figma to Reality</h4>
-
-              <p>
-                I translate your wildly optimistic Figma concepts into performant React code, politely ignoring the parts that defy the laws of physics.
-              </p>
-
-              <ul class="service-card__list">
-                <li>Components mapped to design tokens (magic).</li>
-
-                <li>Responsive states that actually work on your boss's iPad.</li>
-
-                <li>Documentation because I won't remember this tomorrow.</li>
-              </ul>
-            </article>
-
-            <article class="service-card" data-tone="violet">
-              <div class="service-card__icon">
-                <img
-                  src="./Rahul Mali _ Portfolio_files/figma--v1.png"
-                  alt="Design tools on desk"
-                />
-              </div>
-
-              <span class="service-card__badge">Experience Design</span>
-
-              <h4>Interactive Smoke & Mirrors</h4>
-
-              <p>
-                Crafting high-fidelity prototypes so realistic your stakeholders will ask why it's not live yet. Spoiler: It's just a lot of clever auto-animate.
-              </p>
-
-              <ul class="service-card__list">
-                <li>
-                  Clickable flows that hide the chaotic spaghetti logic.
-                </li>
-
-                <li>
-                  Translating "make it pop" into actual CSS values.
-                </li>
-
-                <li>Dev handoff checklists to prevent engineering tears.</li>
-              </ul>
-            </article>
-
-            <article class="service-card" data-tone="orange">
-              <div class="service-card__icon">
-                <img
-                  src="./Rahul Mali _ Portfolio_files/bot.png"
-                  alt="AI generated visuals"
-                />
-              </div>
-
-              <span class="service-card__badge">AI Toolkit</span>
-
-              <h4>AI Prompt Engineering (Googling 2.0)</h4>
-
-              <p>
-                Blending ChatGPT, Vercel v0, and whatever new AI dropped today to build things faster, so I can spend more time tweaking CSS drop shadows.
-              </p>
-
-              <ul class="service-card__list">
-                <li>
-                  UX writing generated by robots who lack human empathy.
-                </li>
-
-                <li>AI code scaffolding (I just take the credit).</li>
-
-                <li>
-                  Generative visuals to distract from missing features.
-                </li>
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section class="section-card skills-section" id="skills">
-          <h3 class="section-heading">Skills</h3>
-
-          <div class="skill-chip-grid">
-            <span class="skill-chip" data-neon="cyan">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/html5-original.svg"
-                alt="HTML logo"
-              />
-
-              <span class="chip-label">HTML</span>
-            </span>
-
-            <span class="skill-chip" data-neon="blue">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/css3-original.svg"
-                alt="CSS logo"
-              />
-
-              <span class="chip-label">CSS</span>
-            </span>
-
-            <span class="skill-chip" data-neon="amber">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/javascript-original.svg"
-                alt="JavaScript logo"
-              />
-
-              <span class="chip-label">JavaScript</span>
-            </span>
-
-            <span class="skill-chip" data-neon="pink">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/react-original.svg"
-                alt="React logo"
-              />
-
-              <span class="chip-label">React</span>
-            </span>
-
-            <span class="skill-chip" data-neon="lime">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/saved_resource"
-                alt="Tailwind CSS logo"
-              />
-
-              <span class="chip-label">Tailwind CSS</span>
-            </span>
-
-            <span class="skill-chip" data-neon="purple">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/python-original.svg"
-                alt="Python logo"
-              />
-
-              <span class="chip-label">Python</span>
-            </span>
-
-            <span class="skill-chip" data-neon="red">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/cplusplus-original.svg"
-                alt="C++ logo"
-              />
-
-              <span class="chip-label">C++ Programming</span>
-            </span>
-
-            <span class="skill-chip" data-neon="teal">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/figma-original.svg"
-                alt="Figma logo"
-              />
-
-              <span class="chip-label">Figma</span>
-            </span>
-
-            <span class="skill-chip" data-neon="cyan">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/blueprint.png"
-                alt="Miro logo"
-              />
-
-              <span class="chip-label">Wireframing</span>
-            </span>
-
-            <span class="skill-chip" data-neon="amber">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/adobe-creative-cloud.png"
-                alt="Adobe Creative Cloud logo"
-              />
-
-              <span class="chip-label">UI &amp; UX Design</span>
-            </span>
-
-            <span class="skill-chip" data-neon="blue">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/webflow.png"
-                alt="Webflow logo"
-              />
-
-              <span class="chip-label">User Interface Dev</span>
-            </span>
-
-            <span class="skill-chip" data-neon="lime">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/google-analytics.png"
-                alt="Google Analytics logo"
-              />
-
-              <span class="chip-label">Research &amp; Analytics</span>
-            </span>
-
-            <span class="skill-chip" data-neon="pink">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/adobe-premiere-pro.png"
-                alt="Adobe Premiere Pro logo"
-              />
-
-              <span class="chip-label">Video Editing</span>
-            </span>
-
-            <span class="skill-chip" data-neon="purple">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/adobe-after-effects.png"
-                alt="Adobe After Effects logo"
-              />
-
-              <span class="chip-label">Video Making</span>
-            </span>
-
-            <span class="skill-chip" data-neon="blue">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/ms-word.png"
-                alt="Microsoft Word logo"
-              />
-
-              <span class="chip-label">MS Word</span>
-            </span>
-
-            <span class="skill-chip" data-neon="amber">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/ms-powerpoint.png"
-                alt="Microsoft PowerPoint logo"
-              />
-
-              <span class="chip-label">MS PowerPoint</span>
-            </span>
-
-            <span class="skill-chip" data-neon="teal">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/canva.png"
-                alt="Canva logo"
-              />
-
-              <span class="chip-label">Canva</span>
-            </span>
-
-            <span class="skill-chip" data-neon="red">
-              <img
-                class="chip-icon"
-                src="./Rahul Mali _ Portfolio_files/artificial-intelligence(1).png"
-                alt="OpenAI logo"
-              />
-
-              <span class="chip-label">Artificial Intelligence</span>
-            </span>
-          </div>
-
-          <div class="skill-subsection">
-            <h4>AI Tools</h4>
-
-            <div class="skill-chip-grid">
-              <span class="skill-chip skill-chip--stacked" data-neon="pink">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/ideogram.ai"
-                  alt="Ideogram icon"
-                />
-
-                <span class="chip-text"
-                  ><strong>Ideogram</strong
-                  ><small>Design inspiration</small></span
-                >
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="blue">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/artificial-intelligence(1).png"
-                  alt="Codex icon"
-                />
-
-                <span class="chip-text"
-                  ><strong>Codex</strong><small>Project building</small></span
-                >
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="teal">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/180x180.png"
-                  alt="Vercel icon"
-                />
-
-                <span class="chip-text"
-                  ><strong>Vercel v0</strong><small>Development</small></span
-                >
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="amber">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/figma--v1(1).png"
-                  alt="Figma icon"
-                />
-
-                <span class="chip-text"
-                  ><strong>Figma AI</strong
-                  ><small>Design &amp; development</small></span
-                >
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="lime">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/chatgpt.png"
-                  alt="ChatGPT icon"
-                />
-
-                <span class="chip-text"
-                  ><strong>ChatGPT</strong
-                  ><small>Content &amp; research</small></span
-                >
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="purple">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/OpenAI_Logo.svg.png"
-                  alt="Sora icon"
-                />
-
-                <span class="chip-text"
-                  ><strong>Sora</strong
-                  ><small>Image &amp; video processing</small></span
-                >
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="blue">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/claude.svg"
-                  alt="Claude icon"
-                />
-                <span class="chip-text">
-                  <strong>Claude</strong><small>Overthinking code for me</small>
-                </span>
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="cyan">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/gemini.svg"
-                  alt="Gemini icon"
-                />
-                <span class="chip-text">
-                  <strong>Gemini</strong><small>Multimodal wizardry</small>
-                </span>
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="pink">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/glm.svg"
-                  alt="GLM icon"
-                />
-                <span class="chip-text">
-                  <strong>GLM</strong><small>Design &amp; UI generator</small>
-                </span>
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="amber">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/minimax.svg"
-                  alt="MiniMax icon"
-                />
-                <span class="chip-text">
-                  <strong>MiniMax</strong><small>Coding powerhouse</small>
-                </span>
-              </span>
-
-              <span class="skill-chip skill-chip--stacked" data-neon="lime">
-                <img
-                  class="chip-icon"
-                  src="./Rahul Mali _ Portfolio_files/antigravity.svg"
-                  alt="Antigravity icon"
-                />
-                <span class="chip-text">
-                  <strong>Antigravity</strong><small>My agentic pair programmer</small>
-                </span>
-              </span>
-            </div>
-          </div>
-        </section>
-
-                <section class="section-card works" id="works">
-          <h3 class="section-heading">Selected Projects (Stuff that actually compiles)</h3>
-
-          <div class="project-grid">
-            <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-examprep.html'">
-              <div class="work-card__media">
-                <img
-                  src="./exem-prep_mockup.png"
-                  alt="Exam-prep AI App UI"
-                  onerror="this.style.background='linear-gradient(135deg,#ff8f4f,#ff5c8d)';this.style.height='190px';this.alt='Exam-Prep'"
-                />
-              </div>
-              <span class="work-card__study-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>Case Study</span>
-              <div class="work-card__tags">React / Vercel / Supabase / Groq AI / Gemini API</div>
-
-              <h4 class="work-card__title">Exam-prep (GovPrep AI)</h4>
-
-              <p>
-                A comprehensive cross-platform exam preparation application deployed on Vercel. Features an intelligent AI assistant powered by Groq AI, real-time current affairs using the Gemini API, and robust backend data sync via Supabase. Available as both a Web App and a fully functional Android APK.
-              </p>
-
-              <div class="work-card__links">
-                <a
-                  class="work-card__study-link"
-                  href="./case-study-examprep.html"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >View Case Study</a
-                >
-                <a
-                  href="https://bci-exam-prep.vercel.app/"
-                  target="_blank"
-                  rel="noopener"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >Live Demo</a
-                >
-                <a
-                  href="./exam-prep.apk"
-                  target="_blank"
-                  rel="noopener"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >Download APK</a
-                >
-                <span>May 2026</span>
-              </div>
-            </article>
-
-            <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-chalo.html'">
-              <div class="work-card__media">
-                <img
-                  src="./chalo_card_image.png"
-                  alt="CHALO Ride-Hailing App UI"
-                  onerror="this.style.background='linear-gradient(135deg,#ff8f4f,#ff5c8d)';this.style.height='190px';this.alt='CHALO'"
-                />
-              </div>
-              <span class="work-card__study-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>Case Study</span>
-              <div class="work-card__tags">React / Node.js / AWS / Full-Stack</div>
-              <h4 class="work-card__title">CHALO – Original Startup Idea</h4>
-              <p>
-                A full-stack, original ride-hailing startup. I handled everything from market research and UI design to building the React frontend, Node backend, and deploying the entire system on AWS ECS. It's not a clone; it's a completely original platform.
-              </p>
-              <div class="work-card__links">
-                <a
-                  class="work-card__study-link"
-                  href="./case-study-chalo.html"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >View Case Study</a
-                >
-                <a
-                  href="./chalo.apk"
-                  target="_blank"
-                  rel="noopener"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >Download APK</a
-                >
-                <span>Apr 2025</span>
-              </div>
-            </article>
-
-            <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-ptenote.html'">
-              <div class="work-card__media">
-                <img
-                  src="./ptenote_mockup.png"
-                  alt="PTENote website redesign mockup"
-                  onerror="this.style.background='linear-gradient(135deg,#1d7cff,#7e65ff)';this.style.height='190px';this.alt='PTENote'"
-                />
-              </div>
-
-              <span class="work-card__study-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>Case Study</span>
-
-              <div class="work-card__tags">HTML / Tailwind CSS / JavaScript</div>
-
-              <h4 class="work-card__title">PTENote – Website Redesign</h4>
-
-              <p>
-                Redesigned the PTENote landing page. Built with HTML, Tailwind, and JavaScript. I spent 80% of the time centering divs and the other 20% convincing stakeholders that mobile responsiveness isn't just a myth.
-              </p>
-
-              <div class="work-card__links">
-                <a
-                  class="work-card__study-link"
-                  href="./case-study-ptenote.html"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >View Case Study</a
-                >
-
-                <a
-                  href="https://ptenote.com/"
-                  target="_blank"
-                  rel="noopener"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >Launch site</a
-                >
-
-                <span>Nov 2025 - Mar 2026</span>
-              </div>
-            </article>
-
-            <article class="work-card work-card--has-study" onclick="window.location.href='./case-study-detnote.html'">
-              <div class="work-card__media">
-                <img
-                  src="./detnote_mockup.png"
-                  alt="DetNote booking platform mockup"
-                  onerror="this.style.background='linear-gradient(135deg,#ff8f4f,#ff5c8d)';this.style.height='190px';this.alt='DetNote'"
-                />
-              </div>
-
-              <span class="work-card__study-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>Case Study</span>
-
-              <div class="work-card__tags">Figma / UI Design</div>
-
-              <h4 class="work-card__title">DetNote – DET Exam Booking</h4>
-
-              <p>
-                Designed DetNote from scratch in Figma. Created a "clean user experience" and "strong visual hierarchy," which is designer-speak for "I made sure the buttons were big enough so people actually click them."
-              </p>
-
-              <div class="work-card__links">
-                <a
-                  class="work-card__study-link"
-                  href="./case-study-detnote.html"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >View Case Study</a
-                >
-
-                <a
-                  href="https://detnote.com/"
-                  target="_blank"
-                  rel="noopener"
-                  onclick="event.stopPropagation()"
-                  ><svg viewBox="0 0 24 24">
-                    <path
-                      d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14Z"
-                    ></path></svg
-                  >Launch site</a
-                >
-
-                <span>Sep 2025 - Oct 2025</span>
-              </div>
-            </article>
-          </div>
-
-          <div class="works__cta" style="display: flex; justify-content: center; margin-top: 40px; width: 100%;">
-            <a class="btn-glass" href="./projects.html">
-              View All Projects
-              <svg viewBox="0 0 24 24" style="fill: currentColor; width: 18px; height: 18px; margin-left: 8px;">
-                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-              </svg>
-            </a>
-          </div>
-        </section>
-
-        <section class="section-card cta" id="contact">
+<section class="section-card cta" id="contact">
           <div>
             <h3>Let's build web experiences that don't suck.</h3>
 
@@ -4103,6 +3462,7 @@
 
     <script>
       (function () {
+        // Hamburger toggle
         const hamburger = document.getElementById('hamburger');
         const header = hamburger.closest('header');
 
@@ -4121,6 +3481,62 @@
             hamburger.setAttribute('aria-expanded', 'false');
           });
         });
+
+        // Intersection Observer for Timeline Fade-In
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px 0px -100px 0px',
+          threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, observerOptions);
+
+        timelineItems.forEach(item => {
+          observer.observe(item);
+        });
+
+        // Dynamic Line Drawing linked to Scroll Progress
+        const timelineContainer = document.querySelector('.timeline-container');
+        const activeLine = document.querySelector('.timeline-line-active');
+
+        function updateTimelineLine() {
+          const containerRect = timelineContainer.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+
+          // Scroll trigger points
+          const triggerPoint = viewportHeight * 0.6;
+          const containerTop = containerRect.top;
+          const containerHeight = containerRect.height;
+
+          let scrolled = triggerPoint - containerTop;
+          if (scrolled < 0) scrolled = 0;
+          if (scrolled > containerHeight) scrolled = containerHeight;
+
+          const percentage = (scrolled / containerHeight) * 100;
+          activeLine.style.height = percentage + '%';
+
+          // Light up timeline items (dots & cards) as scroll progress passes them
+          timelineItems.forEach(item => {
+            // Offset from container top
+            const itemOffset = item.offsetTop;
+            if (scrolled >= itemOffset) {
+              item.classList.add('active');
+            }
+          });
+        }
+
+        window.addEventListener('scroll', updateTimelineLine);
+        window.addEventListener('resize', updateTimelineLine);
+        
+        // Execute on load
+        setTimeout(updateTimelineLine, 100);
       })();
     </script>
   </body>
