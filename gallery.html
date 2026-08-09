@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Rahul Mali | Media Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link href="./Rahul Mali _ Portfolio_files/css2" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f2f5fb;
+        --card: #ffffffd9;
+        --glass-border: #ffffff55;
+        --primary: #0e6bff;
+        --text-dark: #262c35;
+        --text-muted: #6f7b8a;
+        --viewport-pad: 56px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: radial-gradient(circle at top, #f8fbff 0%, var(--bg) 70%);
+        color: var(--text-dark);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .viewport {
+        width: min(1200px, 95vw);
+        margin: 24px auto 20px;
+        background: linear-gradient(145deg, #ffffffed, #f3f6fbf5);
+        border-radius: 34px;
+        box-shadow: 0 28px 60px rgba(16, 39, 80, 0.12);
+        padding: 32px var(--viewport-pad) 72px;
+        position: relative;
+        overflow: clip;
+      }
+
+      .viewport::before,
+      .viewport::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+        z-index: 0;
+      }
+
+      .viewport::before {
+        width: 420px;
+        height: 420px;
+        top: -160px;
+        right: -80px;
+        opacity: 0.65;
+      }
+
+      .viewport::after {
+        width: 280px;
+        height: 280px;
+        bottom: -140px;
+        left: -100px;
+        opacity: 0.45;
+      }
+
+      .bg-orb {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(156,201,255,0.45));
+        box-shadow: 0 25px 45px rgba(26,54,101,0.12);
+        animation: drift 18s ease-in-out infinite;
+        z-index: 1;
+      }
+
+      .bg-orb::after {
+        content: "";
+        position: absolute;
+        inset: 18%;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+        filter: blur(4px);
+      }
+
+      .bg-orb.orb--1 {
+        width: 110px;
+        height: 110px;
+        top: 90px;
+        left: 85px;
+        animation-delay: -2s;
+      }
+
+      .bg-orb.orb--2 {
+        width: 80px;
+        height: 80px;
+        bottom: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-delay: 3s;
+      }
+
+      .bg-orb.orb--3 {
+        width: 90px;
+        height: 90px;
+        top: 60%;
+        right: 90px;
+        animation-delay: 6s;
+      }
+
+      @keyframes drift {
+        0%, 100% { transform: translate3d(0,0,0); }
+        40% { transform: translate3d(12px, -18px, 0); }
+        70% { transform: translate3d(-15px, 15px, 0); }
+      }
+
+      header {
+        position: relative;
+        width: calc(100% + var(--viewport-pad) * 2);
+        margin: 0 calc(-1 * var(--viewport-pad)) 24px;
+        padding: 18px clamp(32px, 8vw, 72px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        z-index: 100;
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      .logo {
+        font-weight: 800;
+        font-size: 24px;
+        letter-spacing: 0.12em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo svg {
+        width: 24px;
+        height: 24px;
+        fill: var(--primary);
+      }
+
+      nav {
+        display: flex;
+        gap: 28px;
+      }
+
+      nav a {
+        text-decoration: none;
+        font-weight: 500;
+        color: var(--text-muted);
+        position: relative;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 15px;
+      }
+
+      nav a svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+      }
+
+      nav a.active, nav a:hover {
+        color: var(--primary);
+      }
+
+      nav a.active::after, nav a:hover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 22px;
+        height: 3px;
+        border-radius: 4px;
+        background: var(--primary);
+      }
+
+      .btn-glass {
+        padding: 14px 32px;
+        border-radius: 999px;
+        border: 1px solid var(--glass-border);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 15px 25px rgba(12, 56, 174, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: var(--primary);
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn-glass svg {
+        width: 18px;
+        height: 18px;
+        fill: #fff;
+      }
+
+      .btn-glass:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 30px rgba(12, 56, 174, 0.35);
+      }
+
+      /* Mobile Navigation Toggle */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        z-index: 110;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 26px;
+        height: 3px;
+        background: var(--text-dark);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+
+      /* Gallery Section styling */
+      .gallery-section {
+        position: relative;
+        z-index: 10;
+        margin-top: 20px;
+      }
+
+      .gallery-heading {
+        font-size: clamp(28px, 5vw, 42px);
+        font-weight: 800;
+        margin: 0 0 10px;
+        color: var(--text-dark);
+        letter-spacing: -0.03em;
+        text-align: center;
+      }
+
+      .gallery-lead {
+        color: var(--text-muted);
+        font-size: 16px;
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto 30px;
+      }
+
+      /* Filter Controls */
+      .filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 40px;
+      }
+
+      .filter-btn {
+        padding: 10px 24px;
+        border-radius: 999px;
+        border: 1px solid var(--glass-border);
+        background: rgba(255, 255, 255, 0.6);
+        color: var(--text-dark);
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+      }
+
+      .filter-btn:hover, .filter-btn.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+        box-shadow: 0 10px 20px rgba(14, 107, 255, 0.2);
+      }
+
+      /* Gallery Grid */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .gallery-item {
+        border-radius: 24px;
+        overflow: hidden;
+        background: var(--card);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 15px 35px rgba(20, 42, 75, 0.05);
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 45px rgba(20, 42, 75, 0.12);
+      }
+
+      .gallery-media {
+        width: 100%;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        background: #000;
+      }
+
+      .gallery-media img, .gallery-media video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s;
+      }
+
+      .gallery-item:hover .gallery-media img, 
+      .gallery-item:hover .gallery-media video {
+        transform: scale(1.05);
+      }
+
+      /* Video Overlay play button */
+      .video-play-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .video-play-button {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 20px rgba(14,107,255,0.4);
+        transition: transform 0.3s;
+      }
+
+      .video-play-button svg {
+        width: 24px;
+        height: 24px;
+        fill: #fff;
+        margin-left: 2px;
+      }
+
+      .gallery-item:hover .video-play-button {
+        transform: scale(1.15);
+      }
+
+      .gallery-info {
+        padding: 16px 20px;
+      }
+
+      .gallery-title {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      /* Lightbox Modal */
+      .lightbox-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(13, 20, 30, 0.85);
+        backdrop-filter: blur(16px);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox-modal.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .lightbox-media-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .lightbox-media-container img, 
+      .lightbox-media-container video {
+        max-width: 100%;
+        max-height: 70vh;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 40px;
+        cursor: pointer;
+        transition: color 0.2s;
+        z-index: 10000;
+      }
+
+      .lightbox-close:hover {
+        color: #fff;
+      }
+
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, color 0.2s;
+        z-index: 10000;
+        user-select: none;
+      }
+
+      .lightbox-nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .lightbox-nav--prev { left: 40px; }
+      .lightbox-nav--next { right: 40px; }
+
+      .lightbox-caption {
+        color: #fff;
+        margin-top: 16px;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .lightbox-counter {
+        color: rgba(255,255,255,0.5);
+        margin-top: 6px;
+        font-size: 12px;
+      }
+
+      /* Responsive Styling */
+      @media (max-width: 900px) {
+        :root { --viewport-pad: 32px; }
+        nav { display: none; }
+        .hamburger { display: flex; }
+
+        header.menu-open nav {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 80px;
+          left: 0;
+          width: 100%;
+          background: #fff;
+          padding: 20px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+          border-radius: 18px;
+          gap: 16px;
+          z-index: 100;
+        }
+
+        header.menu-open nav a.active::after, 
+        header.menu-open nav a:hover::after {
+          display: none;
+        }
+
+        .lightbox-nav {
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+        }
+        
+        .lightbox-nav--prev { left: 10px; }
+        .lightbox-nav--next { right: 10px; }
+      }
+
+      footer {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 13px;
+        margin-top: 60px;
+        border-top: 1px solid var(--glass-border);
+        padding-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="viewport" id="top">
+      <div class="bg-orb orb--1"></div>
+      <div class="bg-orb orb--2"></div>
+      <div class="bg-orb orb--3"></div>
+
+      <header>
+        <div class="logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.012 10.012 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm3.5-8.5a.999.999 0 0 1-.293.707l-3 3a1 1 0 1 1-1.414-1.414L12.586 12 10.8 10.207a1 1 0 0 1 1.414-1.414l3 3a.999.999 0 0 1 .286.707Z"></path></svg>
+          rah.
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav>
+          <a href="./index.html#hero">
+            <svg viewBox="0 0 24 24"><path d="M12 3 3 10.5V21h7v-6h4v6h7v-10.5L12 3Z"></path></svg>
+            Home
+          </a>
+          <a href="./projects.html">
+            <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3V3Zm10 0h8v8h-8V3Zm-10 10h8v8H3v-8Zm10 0h8v8h-8v-8Z"></path></svg>
+            Projects
+          </a>
+          <a href="./index.html#services">
+            <svg viewBox="0 0 24 24"><path d="M12 3 3 7.5 12 12l9-4.5L12 3Zm-9 7.5L12 15l9-4.5v5L12 20l-9-4.5v-5Z"></path></svg>
+            Services
+          </a>
+          <a href="./index.html#skills">
+            <svg viewBox="0 0 24 24"><path d="M4 14h3v7H4v-7Zm6-5h3v12h-3V9Zm6-7h3v19h-3V2Z"></path></svg>
+            Skills
+          </a>
+          <a href="./about.html">
+            <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 5v2h16v-2c0-2.99-3.58-5-8-5Z"></path></svg>
+            About
+          </a>
+          <a class="active" href="./gallery.html">
+            <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"></path></svg>
+            Gallery
+          </a>
+        </nav>
+        <a class="btn-glass" href="./index.html#contact"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3Zm9 7 9-6H3Z"></path></svg>Let's Talk</a>
+      </header>
+
+      <main>
+        <section class="gallery-section">
+          <h3 class="gallery-heading">Photo &amp; Video Gallery</h3>
+          <p class="gallery-lead">Exploring creative mockups, design workspaces, events, and collaborative startup environments.</p>
+
+          <div class="filter-container">
+            <button class="filter-btn active" onclick="filterGallery('all')">All Media</button>
+            <button class="filter-btn" onclick="filterGallery('image')">Photos</button>
+            <button class="filter-btn" onclick="filterGallery('video')">Videos</button>
+          </div>
+
+          <div class="gallery-grid">
+            <!-- Seed Gallery Item 1 -->
+            <div class="gallery-item" data-type="image" data-src="./school_milestone.png" data-caption="Swami Vivekanand Govt. Model School Campus">
+              <div class="gallery-card">
+                <div class="gallery-media">
+                  <img src="./school_milestone.png" loading="lazy" />
+                </div>
+                <div class="gallery-info">
+                  <h4 class="gallery-title">Academic Campus Grounds</h4>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seed Gallery Item 2 -->
+            <div class="gallery-item" data-type="image" data-src="./polytechnic_milestone.png" data-caption="Gokul Bhai Bhatt Government Polytechnic Building">
+              <div class="gallery-card">
+                <div class="gallery-media">
+                  <img src="./polytechnic_milestone.png" loading="lazy" />
+                </div>
+                <div class="gallery-info">
+                  <h4 class="gallery-title">Government Polytechnic Campus</h4>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seed Gallery Item 3 -->
+            <div class="gallery-item" data-type="image" data-src="./university_milestone.png" data-caption="JG University Ahmedabad Technology Block">
+              <div class="gallery-card">
+                <div class="gallery-media">
+                  <img src="./university_milestone.png" loading="lazy" />
+                </div>
+                <div class="gallery-info">
+                  <h4 class="gallery-title">JG University Tech Block</h4>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seed Gallery Item 4 -->
+            <div class="gallery-item" data-type="image" data-src="./sedani_milestone.png" data-caption="Engineering Workstation at Sedani Digital">
+              <div class="gallery-card">
+                <div class="gallery-media">
+                  <img src="./sedani_milestone.png" loading="lazy" />
+                </div>
+                <div class="gallery-info">
+                  <h4 class="gallery-title">Internship Workspace Desk</h4>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seed Gallery Item 5 -->
+            <div class="gallery-item" data-type="image" data-src="./ruut_milestone.png" data-caption="CTO Operations Desk and Collaborative Space at Ruut">
+              <div class="gallery-card">
+                <div class="gallery-media">
+                  <img src="./ruut_milestone.png" loading="lazy" />
+                </div>
+                <div class="gallery-info">
+                  <h4 class="gallery-title">Founding CTO Office Space</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Lightbox Modal -->
+      <div id="lightbox" class="lightbox-modal">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-nav lightbox-nav--prev" onclick="prevImage(event)">&lt;</button>
+        <button class="lightbox-nav lightbox-nav--next" onclick="nextImage(event)">&gt;</button>
+        <div class="lightbox-content">
+          <div class="lightbox-media-container" id="lightbox-media-container">
+            <img id="lightbox-img" src="" alt="Lightbox view" />
+          </div>
+          <div id="lightbox-caption" class="lightbox-caption"></div>
+          <div id="lightbox-counter" class="lightbox-counter">1 / 1</div>
+        </div>
+      </div>
+
+      <footer>
+        © 2025 Rahul Mali. Crafted with React energy &amp; plenty of Tailwind love.
+      </footer>
+    </div>
+
+    <script>
+      // Menu hamburger toggle
+      const hamburger = document.getElementById('hamburger');
+      const header = hamburger.closest('header');
+
+      hamburger.addEventListener('click', function () {
+        this.classList.toggle('active');
+        header.classList.toggle('menu-open');
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+      });
+
+      // Filter logic
+      function filterGallery(type) {
+        // Toggle active button
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+
+        // Filter items
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+          const itemType = item.getAttribute('data-type');
+          if (type === 'all' || itemType === type) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+
+      // Lightbox Slider
+      const lightbox = document.getElementById('lightbox');
+      const mediaContainer = document.getElementById('lightbox-media-container');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const lightboxCounter = document.getElementById('lightbox-counter');
+
+      let visibleItems = [];
+      let currentIndex = 0;
+
+      // Attach click events to gallery items
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', function() {
+          // Get all currently visible items in the filtered view
+          visibleItems = Array.from(document.querySelectorAll('.gallery-item')).filter(el => el.style.display !== 'none');
+          currentIndex = visibleItems.indexOf(this);
+          
+          openLightbox();
+        });
+      });
+
+      function openLightbox() {
+        showMedia();
+        lightbox.style.display = 'flex';
+        setTimeout(() => {
+          lightbox.classList.add('active');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+      }
+
+      function showMedia() {
+        const item = visibleItems[currentIndex];
+        const src = item.getAttribute('data-src');
+        const type = item.getAttribute('data-type');
+        const caption = item.getAttribute('data-caption') || '';
+
+        mediaContainer.innerHTML = ''; // Clear previous
+
+        if (type === 'video') {
+          const video = document.createElement('video');
+          video.src = src;
+          video.controls = true;
+          video.autoplay = true;
+          mediaContainer.appendChild(video);
+        } else {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = caption;
+          mediaContainer.appendChild(img);
+        }
+
+        lightboxCaption.textContent = caption;
+        lightboxCounter.textContent = `${currentIndex + 1} / ${visibleItems.length}`;
+      }
+
+      window.prevImage = function(e) {
+        if (e) e.stopPropagation();
+        currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+        showMedia();
+      };
+
+      window.nextImage = function(e) {
+        if (e) e.stopPropagation();
+        currentIndex = (currentIndex + 1) % visibleItems.length;
+        showMedia();
+      };
+
+      window.closeLightbox = function() {
+        lightbox.classList.remove('active');
+        // Pause any running videos in lightbox
+        const video = mediaContainer.querySelector('video');
+        if (video) video.pause();
+        
+        setTimeout(() => {
+          lightbox.style.display = 'none';
+        }, 300);
+        document.body.style.overflow = '';
+      };
+
+      // Close on clicking outside
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Keyboard support
+      document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'ArrowLeft') prevImage();
+        else if (e.key === 'ArrowRight') nextImage();
+        else if (e.key === 'Escape') closeLightbox();
+      });
+    </script>
+  </body>
+</html>

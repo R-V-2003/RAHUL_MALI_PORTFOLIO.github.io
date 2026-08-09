@@ -202,19 +202,20 @@
       /* Tabs */
       .tabs-bar {
         display: flex;
-        gap: 15px;
+        flex-wrap: wrap;
+        gap: 10px;
         margin-bottom: 30px;
         border-bottom: 1px solid var(--glass-border);
         padding-bottom: 15px;
       }
 
       .tab-btn {
-        padding: 12px 24px;
+        padding: 10px 20px;
         border-radius: 12px;
         background: none;
         border: 1px solid transparent;
         color: var(--text-muted);
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -364,7 +365,7 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 28px;
         width: 100%;
-        max-width: 650px;
+        max-width: 680px;
         max-height: 90vh;
         overflow-y: auto;
         padding: 35px;
@@ -416,55 +417,37 @@
         min-height: 100px;
       }
 
-      /* Stack Image Upload Cards */
-      .image-upload-row {
+      /* Dynamic Input Row Layout */
+      .dynamic-media-row {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
+        grid-template-columns: 2fr 2fr 1.2fr auto;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 12px;
+        background: rgba(255,255,255,0.02);
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid var(--glass-border);
       }
 
-      @media (max-width: 600px) {
-        .image-upload-row {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .image-upload-box {
-        border: 1px dashed var(--glass-border);
-        border-radius: 14px;
-        padding: 15px;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.01);
+      .btn-icon-del {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--danger);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
+        font-size: 16px;
         transition: all 0.2s;
-        position: relative;
       }
 
-      .image-upload-box:hover {
-        border-color: var(--primary);
-        background: rgba(14, 107, 255, 0.02);
-      }
-
-      .image-upload-box input[type="file"] {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        cursor: pointer;
-      }
-
-      .image-upload-box span {
-        font-size: 12px;
-        color: var(--text-muted);
-        display: block;
-        word-break: break-all;
-      }
-
-      .image-upload-box strong {
-        font-size: 11px;
-        text-transform: uppercase;
-        color: var(--primary);
-        display: block;
-        margin-bottom: 5px;
+      .btn-icon-del:hover {
+        background: var(--danger);
+        color: #fff;
       }
 
       .form-actions {
@@ -492,7 +475,6 @@
         color: #fff;
       }
 
-      /* Checkbox layout */
       .checkbox-group {
         display: flex;
         align-items: center;
@@ -605,12 +587,60 @@
       <!-- Main Editor Workspace (revealed on login) -->
       <section class="editor-workspace" id="editor-workspace">
         <div class="tabs-bar">
-          <button class="tab-btn active" onclick="switchTab('journey')">Manage Journey (Timeline)</button>
+          <button class="tab-btn active" onclick="switchTab('general')">General Info (Hero/Bio)</button>
+          <button class="tab-btn" onclick="switchTab('journey')">Manage Journey (Timeline)</button>
           <button class="tab-btn" onclick="switchTab('projects')">Manage Projects (Grid)</button>
+          <button class="tab-btn" onclick="switchTab('achievements')">Manage Achievements</button>
+          <button class="tab-btn" onclick="switchTab('gallery')">Manage Gallery (Media)</button>
+        </div>
+
+        <!-- General Info Tab -->
+        <div class="tab-content active" id="tab-general">
+          <div class="workspace-card">
+            <div class="card-header">
+              <h3>General Portfolio Info (Homepage Header &amp; Bio)</h3>
+            </div>
+            <form onsubmit="saveGeneralInfo(event)">
+              <div class="form-group">
+                <label for="gen-intro">Hero Intro Line</label>
+                <input type="text" id="gen-intro" class="form-control" placeholder="e.g. Hi, I am Rahul Mali" required />
+              </div>
+              <div class="form-group">
+                <label for="gen-headline">Hero Main Headline</label>
+                <input type="text" id="gen-headline" class="form-control" placeholder="e.g. Founding Engineer &amp; CTO" required />
+              </div>
+              <div class="form-group">
+                <label for="gen-bio">Intro Bio Description</label>
+                <textarea id="gen-bio" class="form-control" placeholder="Write a short summary about yourself..." required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="gen-resume">Resume File / Link URL</label>
+                <input type="text" id="gen-resume" class="form-control" placeholder="e.g. ./Rahul Mali.pdf" />
+              </div>
+              
+              <h4 style="font-size: 15px; font-weight:700; margin: 30px 0 15px; border-bottom:1px solid var(--glass-border); padding-bottom:8px;">Social Networks &amp; Contacts</h4>
+              <div class="form-group">
+                <label for="gen-social-email">Email Address</label>
+                <input type="email" id="gen-social-email" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="gen-social-linkedin">LinkedIn Profile URL</label>
+                <input type="text" id="gen-social-linkedin" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="gen-social-github">GitHub Profile URL</label>
+                <input type="text" id="gen-social-github" class="form-control" />
+              </div>
+              
+              <div style="text-align: right; margin-top: 30px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+                <button type="submit" class="btn btn-primary" id="general-save-btn">Save General Info</button>
+              </div>
+            </form>
+          </div>
         </div>
 
         <!-- Journey Manager Tab -->
-        <div class="tab-content active" id="tab-journey">
+        <div class="tab-content" id="tab-journey">
           <div class="workspace-card">
             <div class="card-header">
               <h3>Journey Timeline Milestones</h3>
@@ -622,7 +652,7 @@
                   <th style="width: 15%">Year</th>
                   <th style="width: 25%">Milestone Title</th>
                   <th style="width: 25%">Institution / Organization</th>
-                  <th style="width: 20%">Images</th>
+                  <th style="width: 20%">Media Count</th>
                   <th style="width: 15%">Actions</th>
                 </tr>
               </thead>
@@ -660,6 +690,57 @@
             </table>
           </div>
         </div>
+
+        <!-- Achievements Manager Tab -->
+        <div class="tab-content" id="tab-achievements">
+          <div class="workspace-card">
+            <div class="card-header">
+              <h3>Achievements &amp; Certificates List</h3>
+              <button class="btn btn-primary btn-sm" onclick="showAchievementForm()">+ Add Achievement</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 30%">Achievement Title</th>
+                  <th style="width: 25%">Issuer / Organization</th>
+                  <th style="width: 15%">Date</th>
+                  <th style="width: 15%">Certificate Image</th>
+                  <th style="width: 15%">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="achievements-table-body">
+                <tr>
+                  <td colspan="5" style="text-align: center; color: var(--text-muted);">No achievements loaded.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Gallery Manager Tab -->
+        <div class="tab-content" id="tab-gallery">
+          <div class="workspace-card">
+            <div class="card-header">
+              <h3>Gallery Photos &amp; Videos</h3>
+              <button class="btn btn-primary btn-sm" onclick="showGalleryForm()">+ Add Media File</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 30%">Media Caption</th>
+                  <th style="width: 20%">Type</th>
+                  <th style="width: 35%">Media Source</th>
+                  <th style="width: 15%">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="gallery-table-body">
+                <tr>
+                  <td colspan="4" style="text-align: center; color: var(--text-muted);">No gallery items loaded.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
     </div>
 
@@ -672,7 +753,7 @@
           <input type="hidden" id="milestone-edit-index" value="" />
           <div class="form-group">
             <label for="milestone-year">Year Badge</label>
-            <input type="text" id="milestone-year" class="form-control" placeholder="e.g. 2026 - Present or Jun 2026" required />
+            <input type="text" id="milestone-year" class="form-control" placeholder="e.g. 2026 - Present" required />
           </div>
           <div class="form-group">
             <label for="milestone-title">Milestone Title</label>
@@ -684,47 +765,22 @@
           </div>
           <div class="form-group">
             <label for="milestone-desc">Description</label>
-            <textarea id="milestone-desc" class="form-control" placeholder="Describe achievements, responsibilities, or milestones..." required></textarea>
+            <textarea id="milestone-desc" class="form-control" placeholder="..." required></textarea>
           </div>
           <div class="form-group">
             <label for="milestone-tags">Technologies / Skill Tags (Comma Separated)</label>
-            <input type="text" id="milestone-tags" class="form-control" placeholder="e.g. React, Tailwind CSS, CTO, ERP" />
+            <input type="text" id="milestone-tags" class="form-control" placeholder="e.g. React, Tailwind CSS" />
           </div>
 
-          <!-- Stacks Upload -->
+          <!-- Dynamic Stack Media Upload -->
           <div class="form-group">
-            <label>Milestone Photo Stack (3 Dummy Images)</label>
-            <div class="image-upload-row">
-              <div class="image-upload-box">
-                <strong>Photo 1 (Top)</strong>
-                <span id="milestone-img-name-1">Choose File...</span>
-                <input type="file" id="milestone-img-file-1" accept="image/*" onchange="updateFileName(this, 1)" />
-                <input type="hidden" id="milestone-img-src-1" value="" />
-              </div>
-              <div class="image-upload-box">
-                <strong>Photo 2 (Mid)</strong>
-                <span id="milestone-img-name-2">Choose File...</span>
-                <input type="file" id="milestone-img-file-2" accept="image/*" onchange="updateFileName(this, 2)" />
-                <input type="hidden" id="milestone-img-src-2" value="" />
-              </div>
-              <div class="image-upload-box">
-                <strong>Photo 3 (Base)</strong>
-                <span id="milestone-img-name-3">Choose File...</span>
-                <input type="file" id="milestone-img-file-3" accept="image/*" onchange="updateFileName(this, 3)" />
-                <input type="hidden" id="milestone-img-src-3" value="" />
-              </div>
+            <label style="display:flex; justify-content:space-between; align-items:center;">
+              Milestone Photo &amp; Video Stack (Multiple Files)
+              <button type="button" class="btn btn-secondary btn-sm" onclick="addMediaInputRow()" style="padding: 4px 12px; font-size:11px;">+ Add Media Row</button>
+            </label>
+            <div id="milestone-media-rows" style="margin-top: 10px;">
+              <!-- Dynamic rows added here -->
             </div>
-            <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
-              Specify 3 images. If you do not select files, placeholder dummy images will be assigned.
-            </p>
-          </div>
-
-          <!-- Photo Stack Captions -->
-          <div class="form-group">
-            <label>Image Captions (Corresponding to Photos above)</label>
-            <input type="text" id="milestone-caption-1" class="form-control" placeholder="Caption for Photo 1" style="margin-bottom: 8px;" />
-            <input type="text" id="milestone-caption-2" class="form-control" placeholder="Caption for Photo 2" style="margin-bottom: 8px;" />
-            <input type="text" id="milestone-caption-3" class="form-control" placeholder="Caption for Photo 3" />
           </div>
 
           <div class="form-actions">
@@ -756,14 +812,13 @@
           </div>
           <div class="form-group">
             <label for="project-desc">Short Description</label>
-            <textarea id="project-desc" class="form-control" placeholder="Write a short summary of the project..." required></textarea>
+            <textarea id="project-desc" class="form-control" required></textarea>
           </div>
           <div class="form-group">
             <label for="project-tags">Tech Stack Tags (Comma Separated)</label>
-            <input type="text" id="project-tags" class="form-control" placeholder="e.g. Next.js, TypeScript, Tailwind CSS" />
+            <input type="text" id="project-tags" class="form-control" placeholder="e.g. Next.js, Tailwind CSS" />
           </div>
 
-          <!-- Thumbnail Upload -->
           <div class="form-group">
             <label>Project Card Thumbnail Image</label>
             <div class="image-upload-box" style="width: 100%; text-align: left; padding: 15px 25px;">
@@ -774,17 +829,15 @@
             </div>
           </div>
 
-          <!-- Project Actions Links -->
           <div class="form-group">
             <label>Action & Link URLs</label>
-            <input type="text" id="project-link-case" class="form-control" placeholder="Case Study URL (e.g. ./case-study-examprep.html)" style="margin-bottom: 8px;" />
-            <input type="text" id="project-link-live" class="form-control" placeholder="Live Site URL (e.g. https://site.vercel.app)" style="margin-bottom: 8px;" />
+            <input type="text" id="project-link-case" class="form-control" placeholder="Case Study URL" style="margin-bottom: 8px;" />
+            <input type="text" id="project-link-live" class="form-control" placeholder="Live Site URL" style="margin-bottom: 8px;" />
             <input type="text" id="project-link-github" class="form-control" placeholder="GitHub Repository URL" style="margin-bottom: 8px;" />
-            <input type="text" id="project-link-download" class="form-control" placeholder="APK / Download Link" />
+            <input type="text" id="project-link-download" class="form-control" placeholder="APK Download Link" />
           </div>
 
-          <!-- Homepage Display Checkbox -->
-          <div class="form-group checkbox-group" id="homepage-checkbox-container">
+          <div class="form-group checkbox-group">
             <input type="checkbox" id="project-homepage-display" checked />
             <label for="project-homepage-display">Highlight and display on main page works grid</label>
           </div>
@@ -792,6 +845,85 @@
           <div class="form-actions">
             <button type="button" class="btn btn-secondary" onclick="closeProjectForm()">Cancel</button>
             <button type="submit" class="btn btn-primary" id="project-save-btn">Save Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Achievement Form Overlay -->
+    <div class="form-overlay" id="achievement-form-overlay">
+      <div class="form-card">
+        <button class="close-form" onclick="closeAchievementForm()">&times;</button>
+        <h3 id="achievement-form-title">Add Achievement / Certificate</h3>
+        <form id="achievement-form" onsubmit="saveAchievement(event)">
+          <input type="hidden" id="achievement-edit-index" value="" />
+          <div class="form-group">
+            <label for="achievement-title">Achievement Title</label>
+            <input type="text" id="achievement-title" class="form-control" placeholder="e.g. Smart India Hackathon Winner" required />
+          </div>
+          <div class="form-group">
+            <label for="achievement-issuer">Issuer / Organization</label>
+            <input type="text" id="achievement-issuer" class="form-control" placeholder="e.g. Ministry of Education" required />
+          </div>
+          <div class="form-group">
+            <label for="achievement-date">Date Received</label>
+            <input type="text" id="achievement-date" class="form-control" placeholder="e.g. Dec 2024" required />
+          </div>
+          <div class="form-group">
+            <label for="achievement-desc">Short Description / Scope</label>
+            <textarea id="achievement-desc" class="form-control" placeholder="Detail your achievement scope..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Certificate Image / Credential Mockup</label>
+            <div class="image-upload-box" style="width: 100%; text-align: left; padding: 15px 25px;">
+              <strong>Certificate Image File</strong>
+              <span id="achievement-img-name">Choose File...</span>
+              <input type="file" id="achievement-img-file" accept="image/*" onchange="updateAchievementFileName(this)" />
+              <input type="hidden" id="achievement-img-src" value="" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeAchievementForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="achievement-save-btn">Save Achievement</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Gallery Media Form Overlay -->
+    <div class="form-overlay" id="gallery-form-overlay">
+      <div class="form-card">
+        <button class="close-form" onclick="closeGalleryForm()">&times;</button>
+        <h3 id="gallery-form-title">Add Gallery Media File</h3>
+        <form id="gallery-form" onsubmit="saveGalleryItem(event)">
+          <input type="hidden" id="gallery-edit-index" value="" />
+          <div class="form-group">
+            <label for="gallery-item-caption">Media Caption / Title</label>
+            <input type="text" id="gallery-item-caption" class="form-control" placeholder="e.g. CTO Operations Desk" required />
+          </div>
+          <div class="form-group">
+            <label for="gallery-item-type">Media Type</label>
+            <select id="gallery-item-type" class="form-control" style="background:#1f2937;" required>
+              <option value="image">Photo / Image</option>
+              <option value="video">Video Clip</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Upload Media File (Photo/Video)</label>
+            <div class="image-upload-box" style="width: 100%; text-align: left; padding: 15px 25px;">
+              <strong>Choose Image or Video File</strong>
+              <span id="gallery-item-name">Choose File...</span>
+              <input type="file" id="gallery-item-file" accept="image/*,video/*" onchange="updateGalleryFileName(this)" />
+              <input type="hidden" id="gallery-item-src" value="" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeGalleryForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="gallery-save-btn">Save Media</button>
           </div>
         </form>
       </div>
@@ -815,64 +947,64 @@
         branch: GITHUB_BRANCH
       };
 
-      // Store fetched file SHAs for Github commit payloads
       let fileShas = {
         'about.html': '',
         'projects.html': '',
-        'index.html': ''
+        'index.html': '',
+        'gallery.html': ''
       };
 
       let aboutHTMLText = '';
       let projectsHTMLText = '';
       let indexHTMLText = '';
+      let galleryHTMLText = '';
 
       let aboutDoc = null;
       let projectsDoc = null;
       let indexDoc = null;
+      let galleryDoc = null;
 
       let milestonesList = [];
       let projectsList = [];
+      let achievementsList = [];
+      let galleryList = [];
 
-      // Initialize UI based on configuration
+      // Check cached GitHub settings on load
       window.onload = function() {
         if (ENCRYPTED_GITHUB_TOKEN) {
-          // Encrypted Token is configured -> Show Password Login Panel
           document.getElementById('connection-choices').style.display = 'none';
           document.getElementById('connection-login').style.display = 'block';
         } else {
-          // Token is NOT configured -> Prompt User to connect local folder and perform setup
           document.getElementById('connection-choices').style.display = 'block';
           document.getElementById('connection-login').style.display = 'none';
         }
       };
 
-      // ----------------------------------------------------
-      // SETUP WIZARD (RUNS IN LOCAL FOLDER MODE)
-      // ----------------------------------------------------
+      function showGitHubModal() {
+        document.getElementById('github-conn-overlay').classList.add('active');
+      }
+
+      function closeGitHubModal() {
+        document.getElementById('github-conn-overlay').classList.remove('active');
+      }
 
       async function connectLocalSetup() {
         try {
           connectionMode = 'local';
           dirHandle = await window.showDirectoryPicker();
-          
-          // Verify required files
           try {
             await dirHandle.getFileHandle('dashboard.html');
           } catch (e) {
             alert("Error: Please select the root directory containing 'dashboard.html' to configure logins.");
             return;
           }
-
-          // Show setup wizard form
           document.getElementById('connection-choices').style.display = 'none';
           document.getElementById('connection-setup').style.display = 'block';
         } catch (e) {
           console.error(e);
-          alert("Directory access cancelled.");
         }
       }
 
-      // Generate encrypted key and write back to dashboard.html on local disk
       async function generateSecureConfig(event) {
         event.preventDefault();
         const username = document.getElementById('setup-username').value.trim();
@@ -882,7 +1014,7 @@
         const password = document.getElementById('setup-pass').value.trim();
 
         if (token.length < 10) {
-          alert("Error: Please enter a valid GitHub Personal Access Token.");
+          alert("Error: Please enter a valid GitHub token.");
           return;
         }
 
@@ -890,15 +1022,11 @@
         document.getElementById('setup-save-btn').textContent = 'Encrypting & Saving...';
 
         try {
-          // Encrypt token using password (AES-256)
           const encryptedToken = CryptoJS.AES.encrypt(token, password).toString();
-
-          // Read the current local dashboard.html content
           const fileHandle = await dirHandle.getFileHandle('dashboard.html');
           const file = await fileHandle.getFile();
           let dashboardHTMLContent = await file.text();
 
-          // Update GITHUB_OWNER, GITHUB_REPO, GITHUB_BRANCH, and ENCRYPTED_GITHUB_TOKEN configs
           dashboardHTMLContent = dashboardHTMLContent.replace(
             /const ENCRYPTED_GITHUB_TOKEN = "[^"]*";/,
             `const ENCRYPTED_GITHUB_TOKEN = "${encryptedToken}";`
@@ -916,52 +1044,18 @@
             `const GITHUB_BRANCH = "${branch}";`
           );
 
-          // Write back to dashboard.html on disk
           const writable = await fileHandle.createWritable();
           await writable.write(dashboardHTMLContent);
           await writable.close();
 
-          alert("Configuration successfully saved and encrypted! The page will now reload. You will log in using your Admin Password from now on.");
+          alert("Configuration successfully saved! Reloading...");
           window.location.reload();
         } catch (e) {
           console.error(e);
-          alert("Error writing secure configuration: " + e.message);
+          alert("Error: " + e.message);
           document.getElementById('setup-save-btn').disabled = false;
-          document.getElementById('setup-save-btn').textContent = 'Save & Lock Configuration';
         }
       }
-
-      // Reset local setup (writes empty config to disk)
-      async function resetSetup() {
-        if (!confirm("Do you want to reset the login setup? This will clear the encrypted token and let you configure it again. You will need to select your local project folder to apply the reset.")) return;
-        try {
-          const resetHandle = await window.showDirectoryPicker();
-          const fileHandle = await resetHandle.getFileHandle('dashboard.html');
-          const file = await fileHandle.getFile();
-          let dashboardHTMLContent = await file.text();
-
-          // Reset config variables
-          dashboardHTMLContent = dashboardHTMLContent.replace(
-            /const ENCRYPTED_GITHUB_TOKEN = "[^"]*";/,
-            'const ENCRYPTED_GITHUB_TOKEN = "";'
-          );
-
-          // Write back to dashboard.html on disk
-          const writable = await fileHandle.createWritable();
-          await writable.write(dashboardHTMLContent);
-          await writable.close();
-
-          alert("Dashboard has been reset successfully! The page will now reload to Setup Mode.");
-          window.location.reload();
-        } catch (e) {
-          console.error(e);
-          alert("Error resetting dashboard: " + e.message);
-        }
-      }
-
-      // ----------------------------------------------------
-      // AUTHENTICATION LOGIC (AES DECRYPTION)
-      // ----------------------------------------------------
 
       async function authenticateUser(event) {
         event.preventDefault();
@@ -972,56 +1066,58 @@
         loginBtn.textContent = 'Authenticating...';
 
         try {
-          // Decrypt token using the password
           const decryptedBytes = CryptoJS.AES.decrypt(ENCRYPTED_GITHUB_TOKEN, password);
           const decryptedToken = decryptedBytes.toString(CryptoJS.enc.Utf8).trim();
 
-          // Validate token structure
           if (decryptedToken && decryptedToken.length > 5) {
-            // Authentication Succeeded!
             githubConfig.token = decryptedToken;
             connectionMode = 'github';
 
-            // Connect to GitHub API and load data
             await loadWorkspaceData();
 
-            // Reveal Workspace
             document.getElementById('status-badge').classList.add('connected');
             document.getElementById('status-text').textContent = 'Cloud Mode: ' + githubConfig.repo + '/' + githubConfig.branch;
             document.getElementById('connection-login').style.display = 'none';
             document.getElementById('editor-workspace').style.display = 'block';
           } else {
-            alert("Incorrect Admin Password! Please try again.");
+            alert("Incorrect Admin Password!");
             loginBtn.disabled = false;
             loginBtn.textContent = 'Log In';
           }
         } catch (e) {
           console.error(e);
-          alert("Incorrect Admin Password! Please try again.");
+          alert("Incorrect Admin Password!");
           loginBtn.disabled = false;
           loginBtn.textContent = 'Log In';
         }
       }
 
-      // Read all portfolio page data
       async function loadWorkspaceData() {
         aboutHTMLText = await readTextFile('about.html');
         projectsHTMLText = await readTextFile('projects.html');
         indexHTMLText = await readTextFile('index.html');
+        galleryHTMLText = await readTextFile('gallery.html');
 
         const parser = new DOMParser();
         aboutDoc = parser.parseFromString(aboutHTMLText, 'text/html');
         projectsDoc = parser.parseFromString(projectsHTMLText, 'text/html');
         indexDoc = parser.parseFromString(indexHTMLText, 'text/html');
+        galleryDoc = parser.parseFromString(galleryHTMLText, 'text/html');
 
-        // Extract and render
+        // Extract lists
+        extractGeneralInfo();
         extractMilestones();
         extractProjects();
+        extractAchievements();
+        extractGallery();
+
+        // Render listings
         renderMilestonesTable();
         renderProjectsTable();
+        renderAchievementsTable();
+        renderGalleryTable();
       }
 
-      // Tab switcher
       function switchTab(tabId) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(cont => cont.classList.remove('active'));
@@ -1030,8 +1126,26 @@
         document.getElementById('tab-' + tabId).classList.add('active');
       }
 
+      async function resetSetup() {
+        if (!confirm("Reset connection settings? Requires selecting local folder.")) return;
+        try {
+          const resetHandle = await window.showDirectoryPicker();
+          const fileHandle = await resetHandle.getFileHandle('dashboard.html');
+          const file = await fileHandle.getFile();
+          let content = await file.text();
+
+          content = content.replace(/const ENCRYPTED_GITHUB_TOKEN = "[^"]*";/, 'const ENCRYPTED_GITHUB_TOKEN = "";');
+          const writable = await fileHandle.createWritable();
+          await writable.write(content);
+          await writable.close();
+          window.location.reload();
+        } catch (e) {
+          alert("Error: " + e.message);
+        }
+      }
+
       /* ---------------------------------------------------- */
-      /* FILE HANDLERS (DYNAMIC TARGET: LOCAL OR CLOUD)      */
+      /* FILE HANDLERS                                        */
       /* ---------------------------------------------------- */
 
       async function readTextFile(name) {
@@ -1040,7 +1154,6 @@
           const file = await fileHandle.getFile();
           return await file.text();
         } else {
-          // GitHub fetch
           const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}?ref=${githubConfig.branch}`;
           const res = await fetch(url, {
             headers: {
@@ -1048,7 +1161,7 @@
               'Accept': 'application/vnd.github.v3+json'
             }
           });
-          if (!res.ok) throw new Error(`Could not load ${name} from repository. status: ${res.status}`);
+          if (!res.ok) throw new Error(`Could not load ${name}`);
           const data = await res.json();
           fileShas[name] = data.sha;
           return decodeBase64Utf8(data.content);
@@ -1062,17 +1175,14 @@
           await writable.write(textContent);
           await writable.close();
         } else {
-          // GitHub commit
           const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}`;
           const base64Content = encodeBase64Utf8(textContent);
           const body = {
             message: `CMS: Update ${name}`,
             content: base64Content,
-            branch: githubConfig.branch
+            branch: githubConfig.branch,
+            sha: fileShas[name]
           };
-          if (fileShas[name]) {
-            body.sha = fileShas[name];
-          }
 
           const res = await fetch(url, {
             method: 'PUT',
@@ -1083,12 +1193,9 @@
             },
             body: JSON.stringify(body)
           });
-          if (!res.ok) {
-            const errData = await res.json();
-            throw new Error(`Failed to commit changes to ${name}. Message: ${errData.message}`);
-          }
+          if (!res.ok) throw new Error(`Failed to commit ${name}`);
           const data = await res.json();
-          fileShas[name] = data.content.sha; // Save updated SHA
+          fileShas[name] = data.content.sha;
         }
       }
 
@@ -1099,9 +1206,7 @@
           await writable.write(fileObj);
           await writable.close();
         } else {
-          // GitHub binary file upload (read as Base64 first)
           const base64Content = await fileToBase64(fileObj);
-          
           let sha = '';
           try {
             const checkUrl = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}?ref=${githubConfig.branch}`;
@@ -1115,19 +1220,15 @@
               const checkData = await checkRes.json();
               sha = checkData.sha;
             }
-          } catch (e) {
-            // File does not exist yet
-          }
+          } catch (e) {}
 
           const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${name}`;
           const body = {
-            message: `CMS: Upload image ${name}`,
+            message: `CMS: Upload media ${name}`,
             content: base64Content,
             branch: githubConfig.branch
           };
-          if (sha) {
-            body.sha = sha;
-          }
+          if (sha) body.sha = sha;
 
           const res = await fetch(url, {
             method: 'PUT',
@@ -1138,14 +1239,10 @@
             },
             body: JSON.stringify(body)
           });
-          if (!res.ok) {
-            const errData = await res.json();
-            throw new Error(`Failed to upload ${name}. Message: ${errData.message}`);
-          }
+          if (!res.ok) throw new Error(`Failed to upload ${name}`);
         }
       }
 
-      // Base64 Helpers
       function decodeBase64Utf8(base64) {
         const clean = base64.replace(/\s/g, '');
         const bin = atob(clean);
@@ -1169,16 +1266,93 @@
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
-          reader.onload = () => {
-            const base64 = reader.result.split(',')[1];
-            resolve(base64);
-          };
+          reader.onload = () => resolve(reader.result.split(',')[1]);
           reader.onerror = err => reject(err);
         });
       }
 
       /* ---------------------------------------------------- */
-      /* JOURNEY MILESTONE CRUD                               */
+      /* TAB 1: GENERAL INFO (INDEX.HTML HERO EDIT)           */
+      /* ---------------------------------------------------- */
+
+      function extractGeneralInfo() {
+        const intro = indexDoc.querySelector('.intro h2') ? indexDoc.querySelector('.intro h2').textContent.trim() : '';
+        const headline = indexDoc.querySelector('.intro h1') ? indexDoc.querySelector('.intro h1').textContent.trim() : '';
+        const bio = indexDoc.querySelector('.intro p') ? indexDoc.querySelector('.intro p').textContent.trim() : '';
+        
+        let resume = '';
+        const resumeBtn = indexDoc.querySelector('.intro .btn-glass');
+        if (resumeBtn) resume = resumeBtn.getAttribute('href');
+
+        let email = '';
+        const emailLink = indexDoc.querySelector('.intro-socials a[href^="mailto:"]');
+        if (emailLink) email = emailLink.getAttribute('href').replace('mailto:', '');
+
+        let linkedin = '';
+        const liLink = indexDoc.querySelector('.intro-socials a[href*="linkedin.com"]');
+        if (liLink) linkedin = liLink.getAttribute('href');
+
+        let github = '';
+        const ghLink = indexDoc.querySelector('.intro-socials a[href*="github.com"]');
+        if (ghLink) github = ghLink.getAttribute('href');
+
+        document.getElementById('gen-intro').value = intro;
+        document.getElementById('gen-headline').value = headline;
+        document.getElementById('gen-bio').value = bio;
+        document.getElementById('gen-resume').value = resume;
+        document.getElementById('gen-social-email').value = email;
+        document.getElementById('gen-social-linkedin').value = linkedin;
+        document.getElementById('gen-social-github').value = github;
+      }
+
+      async function saveGeneralInfo(event) {
+        event.preventDefault();
+        const saveBtn = document.getElementById('general-save-btn');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+
+        try {
+          const intro = document.getElementById('gen-intro').value.trim();
+          const headline = document.getElementById('gen-headline').value.trim();
+          const bio = document.getElementById('gen-bio').value.trim();
+          const resume = document.getElementById('gen-resume').value.trim();
+          const email = document.getElementById('gen-social-email').value.trim();
+          const linkedin = document.getElementById('gen-social-linkedin').value.trim();
+          const github = document.getElementById('gen-social-github').value.trim();
+
+          // Update indexDoc Hero
+          if (indexDoc.querySelector('.intro h2')) indexDoc.querySelector('.intro h2').textContent = intro;
+          if (indexDoc.querySelector('.intro h1')) indexDoc.querySelector('.intro h1').textContent = headline;
+          if (indexDoc.querySelector('.intro p')) indexDoc.querySelector('.intro p').textContent = bio;
+          
+          const resumeBtn = indexDoc.querySelector('.intro .btn-glass');
+          if (resumeBtn && resume) resumeBtn.setAttribute('href', resume);
+
+          const emailLink = indexDoc.querySelector('.intro-socials a[href^="mailto:"]');
+          if (emailLink && email) emailLink.setAttribute('href', 'mailto:' + email);
+
+          const liLink = indexDoc.querySelector('.intro-socials a[href*="linkedin.com"]');
+          if (liLink && linkedin) liLink.setAttribute('href', linkedin);
+
+          const ghLink = indexDoc.querySelector('.intro-socials a[href*="github.com"]');
+          if (ghLink && github) ghLink.setAttribute('href', github);
+
+          // Update files
+          const updatedIndexHTML = '<!DOCTYPE html>\n' + indexDoc.documentElement.outerHTML;
+          await writeTextFile('index.html', updatedIndexHTML);
+          indexHTMLText = updatedIndexHTML;
+
+          alert("General Info saved and deployed successfully!");
+        } catch (e) {
+          alert("Error: " + e.message);
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save General Info';
+        }
+      }
+
+      /* ---------------------------------------------------- */
+      /* TAB 2: JOURNEY MILESTONES (DYNAMIC MEDIA STACKS)     */
       /* ---------------------------------------------------- */
 
       function extractMilestones() {
@@ -1197,18 +1371,28 @@
           const stack = item.querySelector('.photo-stack');
           const dataImages = stack.getAttribute('data-images') || '';
           const dataCaptions = stack.getAttribute('data-captions') || '';
+          const dataTypes = stack.getAttribute('data-types') || '';
           
-          const images = dataImages.split(',').map(s => s.trim());
-          const captions = dataCaptions.split(',').map(s => s.trim());
+          const images = dataImages ? dataImages.split(',') : [];
+          const captions = dataCaptions ? dataCaptions.split(',') : [];
+          const types = dataTypes ? dataTypes.split(',') : [];
           
+          const media = [];
+          for (let i = 0; i < images.length; i++) {
+            media.push({
+              src: (images[i] || '').trim(),
+              caption: (captions[i] || '').trim(),
+              type: (types[i] || 'image').trim()
+            });
+          }
+
           milestonesList.push({
             year: badge,
             title: title,
             subtitle: subtitle,
             desc: desc,
             tags: tagsList.join(', '),
-            images: [images[0] || '', images[1] || '', images[2] || ''],
-            captions: [captions[0] || '', captions[1] || '', captions[2] || '']
+            media: media
           });
         });
       }
@@ -1216,7 +1400,7 @@
       function renderMilestonesTable() {
         const tbody = document.getElementById('milestones-table-body');
         if (milestonesList.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No milestones found. Add a milestone to get started.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No milestones found.</td></tr>`;
           return;
         }
         
@@ -1225,13 +1409,7 @@
             <td><span class="badge">${escapeHtml(m.year)}</span></td>
             <td><strong>${escapeHtml(m.title)}</strong></td>
             <td>${escapeHtml(m.subtitle)}</td>
-            <td>
-              <div style="font-size: 11px; color: var(--text-muted);">
-                1: ${escapeHtml(m.images[0].replace('./', ''))}<br/>
-                2: ${escapeHtml(m.images[1].replace('./', ''))}<br/>
-                3: ${escapeHtml(m.images[2].replace('./', ''))}
-              </div>
-            </td>
+            <td><span class="badge" style="background:rgba(126,101,255,0.1); color:#7e65ff; border-color:rgba(126,101,255,0.2);">${m.media.length} Media Files</span></td>
             <td class="actions-cell">
               <button class="btn-sm btn-sm-edit" onclick="editMilestone(${idx})">Edit</button>
               <button class="btn-sm btn-sm-delete" onclick="deleteMilestone(${idx})">Delete</button>
@@ -1244,14 +1422,12 @@
         document.getElementById('milestone-form').reset();
         document.getElementById('milestone-edit-index').value = '';
         document.getElementById('milestone-form-title').textContent = 'Add Journey Milestone';
+        document.getElementById('milestone-media-rows').innerHTML = '';
         
-        document.getElementById('milestone-img-name-1').textContent = 'Choose File...';
-        document.getElementById('milestone-img-name-2').textContent = 'Choose File...';
-        document.getElementById('milestone-img-name-3').textContent = 'Choose File...';
-        
-        document.getElementById('milestone-img-src-1').value = '';
-        document.getElementById('milestone-img-src-2').value = '';
-        document.getElementById('milestone-img-src-3').value = '';
+        // Add 3 default empty media rows
+        addMediaInputRow();
+        addMediaInputRow();
+        addMediaInputRow();
 
         document.getElementById('milestone-form-overlay').classList.add('active');
       }
@@ -1260,10 +1436,32 @@
         document.getElementById('milestone-form-overlay').classList.remove('active');
       }
 
-      function updateFileName(input, num) {
+      function addMediaInputRow(src = '', caption = '', type = 'image') {
+        const container = document.getElementById('milestone-media-rows');
+        const index = container.children.length;
+        
+        const row = document.createElement('div');
+        row.className = 'dynamic-media-row';
+        row.innerHTML = `
+          <div>
+            <input type="file" id="milestone-media-file-${index}" class="form-control" style="font-size:11px;" onchange="updateRowFileName(this, ${index})" />
+            <input type="hidden" id="milestone-media-src-${index}" value="${src}" />
+            <span id="milestone-media-label-${index}" style="font-size:10px; color:var(--text-muted); display:block; margin-top:4px;">${src ? src.replace('./', '') : 'Choose local file...'}</span>
+          </div>
+          <input type="text" id="milestone-media-caption-${index}" class="form-control" placeholder="Caption" value="${escapeHtml(caption)}" />
+          <select id="milestone-media-type-${index}" class="form-control" style="background:#1f2937;">
+            <option value="image" ${type === 'image' ? 'selected' : ''}>Photo</option>
+            <option value="video" ${type === 'video' ? 'selected' : ''}>Video</option>
+          </select>
+          <button type="button" class="btn-icon-del" onclick="this.parentNode.remove()">&times;</button>
+        `;
+        container.appendChild(row);
+      }
+
+      function updateRowFileName(input, idx) {
         const file = input.files[0];
         if (file) {
-          document.getElementById('milestone-img-name-' + num).textContent = file.name;
+          document.getElementById('milestone-media-label-' + idx).textContent = file.name;
         }
       }
 
@@ -1279,23 +1477,20 @@
         document.getElementById('milestone-desc').value = m.desc;
         document.getElementById('milestone-tags').value = m.tags;
         
-        document.getElementById('milestone-img-name-1').textContent = m.images[0] ? m.images[0].replace('./', '') : 'Choose File...';
-        document.getElementById('milestone-img-name-2').textContent = m.images[1] ? m.images[1].replace('./', '') : 'Choose File...';
-        document.getElementById('milestone-img-name-3').textContent = m.images[2] ? m.images[2].replace('./', '') : 'Choose File...';
-        
-        document.getElementById('milestone-img-src-1').value = m.images[0];
-        document.getElementById('milestone-img-src-2').value = m.images[1];
-        document.getElementById('milestone-img-src-3').value = m.images[2];
+        document.getElementById('milestone-media-rows').innerHTML = '';
+        m.media.forEach(med => {
+          addMediaInputRow(med.src, med.caption, med.type);
+        });
 
-        document.getElementById('milestone-caption-1').value = m.captions[0] || '';
-        document.getElementById('milestone-caption-2').value = m.captions[1] || '';
-        document.getElementById('milestone-caption-3').value = m.captions[2] || '';
+        // Always ensure at least 1 row exists
+        if (m.media.length === 0) addMediaInputRow();
       }
 
       async function saveMilestone(event) {
         event.preventDefault();
-        document.getElementById('milestone-save-btn').disabled = true;
-        document.getElementById('milestone-save-btn').textContent = 'Saving...';
+        const saveBtn = document.getElementById('milestone-save-btn');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
 
         try {
           const index = document.getElementById('milestone-edit-index').value;
@@ -1305,29 +1500,34 @@
           const desc = document.getElementById('milestone-desc').value.trim();
           const tags = document.getElementById('milestone-tags').value.trim();
 
-          const caps = [
-            document.getElementById('milestone-caption-1').value.trim() || title,
-            document.getElementById('milestone-caption-2').value.trim() || subtitle,
-            document.getElementById('milestone-caption-3').value.trim() || year
-          ];
+          // Gather dynamic media rows
+          const mediaRows = document.getElementById('milestone-media-rows').children;
+          const media = [];
 
-          const images = [
-            document.getElementById('milestone-img-src-1').value || './school_milestone.png',
-            document.getElementById('milestone-img-src-2').value || './polytechnic_milestone.png',
-            document.getElementById('milestone-img-src-3').value || './university_milestone.png'
-          ];
+          for (let i = 0; i < mediaRows.length; i++) {
+            // Find fields in this row
+            const fileInput = mediaRows[i].querySelector('input[type="file"]');
+            const srcHidden = mediaRows[i].querySelector('input[type="hidden"]');
+            const capInput = mediaRows[i].querySelector('input[type="text"]');
+            const typeSelect = mediaRows[i].querySelector('select');
 
-          // Upload new binary images
-          for (let i = 1; i <= 3; i++) {
-            const fileInput = document.getElementById('milestone-img-file-' + i);
+            let src = srcHidden.value || './school_milestone.png';
+            
+            // Upload file if selected
             if (fileInput.files && fileInput.files[0]) {
               const file = fileInput.files[0];
               await writeBinaryFile(file.name, file);
-              images[i-1] = './' + file.name;
+              src = './' + file.name;
             }
+
+            media.push({
+              src,
+              caption: capInput.value.trim() || title,
+              type: typeSelect.value
+            });
           }
 
-          const milestoneData = { year, title, subtitle, desc, tags, images, captions: caps };
+          const milestoneData = { year, title, subtitle, desc, tags, media };
 
           if (index !== '') {
             milestonesList[parseInt(index)] = milestoneData;
@@ -1338,13 +1538,12 @@
           await syncMilestonesToAboutHTML();
           renderMilestonesTable();
           closeMilestoneForm();
-          alert("Timeline Milestones saved successfully!");
+          alert("Milestone saved successfully!");
         } catch (e) {
-          console.error(e);
-          alert("Error saving milestone: " + e.message);
+          alert("Error: " + e.message);
         } finally {
-          document.getElementById('milestone-save-btn').disabled = false;
-          document.getElementById('milestone-save-btn').textContent = 'Save Milestone';
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Milestone';
         }
       }
 
@@ -1354,10 +1553,9 @@
           milestonesList.splice(index, 1);
           await syncMilestonesToAboutHTML();
           renderMilestonesTable();
-          alert("Milestone deleted successfully!");
+          alert("Deleted!");
         } catch (e) {
-          console.error(e);
-          alert("Error deleting milestone: " + e.message);
+          alert("Error: " + e.message);
         }
       }
 
@@ -1366,6 +1564,30 @@
           const alignClass = idx % 2 === 0 ? 'timeline-item--left' : 'timeline-item--right';
           const tagsHTML = m.tags ? m.tags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('\n                      ') : '';
           
+          const imagesArr = m.media.map(med => med.src).join(',');
+          const captionsArr = m.media.map(med => med.caption).join(',');
+          const typesArr = m.media.map(med => med.type).join(',');
+
+          // Render top 3 images as overlapping pile inside stack card
+          // Any remaining images are still accessible in lightbox!
+          const topCards = [];
+          for (let i = 0; i < Math.min(m.media.length, 3); i++) {
+            const fileType = m.media[i].type;
+            const src = m.media[i].src;
+            const pileNum = i + 1; // card--1 is top, card--2 is mid, card--3 is base
+            
+            if (fileType === 'video') {
+              topCards.push(`<div class="photo-stack-card photo-stack-card--${pileNum}"><video src="${src}" muted loop playinline></video></div>`);
+            } else {
+              topCards.push(`<div class="photo-stack-card photo-stack-card--${pileNum}"><img src="${src}" /></div>`);
+            }
+          }
+
+          // Fallback if empty stack
+          if (topCards.length === 0) {
+            topCards.push('<div class="photo-stack-card photo-stack-card--1"><img src="./school_milestone.png" /></div>');
+          }
+
           return `
             <!-- Milestone ${idx + 1}: ${m.year} -->
             <div class="timeline-item ${alignClass}">
@@ -1385,13 +1607,11 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="${m.images.join(',')}" data-captions="${m.captions.join(',')}">
-                    <div class="photo-stack-card photo-stack-card--3"><img src="${m.images[2]}" /></div>
-                    <div class="photo-stack-card photo-stack-card--2"><img src="${m.images[1]}" /></div>
-                    <div class="photo-stack-card photo-stack-card--1"><img src="${m.images[0]}" /></div>
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="${imagesArr}" data-captions="${captionsArr}" data-types="${typesArr}">
+                    ${topCards.reverse().join('\n                    ')}
                     <div class="photo-stack-indicator">
                       <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
-                      <span>3 Photos</span>
+                      <span>${m.media.length} Media</span>
                     </div>
                   </div>
                 </div>
@@ -1409,7 +1629,7 @@
       }
 
       /* ---------------------------------------------------- */
-      /* PROJECTS CRUD                                        */
+      /* TAB 3: PROJECTS GRID                                 */
       /* ---------------------------------------------------- */
 
       function extractProjects() {
@@ -1447,22 +1667,14 @@
 
           const isFeatured = Array.from(indexDoc.querySelectorAll('.project-grid .work-card__title')).some(t => t.textContent.trim() === title);
 
-          projectsList.push({
-            title,
-            category,
-            desc,
-            tags: tagsList.join(', '),
-            image: img,
-            links,
-            isFeatured
-          });
+          projectsList.push({ title, category, desc, tags: tagsList.join(', '), image: img, links, isFeatured });
         });
       }
 
       function renderProjectsTable() {
         const tbody = document.getElementById('projects-table-body');
         if (projectsList.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No projects found. Add a project to get started.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No projects found.</td></tr>`;
           return;
         }
 
@@ -1499,9 +1711,7 @@
 
       function updateProjectFileName(input) {
         const file = input.files[0];
-        if (file) {
-          document.getElementById('project-img-name').textContent = file.name;
-        }
+        if (file) document.getElementById('project-img-name').textContent = file.name;
       }
 
       function editProject(index) {
@@ -1527,8 +1737,9 @@
 
       async function saveProject(event) {
         event.preventDefault();
-        document.getElementById('project-save-btn').disabled = true;
-        document.getElementById('project-save-btn').textContent = 'Saving...';
+        const saveBtn = document.getElementById('project-save-btn');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
 
         try {
           const index = document.getElementById('project-edit-index').value;
@@ -1565,31 +1776,28 @@
           await syncProjectsToHTML();
           renderProjectsTable();
           closeProjectForm();
-          alert("Project cards saved successfully!");
+          alert("Project saved successfully!");
         } catch (e) {
-          console.error(e);
-          alert("Error saving project: " + e.message);
+          alert("Error: " + e.message);
         } finally {
-          document.getElementById('project-save-btn').disabled = false;
-          document.getElementById('project-save-btn').textContent = 'Save Project';
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Project';
         }
       }
 
       async function deleteProject(index) {
-        if (!confirm("Are you sure you want to delete this project?")) return;
+        if (!confirm("Are you sure?")) return;
         try {
           projectsList.splice(index, 1);
           await syncProjectsToHTML();
           renderProjectsTable();
-          alert("Project deleted successfully!");
+          alert("Deleted!");
         } catch (e) {
-          console.error(e);
-          alert("Error deleting project: " + e.message);
+          alert("Error: " + e.message);
         }
       }
 
       async function syncProjectsToHTML() {
-        // 1. Rebuild projects.html grid
         const projectsHTML = projectsList.map(p => {
           const hasStudy = p.category === 'case-study' && p.links.case;
           const clickAttr = hasStudy ? `onclick="window.location.href='${p.links.case}'"` : '';
@@ -1636,11 +1844,9 @@
         await writeTextFile('projects.html', updatedProjHTML);
         projectsHTMLText = updatedProjHTML;
 
-        // 2. Rebuild index.html featured works
+        // Sync index.html featured works
         const featuredProjects = projectsList.filter(p => p.isFeatured);
-        const homeFeatured = featuredProjects.slice(0, 4); // Max 4 on home grid
-
-        const homeFeaturedHTML = homeFeatured.map(p => {
+        const homeFeaturedHTML = featuredProjects.slice(0, 4).map(p => {
           const hasStudy = p.category === 'case-study' && p.links.case;
           const clickAttr = hasStudy ? `onclick="window.location.href='${p.links.case}'"` : '';
           const cardClass = hasStudy ? 'work-card work-card--has-study' : 'work-card';
@@ -1688,7 +1894,315 @@
       }
 
       /* ---------------------------------------------------- */
-      /* UTILITIES                                            */
+      /* TAB 4: ACHIEVEMENTS CRUD                             */
+      /* ---------------------------------------------------- */
+
+      function extractAchievements() {
+        achievementsList = [];
+        const cards = aboutDoc.querySelectorAll('.achievements-grid .achievement-card');
+        
+        cards.forEach(card => {
+          const title = card.querySelector('.achievement-title').textContent.trim();
+          const issuer = card.querySelector('.achievement-issuer').textContent.trim().split('|')[0].trim();
+          const date = card.querySelector('.achievement-issuer').textContent.trim().split('|')[1].trim();
+          const desc = card.querySelector('.achievement-desc').textContent.trim();
+          const img = card.querySelector('.achievement-media img').getAttribute('src');
+
+          achievementsList.push({ title, issuer, date, desc, image: img });
+        });
+      }
+
+      function renderAchievementsTable() {
+        const tbody = document.getElementById('achievements-table-body');
+        if (achievementsList.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No achievements found.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = achievementsList.map((a, idx) => `
+          <tr>
+            <td><strong>${escapeHtml(a.title)}</strong></td>
+            <td>${escapeHtml(a.issuer)}</td>
+            <td><span class="badge">${escapeHtml(a.date)}</span></td>
+            <td><img src="${escapeHtml(a.image)}" style="width:50px; height:35px; object-fit:cover; border-radius:6px;" /></td>
+            <td class="actions-cell">
+              <button class="btn-sm btn-sm-edit" onclick="editAchievement(${idx})">Edit</button>
+              <button class="btn-sm btn-sm-delete" onclick="deleteAchievement(${idx})">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      function showAchievementForm() {
+        document.getElementById('achievement-form').reset();
+        document.getElementById('achievement-edit-index').value = '';
+        document.getElementById('achievement-form-title').textContent = 'Add Achievement / Certificate';
+        document.getElementById('achievement-img-name').textContent = 'Choose File...';
+        document.getElementById('achievement-img-src').value = '';
+        document.getElementById('achievement-form-overlay').classList.add('active');
+      }
+
+      function closeAchievementForm() {
+        document.getElementById('achievement-form-overlay').classList.remove('active');
+      }
+
+      function updateAchievementFileName(input) {
+        const file = input.files[0];
+        if (file) document.getElementById('achievement-img-name').textContent = file.name;
+      }
+
+      function editAchievement(index) {
+        showAchievementForm();
+        const a = achievementsList[index];
+        document.getElementById('achievement-edit-index').value = index;
+        document.getElementById('achievement-form-title').textContent = 'Edit Achievement';
+
+        document.getElementById('achievement-title').value = a.title;
+        document.getElementById('achievement-issuer').value = a.issuer;
+        document.getElementById('achievement-date').value = a.date;
+        document.getElementById('achievement-desc').value = a.desc;
+        document.getElementById('achievement-img-name').textContent = a.image ? a.image.replace('./', '') : 'Choose File...';
+        document.getElementById('achievement-img-src').value = a.image;
+      }
+
+      async function saveAchievement(event) {
+        event.preventDefault();
+        const saveBtn = document.getElementById('achievement-save-btn');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+
+        try {
+          const index = document.getElementById('achievement-edit-index').value;
+          const title = document.getElementById('achievement-title').value.trim();
+          const issuer = document.getElementById('achievement-issuer').value.trim();
+          const date = document.getElementById('achievement-date').value.trim();
+          const desc = document.getElementById('achievement-desc').value.trim();
+          
+          let image = document.getElementById('achievement-img-src').value || './sedani_milestone.png';
+
+          const imgInput = document.getElementById('achievement-img-file');
+          if (imgInput.files && imgInput.files[0]) {
+            const file = imgInput.files[0];
+            await writeBinaryFile(file.name, file);
+            image = './' + file.name;
+          }
+
+          const achievementData = { title, issuer, date, desc, image };
+
+          if (index !== '') {
+            achievementsList[parseInt(index)] = achievementData;
+          } else {
+            achievementsList.push(achievementData);
+          }
+
+          await syncAchievementsToAboutHTML();
+          renderAchievementsTable();
+          closeAchievementForm();
+          alert("Achievement saved successfully!");
+        } catch (e) {
+          alert("Error: " + e.message);
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Achievement';
+        }
+      }
+
+      async function deleteAchievement(index) {
+        if (!confirm("Are you sure?")) return;
+        try {
+          achievementsList.splice(index, 1);
+          await syncAchievementsToAboutHTML();
+          renderAchievementsTable();
+          alert("Deleted!");
+        } catch (e) {
+          alert("Error: " + e.message);
+        }
+      }
+
+      async function syncAchievementsToAboutHTML() {
+        const achievementsHTML = achievementsList.map(a => `
+              <!-- Achievement Card -->
+              <div class="achievement-card">
+                <div class="achievement-media">
+                  <img src="${escapeHtml(a.image)}" />
+                </div>
+                <div class="achievement-info">
+                  <h4 class="achievement-title">${escapeHtml(a.title)}</h4>
+                  <div class="achievement-issuer">${escapeHtml(a.issuer)} | ${escapeHtml(a.date)}</div>
+                  <p class="achievement-desc">${escapeHtml(a.desc)}</p>
+                  <a class="achievement-link" onclick="openCertificate(this, event)" data-src="${escapeHtml(a.image)}" data-caption="${escapeHtml(a.title)} Certificate">View Certificate</a>
+                </div>
+              </div>`).join('\n');
+
+        const grid = aboutDoc.querySelector('.achievements-grid');
+        grid.innerHTML = achievementsHTML;
+
+        const updatedHTMLText = '<!DOCTYPE html>\n' + aboutDoc.documentElement.outerHTML;
+        await writeTextFile('about.html', updatedHTMLText);
+        aboutHTMLText = updatedHTMLText;
+      }
+
+      /* ---------------------------------------------------- */
+      /* TAB 5: GALLERY OPERATIONS                            */
+      /* ---------------------------------------------------- */
+
+      function extractGallery() {
+        galleryList = [];
+        const items = galleryDoc.querySelectorAll('.gallery-grid .gallery-item');
+        
+        items.forEach(item => {
+          const type = item.getAttribute('data-type') || 'image';
+          const src = item.getAttribute('data-src') || '';
+          const caption = item.getAttribute('data-caption') || '';
+          
+          let title = '';
+          const titleEl = item.querySelector('.gallery-title');
+          if (titleEl) title = titleEl.textContent.trim();
+
+          galleryList.push({ caption, type, src, title });
+        });
+      }
+
+      function renderGalleryTable() {
+        const tbody = document.getElementById('gallery-table-body');
+        if (galleryList.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">No media items found.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = galleryList.map((g, idx) => `
+          <tr>
+            <td><strong>${escapeHtml(g.caption)}</strong></td>
+            <td><span class="badge" style="${g.type === 'video' ? 'background:rgba(239,68,68,0.1); color:var(--danger); border-color:rgba(239,68,68,0.2);' : ''}">${escapeHtml(g.type)}</span></td>
+            <td><span style="font-size:12px; color:var(--text-muted);">${escapeHtml(g.src)}</span></td>
+            <td class="actions-cell">
+              <button class="btn-sm btn-sm-edit" onclick="editGalleryItem(${idx})">Edit</button>
+              <button class="btn-sm btn-sm-delete" onclick="deleteGalleryItem(${idx})">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      function showGalleryForm() {
+        document.getElementById('gallery-form').reset();
+        document.getElementById('gallery-edit-index').value = '';
+        document.getElementById('gallery-form-title').textContent = 'Add Gallery Media File';
+        document.getElementById('gallery-item-name').textContent = 'Choose File...';
+        document.getElementById('gallery-item-src').value = '';
+        document.getElementById('gallery-form-overlay').classList.add('active');
+      }
+
+      function closeGalleryForm() {
+        document.getElementById('gallery-form-overlay').classList.remove('active');
+      }
+
+      function updateGalleryFileName(input) {
+        const file = input.files[0];
+        if (file) document.getElementById('gallery-item-name').textContent = file.name;
+      }
+
+      function editGalleryItem(index) {
+        showGalleryForm();
+        const g = galleryList[index];
+        document.getElementById('gallery-edit-index').value = index;
+        document.getElementById('gallery-form-title').textContent = 'Edit Gallery Media';
+
+        document.getElementById('gallery-item-caption').value = g.caption;
+        document.getElementById('gallery-item-type').value = g.type;
+        document.getElementById('gallery-item-name').textContent = g.src ? g.src.replace('./', '') : 'Choose File...';
+        document.getElementById('gallery-item-src').value = g.src;
+      }
+
+      async function saveGalleryItem(event) {
+        event.preventDefault();
+        const saveBtn = document.getElementById('gallery-save-btn');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+
+        try {
+          const index = document.getElementById('gallery-edit-index').value;
+          const caption = document.getElementById('gallery-item-caption').value.trim();
+          const type = document.getElementById('gallery-item-type').value;
+          
+          let src = document.getElementById('gallery-item-src').value || './school_milestone.png';
+
+          const fileInput = document.getElementById('gallery-item-file');
+          if (fileInput.files && fileInput.files[0]) {
+            const file = fileInput.files[0];
+            await writeBinaryFile(file.name, file);
+            src = './' + file.name;
+          }
+
+          const galleryData = { caption, type, src, title: caption };
+
+          if (index !== '') {
+            galleryList[parseInt(index)] = galleryData;
+          } else {
+            galleryList.push(galleryData);
+          }
+
+          await syncGalleryToHTML();
+          renderGalleryTable();
+          closeGalleryForm();
+          alert("Media saved to gallery successfully!");
+        } catch (e) {
+          alert("Error: " + e.message);
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Media';
+        }
+      }
+
+      async function deleteGalleryItem(index) {
+        if (!confirm("Are you sure?")) return;
+        try {
+          galleryList.splice(index, 1);
+          await syncGalleryToHTML();
+          renderGalleryTable();
+          alert("Deleted!");
+        } catch (e) {
+          alert("Error: " + e.message);
+        }
+      }
+
+      async function syncGalleryToHTML() {
+        const galleryHTML = galleryList.map(g => {
+          let mediaHTML = '';
+          if (g.type === 'video') {
+            mediaHTML = `
+                  <video src="${escapeHtml(g.src)}" muted loop playinline></video>
+                  <div class="video-play-overlay">
+                    <div class="video-play-button">
+                      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                  </div>`;
+          } else {
+            mediaHTML = `<img src="${escapeHtml(g.src)}" loading="lazy" />`;
+          }
+
+          return `
+            <div class="gallery-item" data-type="${escapeHtml(g.type)}" data-src="${escapeHtml(g.src)}" data-caption="${escapeHtml(g.caption)}">
+              <div class="gallery-card">
+                <div class="gallery-media">
+                  ${mediaHTML}
+                </div>
+                <div class="gallery-info">
+                  <h4 class="gallery-title">${escapeHtml(g.title)}</h4>
+                </div>
+              </div>
+            </div>`;
+        }).join('\n\n');
+
+        const grid = galleryDoc.querySelector('.gallery-grid');
+        grid.innerHTML = galleryHTML;
+
+        const updatedHTMLText = '<!DOCTYPE html>\n' + galleryDoc.documentElement.outerHTML;
+        await writeTextFile('gallery.html', updatedHTMLText);
+        galleryHTMLText = updatedHTMLText;
+      }
+
+      /* ---------------------------------------------------- */
+      /* GENERAL UTILITIES                                    */
       /* ---------------------------------------------------- */
 
       function escapeHtml(text) {

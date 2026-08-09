@@ -3467,8 +3467,159 @@
           right: 10px;
         }
       }
+    
+      /* About Page Tabs & Achievements Grid Styles */
+      .about-tabs-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 25px auto 40px;
+        max-width: 600px;
+        border-bottom: 2px solid rgba(38, 44, 53, 0.08);
+        padding-bottom: 10px;
+      }
+
+      .about-tab-btn {
+        padding: 10px 24px;
+        border: none;
+        background: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: color 0.3s, transform 0.3s;
+        position: relative;
+      }
+
+      .about-tab-btn:hover {
+        color: var(--primary);
+      }
+
+      .about-tab-btn.active {
+        color: var(--primary);
+      }
+
+      .about-tab-btn.active::after {
+        content: "";
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 32px;
+        height: 4px;
+        border-radius: 4px;
+        background: var(--primary);
+      }
+
+      .about-tab-content {
+        display: none;
+        animation: fadeInTab 0.5s ease;
+      }
+
+      .about-tab-content.active {
+        display: block;
+      }
+
+      @keyframes fadeInTab {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Achievements Grid */
+      .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 28px;
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .achievement-card {
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 15px 35px rgba(20, 42, 75, 0.05);
+        backdrop-filter: blur(14px);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .achievement-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 22px 45px rgba(20, 42, 75, 0.12);
+      }
+
+      .achievement-media {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      }
+
+      .achievement-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+
+      .achievement-card:hover .achievement-media img {
+        transform: scale(1.03);
+      }
+
+      .achievement-info {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .achievement-title {
+        font-size: 17px;
+        font-weight: 700;
+        margin: 0 0 6px;
+        color: var(--text-dark);
+        line-height: 1.3;
+      }
+
+      .achievement-issuer {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 12px;
+      }
+
+      .achievement-desc {
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.5;
+        margin: 0 0 20px;
+      }
+
+      .achievement-link {
+        margin-top: auto;
+        display: inline-flex;
+        align-items: center;
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 13px;
+        text-decoration: none;
+        gap: 6px;
+        transition: color 0.2s;
+        cursor: pointer;
+      }
+
+      .achievement-link:hover {
+        color: #7e65ff;
+      }
     </style>
   </head>
+
 
   <body>
     <div class="viewport" id="top">
@@ -3540,7 +3691,7 @@
             </svg>
 
             About
-          </a>
+          </a>\n\n          <a href="./gallery.html">\n            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">\n              <path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"></path>\n            </svg>\n            Gallery\n          </a>
         </nav>
 
         <a class="btn-glass" href="#contact"
@@ -3551,9 +3702,15 @@
       </header>
       <main>
         <section class="section-card works" id="journey">
-          <h3 class="section-heading">My Professional Journey (Timeline)</h3>
+          <h3 class="section-heading">Professional Journey &amp; Achievements</h3>
+          
+          <div class="about-tabs-container">
+            <button class="about-tab-btn active" onclick="switchAboutTab('journey')">My Journey</button>
+            <button class="about-tab-btn" onclick="switchAboutTab('achievements')">Key Achievements</button>
+          </div>
 
-          <div class="timeline-container">
+          <div class="about-tab-content active" id="about-tab-content-journey">
+            <div class="timeline-container">
             <div class="timeline-line-container">
               <div class="timeline-line-active"></div>
             </div>
@@ -3578,7 +3735,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./school_milestone.png,./university_milestone.png,./polytechnic_milestone.png" data-captions="Swami Vivekanand Govt. Model School - Campus View,Academic Foundation - Mathematics &amp; Science,Early Computer Programming Exploration">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./school_milestone.png,./university_milestone.png,./polytechnic_milestone.png" data-captions="Swami Vivekanand Govt. Model School - Campus View,Academic Foundation - Mathematics &amp; Science,Early Computer Programming Exploration" data-types="image,image,image">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./polytechnic_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./university_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./school_milestone.png" /></div>
@@ -3612,7 +3769,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./polytechnic_milestone.png,./school_milestone.png,./sedani_milestone.png" data-captions="Gokul Bhai Bhatt Govt. Polytechnic - Computer Science Dept.,Building Fundamental Coding Concepts,Data Structures and Algorithms labs">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./polytechnic_milestone.png,./school_milestone.png,./sedani_milestone.png" data-captions="Gokul Bhai Bhatt Govt. Polytechnic - Computer Science Dept.,Building Fundamental Coding Concepts,Data Structures and Algorithms labs" data-types="image,image,image">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./sedani_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./school_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./polytechnic_milestone.png" /></div>
@@ -3646,7 +3803,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./university_milestone.png,./polytechnic_milestone.png,./ruut_milestone.png" data-captions="JG University - Modern Technology Campus in Ahmedabad,Software Projects Development Labs,B.Tech advanced Computer Science curriculum">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./university_milestone.png,./polytechnic_milestone.png,./ruut_milestone.png" data-captions="JG University - Modern Technology Campus in Ahmedabad,Software Projects Development Labs,B.Tech advanced Computer Science curriculum" data-types="image,image,image">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./ruut_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./polytechnic_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./university_milestone.png" /></div>
@@ -3680,7 +3837,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./sedani_milestone.png,./ruut_milestone.png,./university_milestone.png" data-captions="Sedani Digital - Frontend Development internship workstation,Building client products and Figma to React integration,UI UX responsive design and workspace layout styling">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./sedani_milestone.png,./ruut_milestone.png,./university_milestone.png" data-captions="Sedani Digital - Frontend Development internship workstation,Building client products and Figma to React integration,UI UX responsive design and workspace layout styling" data-types="image,image,image">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./university_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./ruut_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./sedani_milestone.png" /></div>
@@ -3714,7 +3871,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./ruut_milestone.png,./sedani_milestone.png,./polytechnic_milestone.png" data-captions="Ṛuut - CTO Office and founding engineering workspace,Main website and ERP systems deployment diagrams,Collaborative startup workspace operations">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./ruut_milestone.png,./sedani_milestone.png,./polytechnic_milestone.png" data-captions="Ṛuut - CTO Office and founding engineering workspace,Main website and ERP systems deployment diagrams,Collaborative startup workspace operations" data-types="image,image,image">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./polytechnic_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./sedani_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./ruut_milestone.png" /></div>
@@ -3727,6 +3884,50 @@
               </div>
             </div>
 
+            </div>
+          </div>
+
+          <div class="about-tab-content" id="about-tab-content-achievements">
+            <div class="achievements-grid">
+              <!-- Achievement Item 1 -->
+              <div class="achievement-card">
+                <div class="achievement-media">
+                  <img src="./sedani_milestone.png" />
+                </div>
+                <div class="achievement-info">
+                  <h4 class="achievement-title">Smart India Hackathon Finalist</h4>
+                  <div class="achievement-issuer">Ministry of Education | Dec 2024</div>
+                  <p class="achievement-desc">Selected as national finalist in Smart India Hackathon for designing an automated cyber intelligence warning platform.</p>
+                  <a class="achievement-link" onclick="openCertificate(this, event)" data-src="./sedani_milestone.png" data-caption="Smart India Hackathon Finalist Certificate">View Certificate</a>
+                </div>
+              </div>
+
+              <!-- Achievement Item 2 -->
+              <div class="achievement-card">
+                <div class="achievement-media">
+                  <img src="./polytechnic_milestone.png" />
+                </div>
+                <div class="achievement-info">
+                  <h4 class="achievement-title">Diploma CSE Gold Medalist</h4>
+                  <div class="achievement-issuer">Govt. Polytechnic Board | Jul 2024</div>
+                  <p class="achievement-desc">Graduated top of my class with 9.34 CGPA, receiving academic honors and excellence credentials.</p>
+                  <a class="achievement-link" onclick="openCertificate(this, event)" data-src="./polytechnic_milestone.png" data-caption="Diploma Academic Honor Credential">View Certificate</a>
+                </div>
+              </div>
+
+              <!-- Achievement Item 3 -->
+              <div class="achievement-card">
+                <div class="achievement-media">
+                  <img src="./university_milestone.png" />
+                </div>
+                <div class="achievement-info">
+                  <h4 class="achievement-title">B.Tech Technology Scholar Award</h4>
+                  <div class="achievement-issuer">JG University | May 2025</div>
+                  <p class="achievement-desc">Awarded academic scholarship for leading innovative software research projects and maintains top SGPA.</p>
+                  <a class="achievement-link" onclick="openCertificate(this, event)" data-src="./university_milestone.png" data-caption="JG University Scholar Award">View Certificate</a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -3736,7 +3937,9 @@
           <button class="lightbox-nav lightbox-nav--prev" onclick="prevImage(event)">&lt;</button>
           <button class="lightbox-nav lightbox-nav--next" onclick="nextImage(event)">&gt;</button>
           <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="Lightbox image" />
+            <div class="lightbox-media-container" id="lightbox-media-container">
+              <img id="lightbox-img" src="" alt="Lightbox view" />
+            </div>
             <div id="lightbox-caption" class="lightbox-caption"></div>
             <div id="lightbox-counter" class="lightbox-counter">1 / 3</div>
           </div>
@@ -3889,15 +4092,47 @@
         let currentStackImages = [];
         let currentImageIndex = 0;
 
+        // Switch About Tab
+        window.switchAboutTab = function(tabId) {
+          document.querySelectorAll('.about-tab-btn').forEach(btn => btn.classList.remove('active'));
+          document.querySelectorAll('.about-tab-content').forEach(cont => cont.classList.remove('active'));
+          
+          if(event) {
+            event.currentTarget.classList.add('active');
+          }
+          document.getElementById('about-tab-content-' + tabId).classList.add('active');
+        };
+
+        // Click handler to open individual certificate link in Lightbox
+        window.openCertificate = function(element, e) {
+          if (e) e.preventDefault();
+          const src = element.getAttribute('data-src');
+          const caption = element.getAttribute('data-caption') || 'Certificate';
+          
+          currentStackImages = [{ src, caption, type: 'image' }];
+          currentImageIndex = 0;
+          
+          showLightboxImage();
+          lightbox.style.display = 'flex';
+          setTimeout(() => {
+            lightbox.classList.add('active');
+          }, 10);
+          document.body.style.overflow = 'hidden';
+        };
+
         window.openStackGallery = function (element) {
           const imagesStr = element.getAttribute('data-images') || '';
           const captionsStr = element.getAttribute('data-captions') || '';
+          const typesStr = element.getAttribute('data-types') || '';
+          
           const images = imagesStr.split(',');
           const captions = captionsStr.split(',');
+          const types = typesStr.split(',');
 
           currentStackImages = images.map((src, idx) => ({
             src: src.trim(),
-            caption: (captions[idx] || 'Milestone Photo').trim()
+            caption: (captions[idx] || 'Milestone Photo').trim(),
+            type: (types[idx] || 'image').trim()
           }));
           currentImageIndex = 0;
           showLightboxImage();
@@ -3910,9 +4145,27 @@
         };
 
         function showLightboxImage() {
-          const imgData = currentStackImages[currentImageIndex];
-          lightboxImg.src = imgData.src;
-          lightboxCaption.textContent = imgData.caption;
+          const mediaData = currentStackImages[currentImageIndex];
+          const mediaContainer = document.getElementById('lightbox-media-container');
+          
+          mediaContainer.innerHTML = ''; // Clear previous
+
+          if (mediaData.type === 'video') {
+            const video = document.createElement('video');
+            video.id = 'lightbox-img';
+            video.src = mediaData.src;
+            video.controls = true;
+            video.autoplay = true;
+            mediaContainer.appendChild(video);
+          } else {
+            const img = document.createElement('img');
+            img.id = 'lightbox-img';
+            img.src = mediaData.src;
+            img.alt = mediaData.caption;
+            mediaContainer.appendChild(img);
+          }
+          
+          lightboxCaption.textContent = mediaData.caption;
           lightboxCounter.textContent = `${currentImageIndex + 1} / ${currentStackImages.length}`;
         }
 
@@ -3930,6 +4183,10 @@
 
         window.closeLightbox = function () {
           lightbox.classList.remove('active');
+          const mediaContainer = document.getElementById('lightbox-media-container');
+          const video = mediaContainer.querySelector('video');
+          if (video) video.pause();
+          
           setTimeout(() => {
             lightbox.style.display = 'none';
           }, 300);
