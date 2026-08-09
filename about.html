@@ -3578,7 +3578,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(1)">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./school_milestone.png,./university_milestone.png,./polytechnic_milestone.png" data-captions="Swami Vivekanand Govt. Model School - Campus View,Academic Foundation - Mathematics &amp; Science,Early Computer Programming Exploration">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./polytechnic_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./university_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./school_milestone.png" /></div>
@@ -3612,7 +3612,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(2)">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./polytechnic_milestone.png,./school_milestone.png,./sedani_milestone.png" data-captions="Gokul Bhai Bhatt Govt. Polytechnic - Computer Science Dept.,Building Fundamental Coding Concepts,Data Structures and Algorithms labs">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./sedani_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./school_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./polytechnic_milestone.png" /></div>
@@ -3646,7 +3646,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(3)">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./university_milestone.png,./polytechnic_milestone.png,./ruut_milestone.png" data-captions="JG University - Modern Technology Campus in Ahmedabad,Software Projects Development Labs,B.Tech advanced Computer Science curriculum">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./ruut_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./polytechnic_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./university_milestone.png" /></div>
@@ -3680,7 +3680,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(4)">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./sedani_milestone.png,./ruut_milestone.png,./university_milestone.png" data-captions="Sedani Digital - Frontend Development internship workstation,Building client products and Figma to React integration,UI UX responsive design and workspace layout styling">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./university_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./ruut_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./sedani_milestone.png" /></div>
@@ -3714,7 +3714,7 @@
                   </div>
                 </div>
                 <div class="timeline-col-media">
-                  <div class="photo-stack" onclick="openStackGallery(5)">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="./ruut_milestone.png,./sedani_milestone.png,./polytechnic_milestone.png" data-captions="Ṛuut - CTO Office and founding engineering workspace,Main website and ERP systems deployment diagrams,Collaborative startup workspace operations">
                     <div class="photo-stack-card photo-stack-card--3"><img src="./polytechnic_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--2"><img src="./sedani_milestone.png" /></div>
                     <div class="photo-stack-card photo-stack-card--1"><img src="./ruut_milestone.png" /></div>
@@ -3889,36 +3889,16 @@
         let currentStackImages = [];
         let currentImageIndex = 0;
 
-        window.openStackGallery = function (stackId) {
-          const stacks = {
-            1: [
-              { src: './school_milestone.png', caption: 'Swami Vivekanand Govt. Model School - Campus View' },
-              { src: './university_milestone.png', caption: 'Academic Foundation - Mathematics & Science' },
-              { src: './polytechnic_milestone.png', caption: 'Early Computer Programming Exploration' }
-            ],
-            2: [
-              { src: './polytechnic_milestone.png', caption: 'Gokul Bhai Bhatt Govt. Polytechnic - Computer Science Dept.' },
-              { src: './school_milestone.png', caption: 'Building Fundamental Coding Concepts' },
-              { src: './sedani_milestone.png', caption: 'Data Structures and Algorithms labs' }
-            ],
-            3: [
-              { src: './university_milestone.png', caption: 'JG University - Modern Technology Campus in Ahmedabad' },
-              { src: './polytechnic_milestone.png', caption: 'Software Projects Development Labs' },
-              { src: './ruut_milestone.png', caption: 'B.Tech advanced Computer Science curriculum' }
-            ],
-            4: [
-              { src: './sedani_milestone.png', caption: 'Sedani Digital - Frontend Development internship workstation' },
-              { src: './ruut_milestone.png', caption: 'Building client products and Figma to React integration' },
-              { src: './university_milestone.png', caption: 'UI UX responsive design and workspace layout styling' }
-            ],
-            5: [
-              { src: './ruut_milestone.png', caption: 'Ṛuut - CTO Office and founding engineering workspace' },
-              { src: './sedani_milestone.png', caption: 'Main website and ERP systems deployment diagrams' },
-              { src: './polytechnic_milestone.png', caption: 'Collaborative startup workspace operations' }
-            ]
-          };
+        window.openStackGallery = function (element) {
+          const imagesStr = element.getAttribute('data-images') || '';
+          const captionsStr = element.getAttribute('data-captions') || '';
+          const images = imagesStr.split(',');
+          const captions = captionsStr.split(',');
 
-          currentStackImages = stacks[stackId];
+          currentStackImages = images.map((src, idx) => ({
+            src: src.trim(),
+            caption: (captions[idx] || 'Milestone Photo').trim()
+          }));
           currentImageIndex = 0;
           showLightboxImage();
 

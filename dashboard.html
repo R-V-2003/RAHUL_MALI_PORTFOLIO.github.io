@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rahul Mali | Portfolio CMS Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-dark: #070b13;
+        --card-bg: rgba(13, 20, 37, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --text-primary: #f3f4f6;
+        --text-muted: #9ca3af;
+        --primary: #0e6bff;
+        --primary-glow: rgba(14, 107, 255, 0.4);
+        --success: #10b981;
+        --success-glow: rgba(16, 185, 129, 0.3);
+        --danger: #ef4444;
+        --danger-glow: rgba(239, 68, 68, 0.3);
+        --font-family: "Outfit", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-primary);
+        font-family: var(--font-family);
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-image: radial-gradient(circle at 10% 20%, rgba(14, 107, 255, 0.1) 0%, transparent 40%),
+                          radial-gradient(circle at 90% 80%, rgba(126, 101, 255, 0.08) 0%, transparent 40%);
+        background-attachment: fixed;
+        padding: 40px 20px;
+      }
+
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        color: #fff;
+      }
+
+      .logo-area svg {
+        width: 28px;
+        height: 28px;
+        fill: var(--primary);
+      }
+
+      .logo-area span {
+        color: var(--primary);
+      }
+
+      .status-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 99px;
+        font-size: 13px;
+        font-weight: 600;
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--danger);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .status-badge.connected {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.05);
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: currentColor;
+        box-shadow: 0 0 8px currentColor;
+      }
+
+      /* Connection Panel */
+      .connection-card {
+        background: var(--card-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 28px;
+        padding: 40px;
+        text-align: center;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+      }
+
+      .connection-card h2 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .connection-card p {
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto 30px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .btn {
+        padding: 14px 36px;
+        border-radius: 99px;
+        border: none;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        box-shadow: 0 10px 20px var(--primary-glow);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px var(--primary-glow);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .btn-danger {
+        background: var(--danger);
+        box-shadow: 0 10px 20px var(--danger-glow);
+      }
+
+      .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px var(--danger-glow);
+      }
+
+      /* Main Editor Workspace */
+      .editor-workspace {
+        display: none;
+      }
+
+      /* Tabs */
+      .tabs-bar {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid var(--glass-border);
+        padding-bottom: 15px;
+      }
+
+      .tab-btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        background: none;
+        border: 1px solid transparent;
+        color: var(--text-muted);
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .tab-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .tab-btn.active {
+        color: #fff;
+        background: rgba(14, 107, 255, 0.1);
+        border: 1px solid rgba(14, 107, 255, 0.2);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Cards & Tables */
+      .workspace-card {
+        background: var(--card-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 30px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        margin-bottom: 30px;
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .card-header h3 {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      /* Tables styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+
+      th, td {
+        padding: 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      th {
+        font-weight: 600;
+        color: var(--text-muted);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      td {
+        font-size: 14px;
+        color: var(--text-primary);
+      }
+
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.01);
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        background: rgba(14, 107, 255, 0.1);
+        color: var(--primary);
+        border: 1px solid rgba(14, 107, 255, 0.2);
+      }
+
+      .actions-cell {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn-sm {
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+        color: #fff;
+      }
+
+      .btn-sm-edit {
+        background: rgba(14, 107, 255, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(14, 107, 255, 0.2);
+      }
+
+      .btn-sm-edit:hover {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .btn-sm-delete {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.2);
+      }
+
+      .btn-sm-delete:hover {
+        background: var(--danger);
+        color: #fff;
+      }
+
+      /* Modal and Panel Forms */
+      .form-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 7, 12, 0.8);
+        backdrop-filter: blur(15px);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .form-overlay.active {
+        display: flex;
+      }
+
+      .form-card {
+        background: rgba(17, 24, 39, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 28px;
+        width: 100%;
+        max-width: 650px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 35px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        position: relative;
+      }
+
+      .form-card h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 25px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 18px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        color: #fff;
+        font-family: var(--font-family);
+        font-size: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 10px rgba(14, 107, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      textarea.form-control {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      /* Stack Image Upload Cards */
+      .image-upload-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
+
+      @media (max-width: 600px) {
+        .image-upload-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .image-upload-box {
+        border: 1px dashed var(--glass-border);
+        border-radius: 14px;
+        padding: 15px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.01);
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+      }
+
+      .image-upload-box:hover {
+        border-color: var(--primary);
+        background: rgba(14, 107, 255, 0.02);
+      }
+
+      .image-upload-box input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .image-upload-box span {
+        font-size: 12px;
+        color: var(--text-muted);
+        display: block;
+        word-break: break-all;
+      }
+
+      .image-upload-box strong {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: var(--primary);
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-top: 30px;
+        border-top: 1px solid var(--glass-border);
+        padding-top: 20px;
+      }
+
+      .close-form {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 28px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .close-form:hover {
+        color: #fff;
+      }
+
+      /* Checkbox layout */
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .checkbox-group input {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      .checkbox-group label {
+        margin-bottom: 0;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header>
+        <div class="logo-area">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2a10 10 0 1 0 10 10A10.012 10.012 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm3.5-8.5a.999.999 0 0 1-.293.707l-3 3a1 1 0 1 1-1.414-1.414L12.586 12 10.8 10.207a1 1 0 0 1 1.414-1.414l3 3a.999.999 0 0 1 .286.707Z"
+            ></path>
+          </svg>
+          rah<span>.</span> CMS
+        </div>
+        <div class="status-badge" id="status-badge">
+          <div class="status-dot"></div>
+          <span id="status-text">Disconnected</span>
+        </div>
+      </header>
+
+      <!-- Connection Panel -->
+      <section class="connection-card" id="connection-card">
+        <h2>Connect Portfolio Directory</h2>
+        <p>
+          Select your local portfolio folder to retrieve and edit content. Changes will write directly to your local HTML and image files, ready to commit and push to GitHub Pages!
+        </p>
+        <button class="btn btn-primary" onclick="connectDirectory()">
+          <svg viewBox="0 0 24 24" style="fill:currentColor; width:18px; height:18px;">
+            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/>
+          </svg>
+          Select Project Folder
+        </button>
+      </section>
+
+      <!-- Main Editor Workspace (revealed on connection) -->
+      <section class="editor-workspace" id="editor-workspace">
+        <div class="tabs-bar">
+          <button class="tab-btn active" onclick="switchTab('journey')">Manage Journey (Timeline)</button>
+          <button class="tab-btn" onclick="switchTab('projects')">Manage Projects (Grid)</button>
+        </div>
+
+        <!-- Journey Manager Tab -->
+        <div class="tab-content active" id="tab-journey">
+          <div class="workspace-card">
+            <div class="card-header">
+              <h3>Journey Timeline Milestones</h3>
+              <button class="btn btn-primary btn-sm" onclick="showMilestoneForm()">+ Add New Milestone</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 15%">Year</th>
+                  <th style="width: 25%">Milestone Title</th>
+                  <th style="width: 25%">Institution / Organization</th>
+                  <th style="width: 20%">Images</th>
+                  <th style="width: 15%">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="milestones-table-body">
+                <tr>
+                  <td colspan="5" style="text-align: center; color: var(--text-muted);">No milestones loaded.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Projects Manager Tab -->
+        <div class="tab-content" id="tab-projects">
+          <div class="workspace-card">
+            <div class="card-header">
+              <h3>Projects Directory List</h3>
+              <button class="btn btn-primary btn-sm" onclick="showProjectForm()">+ Add New Project</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 30%">Project Title</th>
+                  <th style="width: 20%">Category</th>
+                  <th style="width: 25%">Technologies</th>
+                  <th style="width: 10%">Thumbnail</th>
+                  <th style="width: 15%">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="projects-table-body">
+                <tr>
+                  <td colspan="5" style="text-align: center; color: var(--text-muted);">No projects loaded.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Milestone Form Overlay -->
+    <div class="form-overlay" id="milestone-form-overlay">
+      <div class="form-card">
+        <button class="close-form" onclick="closeMilestoneForm()">&times;</button>
+        <h3 id="milestone-form-title">Add Journey Milestone</h3>
+        <form id="milestone-form" onsubmit="saveMilestone(event)">
+          <input type="hidden" id="milestone-edit-index" value="" />
+          <div class="form-group">
+            <label for="milestone-year">Year Badge</label>
+            <input type="text" id="milestone-year" class="form-control" placeholder="e.g. 2026 - Present or Jun 2026" required />
+          </div>
+          <div class="form-group">
+            <label for="milestone-title">Milestone Title</label>
+            <input type="text" id="milestone-title" class="form-control" placeholder="e.g. Founding Engineer & CTO" required />
+          </div>
+          <div class="form-group">
+            <label for="milestone-subtitle">Institution / Company</label>
+            <input type="text" id="milestone-subtitle" class="form-control" placeholder="e.g. Ṛuut or JG University" required />
+          </div>
+          <div class="form-group">
+            <label for="milestone-desc">Description</label>
+            <textarea id="milestone-desc" class="form-control" placeholder="Describe achievements, responsibilities, or milestones..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="milestone-tags">Technologies / Skill Tags (Comma Separated)</label>
+            <input type="text" id="milestone-tags" class="form-control" placeholder="e.g. React, Tailwind CSS, CTO, ERP" />
+          </div>
+
+          <!-- Stacks Upload -->
+          <div class="form-group">
+            <label>Milestone Photo Stack (3 Dummy Images)</label>
+            <div class="image-upload-row">
+              <div class="image-upload-box">
+                <strong>Photo 1 (Top)</strong>
+                <span id="milestone-img-name-1">Choose File...</span>
+                <input type="file" id="milestone-img-file-1" accept="image/*" onchange="updateFileName(this, 1)" />
+                <input type="hidden" id="milestone-img-src-1" value="" />
+              </div>
+              <div class="image-upload-box">
+                <strong>Photo 2 (Mid)</strong>
+                <span id="milestone-img-name-2">Choose File...</span>
+                <input type="file" id="milestone-img-file-2" accept="image/*" onchange="updateFileName(this, 2)" />
+                <input type="hidden" id="milestone-img-src-2" value="" />
+              </div>
+              <div class="image-upload-box">
+                <strong>Photo 3 (Base)</strong>
+                <span id="milestone-img-name-3">Choose File...</span>
+                <input type="file" id="milestone-img-file-3" accept="image/*" onchange="updateFileName(this, 3)" />
+                <input type="hidden" id="milestone-img-src-3" value="" />
+              </div>
+            </div>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
+              Specify 3 images. If you do not select files, placeholder dummy images will be assigned.
+            </p>
+          </div>
+
+          <!-- Photo Stack Captions -->
+          <div class="form-group">
+            <label>Image Captions (Corresponding to Photos above)</label>
+            <input type="text" id="milestone-caption-1" class="form-control" placeholder="Caption for Photo 1" style="margin-bottom: 8px;" />
+            <input type="text" id="milestone-caption-2" class="form-control" placeholder="Caption for Photo 2" style="margin-bottom: 8px;" />
+            <input type="text" id="milestone-caption-3" class="form-control" placeholder="Caption for Photo 3" />
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeMilestoneForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="milestone-save-btn">Save Milestone</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Project Form Overlay -->
+    <div class="form-overlay" id="project-form-overlay">
+      <div class="form-card">
+        <button class="close-form" onclick="closeProjectForm()">&times;</button>
+        <h3 id="project-form-title">Add Project</h3>
+        <form id="project-form" onsubmit="saveProject(event)">
+          <input type="hidden" id="project-edit-index" value="" />
+          <div class="form-group">
+            <label for="project-title">Project Title</label>
+            <input type="text" id="project-title" class="form-control" placeholder="e.g. GovPrep AI" required />
+          </div>
+          <div class="form-group">
+            <label for="project-category">Filter Category</label>
+            <select id="project-category" class="form-control" style="background:#1f2937;" required>
+              <option value="case-study">Case Studies</option>
+              <option value="figma">Figma Designs</option>
+              <option value="frontend">Frontend Projects</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="project-desc">Short Description</label>
+            <textarea id="project-desc" class="form-control" placeholder="Write a short summary of the project..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="project-tags">Tech Stack Tags (Comma Separated)</label>
+            <input type="text" id="project-tags" class="form-control" placeholder="e.g. Next.js, TypeScript, Tailwind CSS" />
+          </div>
+
+          <!-- Thumbnail Upload -->
+          <div class="form-group">
+            <label>Project Card Thumbnail Image</label>
+            <div class="image-upload-box" style="width: 100%; text-align: left; padding: 15px 25px;">
+              <strong>Mockup Image File</strong>
+              <span id="project-img-name">Choose File...</span>
+              <input type="file" id="project-img-file" accept="image/*" onchange="updateProjectFileName(this)" />
+              <input type="hidden" id="project-img-src" value="" />
+            </div>
+          </div>
+
+          <!-- Project Actions Links -->
+          <div class="form-group">
+            <label>Action & Link URLs</label>
+            <input type="text" id="project-link-case" class="form-control" placeholder="Case Study URL (e.g. ./case-study-examprep.html)" style="margin-bottom: 8px;" />
+            <input type="text" id="project-link-live" class="form-control" placeholder="Live Site URL (e.g. https://site.vercel.app)" style="margin-bottom: 8px;" />
+            <input type="text" id="project-link-github" class="form-control" placeholder="GitHub Repository URL" style="margin-bottom: 8px;" />
+            <input type="text" id="project-link-download" class="form-control" placeholder="APK / Download Link" />
+          </div>
+
+          <!-- Homepage Display Checkbox -->
+          <div class="form-group checkbox-group" id="homepage-checkbox-container">
+            <input type="checkbox" id="project-homepage-display" checked />
+            <label for="project-homepage-display">Highlight and display on main page works grid</label>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeProjectForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="project-save-btn">Save Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JavaScript CMS Operations Logic -->
+    <script>
+      let dirHandle = null;
+      let aboutHTMLText = '';
+      let projectsHTMLText = '';
+      let indexHTMLText = '';
+
+      let aboutDoc = null;
+      let projectsDoc = null;
+      let indexDoc = null;
+
+      let milestonesList = [];
+      let projectsList = [];
+
+      // File connection
+      async function connectDirectory() {
+        try {
+          dirHandle = await window.showDirectoryPicker();
+          
+          // Verify required files
+          try {
+            await dirHandle.getFileHandle('about.html');
+            await dirHandle.getFileHandle('projects.html');
+            await dirHandle.getFileHandle('index.html');
+          } catch (e) {
+            alert("Error: The selected folder is not your portfolio project directory. It must contain about.html, projects.html, and index.html.");
+            return;
+          }
+
+          // Read and parse files
+          aboutHTMLText = await readTextFile(dirHandle, 'about.html');
+          projectsHTMLText = await readTextFile(dirHandle, 'projects.html');
+          indexHTMLText = await readTextFile(dirHandle, 'index.html');
+
+          const parser = new DOMParser();
+          aboutDoc = parser.parseFromString(aboutHTMLText, 'text/html');
+          projectsDoc = parser.parseFromString(projectsHTMLText, 'text/html');
+          indexDoc = parser.parseFromString(indexHTMLText, 'text/html');
+
+          // Extract current lists
+          extractMilestones();
+          extractProjects();
+
+          // Render listings
+          renderMilestonesTable();
+          renderProjectsTable();
+
+          // Update Status
+          document.getElementById('status-badge').classList.add('connected');
+          document.getElementById('status-text').textContent = 'Connected: ' + dirHandle.name;
+          document.getElementById('connection-card').style.display = 'none';
+          document.getElementById('editor-workspace').style.display = 'block';
+        } catch (err) {
+          console.error(err);
+          alert("Directory connection cancelled or failed. Error: " + err.message);
+        }
+      }
+
+      // Tab switcher
+      function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(cont => cont.classList.remove('active'));
+        
+        event.currentTarget.classList.add('active');
+        document.getElementById('tab-' + tabId).classList.add('active');
+      }
+
+      // Read text file helper
+      async function readTextFile(handle, name) {
+        const fileHandle = await handle.getFileHandle(name);
+        const file = await fileHandle.getFile();
+        return await file.text();
+      }
+
+      // Write text file helper
+      async function writeTextFile(handle, name, text) {
+        const fileHandle = await handle.getFileHandle(name, { create: true });
+        const writable = await fileHandle.createWritable();
+        await writable.write(text);
+        await writable.close();
+      }
+
+      // Write binary file helper
+      async function writeBinaryFile(handle, name, fileObj) {
+        const fileHandle = await handle.getFileHandle(name, { create: true });
+        const writable = await fileHandle.createWritable();
+        await writable.write(fileObj);
+        await writable.close();
+      }
+
+      /* ---------------------------------------------------- */
+      /* JOURNEY MILESTONE CMS SECTION                        */
+      /* ---------------------------------------------------- */
+
+      function extractMilestones() {
+        milestonesList = [];
+        const items = aboutDoc.querySelectorAll('.timeline-container .timeline-item');
+        
+        items.forEach(item => {
+          const badge = item.querySelector('.timeline-badge').textContent.trim();
+          const title = item.querySelector('.timeline-title').textContent.trim();
+          const subtitle = item.querySelector('.timeline-subtitle').textContent.trim();
+          const desc = item.querySelector('p').textContent.trim();
+          
+          const tagsList = [];
+          item.querySelectorAll('.timeline-tags .tag').forEach(t => tagsList.push(t.textContent.trim()));
+          
+          const stack = item.querySelector('.photo-stack');
+          const dataImages = stack.getAttribute('data-images') || '';
+          const dataCaptions = stack.getAttribute('data-captions') || '';
+          
+          const images = dataImages.split(',').map(s => s.trim());
+          const captions = dataCaptions.split(',').map(s => s.trim());
+          
+          milestonesList.push({
+            year: badge,
+            title: title,
+            subtitle: subtitle,
+            desc: desc,
+            tags: tagsList.join(', '),
+            images: [images[0] || '', images[1] || '', images[2] || ''],
+            captions: [captions[0] || '', captions[1] || '', captions[2] || '']
+          });
+        });
+      }
+
+      function renderMilestonesTable() {
+        const tbody = document.getElementById('milestones-table-body');
+        if (milestonesList.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No milestones found. Add a milestone to get started.</td></tr>`;
+          return;
+        }
+        
+        tbody.innerHTML = milestonesList.map((m, idx) => `
+          <tr>
+            <td><span class="badge">${escapeHtml(m.year)}</span></td>
+            <td><strong>${escapeHtml(m.title)}</strong></td>
+            <td>${escapeHtml(m.subtitle)}</td>
+            <td>
+              <div style="font-size: 11px; color: var(--text-muted);">
+                1: ${escapeHtml(m.images[0].replace('./', ''))}<br/>
+                2: ${escapeHtml(m.images[1].replace('./', ''))}<br/>
+                3: ${escapeHtml(m.images[2].replace('./', ''))}
+              </div>
+            </td>
+            <td class="actions-cell">
+              <button class="btn-sm btn-sm-edit" onclick="editMilestone(${idx})">Edit</button>
+              <button class="btn-sm btn-sm-delete" onclick="deleteMilestone(${idx})">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      function showMilestoneForm() {
+        document.getElementById('milestone-form').reset();
+        document.getElementById('milestone-edit-index').value = '';
+        document.getElementById('milestone-form-title').textContent = 'Add Journey Milestone';
+        
+        // Reset file box names
+        document.getElementById('milestone-img-name-1').textContent = 'Choose File...';
+        document.getElementById('milestone-img-name-2').textContent = 'Choose File...';
+        document.getElementById('milestone-img-name-3').textContent = 'Choose File...';
+        
+        document.getElementById('milestone-img-src-1').value = '';
+        document.getElementById('milestone-img-src-2').value = '';
+        document.getElementById('milestone-img-src-3').value = '';
+
+        document.getElementById('milestone-form-overlay').classList.add('active');
+      }
+
+      function closeMilestoneForm() {
+        document.getElementById('milestone-form-overlay').classList.remove('active');
+      }
+
+      function updateFileName(input, num) {
+        const file = input.files[0];
+        if (file) {
+          document.getElementById('milestone-img-name-' + num).textContent = file.name;
+        }
+      }
+
+      function editMilestone(index) {
+        showMilestoneForm();
+        const m = milestonesList[index];
+        document.getElementById('milestone-edit-index').value = index;
+        document.getElementById('milestone-form-title').textContent = 'Edit Journey Milestone';
+        
+        document.getElementById('milestone-year').value = m.year;
+        document.getElementById('milestone-title').value = m.title;
+        document.getElementById('milestone-subtitle').value = m.subtitle;
+        document.getElementById('milestone-desc').value = m.desc;
+        document.getElementById('milestone-tags').value = m.tags;
+        
+        // Display image names
+        document.getElementById('milestone-img-name-1').textContent = m.images[0] ? m.images[0].replace('./', '') : 'Choose File...';
+        document.getElementById('milestone-img-name-2').textContent = m.images[1] ? m.images[1].replace('./', '') : 'Choose File...';
+        document.getElementById('milestone-img-name-3').textContent = m.images[2] ? m.images[2].replace('./', '') : 'Choose File...';
+        
+        document.getElementById('milestone-img-src-1').value = m.images[0];
+        document.getElementById('milestone-img-src-2').value = m.images[1];
+        document.getElementById('milestone-img-src-3').value = m.images[2];
+
+        document.getElementById('milestone-caption-1').value = m.captions[0] || '';
+        document.getElementById('milestone-caption-2').value = m.captions[1] || '';
+        document.getElementById('milestone-caption-3').value = m.captions[2] || '';
+      }
+
+      async function saveMilestone(event) {
+        event.preventDefault();
+        document.getElementById('milestone-save-btn').disabled = true;
+        document.getElementById('milestone-save-btn').textContent = 'Saving...';
+
+        try {
+          const index = document.getElementById('milestone-edit-index').value;
+          const year = document.getElementById('milestone-year').value.trim();
+          const title = document.getElementById('milestone-title').value.trim();
+          const subtitle = document.getElementById('milestone-subtitle').value.trim();
+          const desc = document.getElementById('milestone-desc').value.trim();
+          const tags = document.getElementById('milestone-tags').value.trim();
+
+          const caps = [
+            document.getElementById('milestone-caption-1').value.trim() || title,
+            document.getElementById('milestone-caption-2').value.trim() || subtitle,
+            document.getElementById('milestone-caption-3').value.trim() || year
+          ];
+
+          // Images
+          const images = [
+            document.getElementById('milestone-img-src-1').value || './school_milestone.png',
+            document.getElementById('milestone-img-src-2').value || './polytechnic_milestone.png',
+            document.getElementById('milestone-img-src-3').value || './university_milestone.png'
+          ];
+
+          // Write uploaded files to directory
+          for (let i = 1; i <= 3; i++) {
+            const fileInput = document.getElementById('milestone-img-file-' + i);
+            if (fileInput.files && fileInput.files[0]) {
+              const file = fileInput.files[0];
+              await writeBinaryFile(dirHandle, file.name, file);
+              images[i-1] = './' + file.name;
+            }
+          }
+
+          const milestoneData = {
+            year,
+            title,
+            subtitle,
+            desc,
+            tags,
+            images,
+            captions: caps
+          };
+
+          if (index !== '') {
+            milestonesList[parseInt(index)] = milestoneData;
+          } else {
+            milestonesList.push(milestoneData);
+          }
+
+          // Build about.html structure and save
+          await syncMilestonesToAboutHTML();
+          
+          renderMilestonesTable();
+          closeMilestoneForm();
+          alert("Milestones updated successfully!");
+        } catch (e) {
+          console.error(e);
+          alert("Error saving milestone: " + e.message);
+        } finally {
+          document.getElementById('milestone-save-btn').disabled = false;
+          document.getElementById('milestone-save-btn').textContent = 'Save Milestone';
+        }
+      }
+
+      async function deleteMilestone(index) {
+        if (!confirm("Are you sure you want to delete this milestone from your timeline?")) return;
+        try {
+          milestonesList.splice(index, 1);
+          await syncMilestonesToAboutHTML();
+          renderMilestonesTable();
+          alert("Milestone deleted successfully!");
+        } catch (e) {
+          console.error(e);
+          alert("Error deleting milestone: " + e.message);
+        }
+      }
+
+      async function syncMilestonesToAboutHTML() {
+        const milestonesHTML = milestonesList.map((m, idx) => {
+          const alignClass = idx % 2 === 0 ? 'timeline-item--left' : 'timeline-item--right';
+          const tagsHTML = m.tags ? m.tags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('\n                      ') : '';
+          
+          return `
+            <!-- Milestone ${idx + 1}: ${m.year} -->
+            <div class="timeline-item ${alignClass}">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-col-card">
+                  <div class="timeline-card">
+                    <span class="timeline-badge">${escapeHtml(m.year)}</span>
+                    <h4 class="timeline-title">${escapeHtml(m.title)}</h4>
+                    <div class="timeline-subtitle">${escapeHtml(m.subtitle)}</div>
+                    <p>
+                      ${escapeHtml(m.desc)}
+                    </p>
+                    <div class="timeline-tags">
+                      ${tagsHTML}
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-col-media">
+                  <div class="photo-stack" onclick="openStackGallery(this)" data-images="${m.images.join(',')}" data-captions="${m.captions.join(',')}">
+                    <div class="photo-stack-card photo-stack-card--3"><img src="${m.images[2]}" /></div>
+                    <div class="photo-stack-card photo-stack-card--2"><img src="${m.images[1]}" /></div>
+                    <div class="photo-stack-card photo-stack-card--1"><img src="${m.images[0]}" /></div>
+                    <div class="photo-stack-indicator">
+                      <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                      <span>3 Photos</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+        }).join('\n');
+
+        const container = aboutDoc.querySelector('.timeline-container');
+        const lineContainerHTML = `<div class="timeline-line-container">\n              <div class="timeline-line-active"></div>\n            </div>`;
+        container.innerHTML = lineContainerHTML + '\n\n' + milestonesHTML;
+
+        // Serialize HTML back
+        const updatedHTMLText = '<!DOCTYPE html>\n' + aboutDoc.documentElement.outerHTML;
+        await writeTextFile(dirHandle, 'about.html', updatedHTMLText);
+        aboutHTMLText = updatedHTMLText;
+      }
+
+
+      /* ---------------------------------------------------- */
+      /* PROJECTS CMS SECTION                                 */
+      /* ---------------------------------------------------- */
+
+      function extractProjects() {
+        projectsList = [];
+        const cards = projectsDoc.querySelectorAll('.project-grid article.work-card');
+        
+        cards.forEach(card => {
+          const title = card.querySelector('.work-card__title').textContent.trim();
+          const desc = card.querySelector('.work-card__desc').textContent.trim();
+          const category = card.getAttribute('data-category') || 'frontend';
+          const img = card.querySelector('.work-card__media img').getAttribute('src');
+          
+          const tagsList = [];
+          card.querySelectorAll('.work-card__tags .tag').forEach(t => tagsList.push(t.textContent.trim()));
+          
+          const links = { case: '', live: '', github: '', download: '' };
+          
+          // Check onclick case study
+          const clickAttr = card.getAttribute('onclick') || '';
+          if (clickAttr.includes('case-study-')) {
+            const match = clickAttr.match(/\.\/case-study-[^']+/);
+            if (match) links.case = match[0];
+          }
+
+          // Sub links
+          card.querySelectorAll('.work-card__links a').forEach(a => {
+            const href = a.getAttribute('href');
+            const txt = a.textContent.trim().toLowerCase();
+            if (txt.includes('site') || txt.includes('live') || txt.includes('view')) links.live = href;
+            else if (txt.includes('github') || txt.includes('code')) links.github = href;
+            else if (txt.includes('download') || txt.includes('apk')) links.download = href;
+            else if (txt.includes('study') || txt.includes('case')) links.case = href;
+          });
+
+          // Check if displayed on homepage
+          const isFeatured = Array.from(indexDoc.querySelectorAll('.project-grid .work-card__title')).some(t => t.textContent.trim() === title);
+
+          projectsList.push({
+            title,
+            category,
+            desc,
+            tags: tagsList.join(', '),
+            image: img,
+            links,
+            isFeatured
+          });
+        });
+      }
+
+      function renderProjectsTable() {
+        const tbody = document.getElementById('projects-table-body');
+        if (projectsList.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No projects found. Add a project to get started.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = projectsList.map((p, idx) => `
+          <tr>
+            <td>
+              <strong>${escapeHtml(p.title)}</strong>
+              ${p.isFeatured ? '<span class="badge" style="background:rgba(16,185,129,0.1); color:var(--success); border-color:rgba(16,185,129,0.2); margin-left:8px;">Home</span>' : ''}
+            </td>
+            <td><span class="badge">${escapeHtml(p.category)}</span></td>
+            <td><span style="font-size:12px; color:var(--text-muted);">${escapeHtml(p.tags)}</span></td>
+            <td><img src="${escapeHtml(p.image)}" style="width:50px; height:35px; object-fit:cover; border-radius:6px; border:1px solid var(--glass-border);" /></td>
+            <td class="actions-cell">
+              <button class="btn-sm btn-sm-edit" onclick="editProject(${idx})">Edit</button>
+              <button class="btn-sm btn-sm-delete" onclick="deleteProject(${idx})">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      function showProjectForm() {
+        document.getElementById('project-form').reset();
+        document.getElementById('project-edit-index').value = '';
+        document.getElementById('project-form-title').textContent = 'Add Project';
+        document.getElementById('project-img-name').textContent = 'Choose File...';
+        document.getElementById('project-img-src').value = '';
+        document.getElementById('project-homepage-display').checked = true;
+        document.getElementById('project-form-overlay').classList.add('active');
+      }
+
+      function closeProjectForm() {
+        document.getElementById('project-form-overlay').classList.remove('active');
+      }
+
+      function updateProjectFileName(input) {
+        const file = input.files[0];
+        if (file) {
+          document.getElementById('project-img-name').textContent = file.name;
+        }
+      }
+
+      function editProject(index) {
+        showProjectForm();
+        const p = projectsList[index];
+        document.getElementById('project-edit-index').value = index;
+        document.getElementById('project-form-title').textContent = 'Edit Project';
+
+        document.getElementById('project-title').value = p.title;
+        document.getElementById('project-category').value = p.category;
+        document.getElementById('project-desc').value = p.desc;
+        document.getElementById('project-tags').value = p.tags;
+        document.getElementById('project-img-name').textContent = p.image ? p.image.replace('./', '') : 'Choose File...';
+        document.getElementById('project-img-src').value = p.image;
+
+        document.getElementById('project-link-case').value = p.links.case;
+        document.getElementById('project-link-live').value = p.links.live;
+        document.getElementById('project-link-github').value = p.links.github;
+        document.getElementById('project-link-download').value = p.links.download;
+
+        document.getElementById('project-homepage-display').checked = p.isFeatured;
+      }
+
+      async function saveProject(event) {
+        event.preventDefault();
+        document.getElementById('project-save-btn').disabled = true;
+        document.getElementById('project-save-btn').textContent = 'Saving...';
+
+        try {
+          const index = document.getElementById('project-edit-index').value;
+          const title = document.getElementById('project-title').value.trim();
+          const category = document.getElementById('project-category').value;
+          const desc = document.getElementById('project-desc').value.trim();
+          const tags = document.getElementById('project-tags').value.trim();
+          
+          let image = document.getElementById('project-img-src').value || './exem-prep_mockup.png';
+          
+          // Image upload
+          const imgInput = document.getElementById('project-img-file');
+          if (imgInput.files && imgInput.files[0]) {
+            const file = imgInput.files[0];
+            await writeBinaryFile(dirHandle, file.name, file);
+            image = './' + file.name;
+          }
+
+          const links = {
+            case: document.getElementById('project-link-case').value.trim(),
+            live: document.getElementById('project-link-live').value.trim(),
+            github: document.getElementById('project-link-github').value.trim(),
+            download: document.getElementById('project-link-download').value.trim()
+          };
+
+          const isFeatured = document.getElementById('project-homepage-display').checked;
+
+          const projectData = {
+            title,
+            category,
+            desc,
+            tags,
+            image,
+            links,
+            isFeatured
+          };
+
+          if (index !== '') {
+            projectsList[parseInt(index)] = projectData;
+          } else {
+            projectsList.push(projectData);
+          }
+
+          // Write changes to projects.html and index.html
+          await syncProjectsToHTML();
+
+          renderProjectsTable();
+          closeProjectForm();
+          alert("Projects updated successfully!");
+        } catch (e) {
+          console.error(e);
+          alert("Error saving project: " + e.message);
+        } finally {
+          document.getElementById('project-save-btn').disabled = false;
+          document.getElementById('project-save-btn').textContent = 'Save Project';
+        }
+      }
+
+      async function deleteProject(index) {
+        if (!confirm("Are you sure you want to delete this project from the directory?")) return;
+        try {
+          projectsList.splice(index, 1);
+          await syncProjectsToHTML();
+          renderProjectsTable();
+          alert("Project deleted successfully!");
+        } catch (e) {
+          console.error(e);
+          alert("Error deleting project: " + e.message);
+        }
+      }
+
+      async function syncProjectsToHTML() {
+        // 1. Build projects.html grid
+        const projectsHTML = projectsList.map(p => {
+          const hasStudy = p.category === 'case-study' && p.links.case;
+          const clickAttr = hasStudy ? `onclick="window.location.href='${p.links.case}'"` : '';
+          const cardClass = hasStudy ? 'work-card work-card--has-study' : 'work-card';
+          
+          let linksHTML = '';
+          if (p.links.case && !hasStudy) {
+            linksHTML += `<a href="${p.links.case}" class="work-card__link">Case Study</a>\n                  `;
+          }
+          if (p.links.live) {
+            linksHTML += `<a href="${p.links.live}" target="_blank" rel="noopener" class="work-card__link">View Site</a>\n                  `;
+          }
+          if (p.links.github) {
+            linksHTML += `<a href="${p.links.github}" target="_blank" rel="noopener" class="work-card__link">GitHub</a>\n                  `;
+          }
+          if (p.links.download) {
+            linksHTML += `<a href="${p.links.download}" target="_blank" rel="noopener" class="work-card__link">Download APK</a>\n                  `;
+          }
+
+          const tagsHTML = p.tags ? p.tags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('\n                  ') : '';
+
+          return `
+            <article data-category="${escapeHtml(p.category)}" class="${cardClass}" ${clickAttr}>
+              <div class="work-card__media">
+                <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)} mockup" loading="lazy" />
+              </div>
+              <div class="work-card__content">
+                <h4 class="work-card__title">${escapeHtml(p.title)}</h4>
+                <p class="work-card__desc">${escapeHtml(p.desc)}</p>
+                <div class="work-card__tags">
+                  ${tagsHTML}
+                </div>
+                <div class="work-card__links">
+                  ${linksHTML.trim()}
+                </div>
+              </div>
+            </article>`;
+        }).join('\n\n');
+
+        const projGrid = projectsDoc.querySelector('.project-grid');
+        projGrid.innerHTML = projectsHTML;
+
+        const updatedProjHTML = '<!DOCTYPE html>\n' + projectsDoc.documentElement.outerHTML;
+        await writeTextFile(dirHandle, 'projects.html', updatedProjHTML);
+        projectsHTMLText = updatedProjHTML;
+
+        // 2. Build index.html top featured projects
+        const featuredProjects = projectsList.filter(p => p.isFeatured);
+        // Truncate to top 4 max to match the home page works layout
+        const homeFeatured = featuredProjects.slice(0, 4);
+
+        const homeFeaturedHTML = homeFeatured.map(p => {
+          const hasStudy = p.category === 'case-study' && p.links.case;
+          const clickAttr = hasStudy ? `onclick="window.location.href='${p.links.case}'"` : '';
+          const cardClass = hasStudy ? 'work-card work-card--has-study' : 'work-card';
+          
+          let linksHTML = '';
+          if (p.links.case && !hasStudy) {
+            linksHTML += `<a href="${p.links.case}" class="work-card__link">Case Study</a>\n                  `;
+          }
+          if (p.links.live) {
+            linksHTML += `<a href="${p.links.live}" target="_blank" rel="noopener" class="work-card__link">View Site</a>\n                  `;
+          }
+          if (p.links.github) {
+            linksHTML += `<a href="${p.links.github}" target="_blank" rel="noopener" class="work-card__link">GitHub</a>\n                  `;
+          }
+          if (p.links.download) {
+            linksHTML += `<a href="${p.links.download}" target="_blank" rel="noopener" class="work-card__link">Download APK</a>\n                  `;
+          }
+
+          const tagsHTML = p.tags ? p.tags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('\n                  ') : '';
+
+          return `
+            <article data-category="${escapeHtml(p.category)}" class="${cardClass}" ${clickAttr}>
+              <div class="work-card__media">
+                <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)} mockup" loading="lazy" />
+              </div>
+              <div class="work-card__content">
+                <h4 class="work-card__title">${escapeHtml(p.title)}</h4>
+                <p class="work-card__desc">${escapeHtml(p.desc)}</p>
+                <div class="work-card__tags">
+                  ${tagsHTML}
+                </div>
+                <div class="work-card__links">
+                  ${linksHTML.trim()}
+                </div>
+              </div>
+            </article>`;
+        }).join('\n\n');
+
+        const indexGrid = indexDoc.querySelector('.project-grid');
+        indexGrid.innerHTML = homeFeaturedHTML;
+
+        const updatedIndexHTML = '<!DOCTYPE html>\n' + indexDoc.documentElement.outerHTML;
+        await writeTextFile(dirHandle, 'index.html', updatedIndexHTML);
+        indexHTMLText = updatedIndexHTML;
+      }
+
+
+      /* ---------------------------------------------------- */
+      /* UTILS                                                */
+      /* ---------------------------------------------------- */
+
+      function escapeHtml(text) {
+        const map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, m => map[m]);
+      }
+    </script>
+  </body>
+</html>
