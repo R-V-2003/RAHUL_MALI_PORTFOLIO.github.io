@@ -1317,7 +1317,9 @@
         skillsRows.innerHTML = '';
         const chips = indexDoc.querySelectorAll('.skill-chip-grid .skill-chip');
         chips.forEach((chip) => {
-          const name = chip.querySelector('.chip-label').textContent.trim();
+          const nameEl = chip.querySelector('.chip-label');
+          if (!nameEl) return;
+          const name = nameEl.textContent.trim();
           const neon = chip.getAttribute('data-neon') || 'cyan';
           const imgEl = chip.querySelector('.chip-icon');
           const img = imgEl ? imgEl.getAttribute('src') : '';
