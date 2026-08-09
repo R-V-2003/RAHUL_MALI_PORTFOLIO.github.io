@@ -3024,11 +3024,12 @@
       }
     
       
-      /* Journey Page Styles - Alternating & Compact Cards */
+      
+      /* Journey Page Styles - Alternating & Photo Stacks */
       .timeline-container {
         position: relative;
         width: 100%;
-        max-width: 900px;
+        max-width: 1000px;
         margin: 40px auto 20px;
         padding: 20px 0 80px;
       }
@@ -3060,13 +3061,13 @@
 
       .timeline-item {
         position: relative;
-        width: 50%;
-        padding: 20px 40px;
+        width: 100%;
         box-sizing: border-box;
         z-index: 2;
         opacity: 0;
         transform: translateY(40px);
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        margin: 40px 0;
       }
 
       .timeline-item.active {
@@ -3074,20 +3075,12 @@
         transform: translateY(0);
       }
 
-      .timeline-item--left {
-        left: 0;
-        text-align: right;
-      }
-
-      .timeline-item--right {
-        left: 50%;
-        text-align: left;
-      }
-
-      /* Dots on the line */
+      /* Dots on the line - Centered Vertically */
       .timeline-dot {
         position: absolute;
-        top: 32px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 18px;
         height: 18px;
         border-radius: 50%;
@@ -3098,23 +3091,53 @@
         transition: all 0.3s ease;
       }
 
-      .timeline-item--left .timeline-dot {
-        right: -9px;
-      }
-
-      .timeline-item--right .timeline-dot {
-        left: -9px;
-      }
-
       /* Active Dot State */
       .timeline-item.active .timeline-dot {
         background: var(--primary);
         border-color: #fff;
         box-shadow: 0 0 0 6px rgba(14, 107, 255, 0.35), 0 0 20px var(--primary);
-        transform: scale(1.15);
+        transform: translate(-50%, -50%) scale(1.15);
       }
 
-      /* Card Styling */
+      /* Grid / Columns for Left-Right stagger */
+      .timeline-content-wrapper {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .timeline-item--left .timeline-content-wrapper {
+        flex-direction: row;
+      }
+
+      .timeline-item--right .timeline-content-wrapper {
+        flex-direction: row-reverse;
+      }
+
+      .timeline-col-card {
+        width: 50%;
+        padding: 0 50px 0 30px;
+        box-sizing: border-box;
+      }
+
+      .timeline-item--right .timeline-col-card {
+        padding: 0 30px 0 50px;
+      }
+
+      .timeline-col-media {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 30px 0 50px;
+        box-sizing: border-box;
+      }
+
+      .timeline-item--right .timeline-col-media {
+        padding: 0 50px 0 30px;
+      }
+
+      /* Card Styling (No image inside card) */
       .timeline-card {
         padding: 28px;
         border-radius: 24px;
@@ -3123,30 +3146,22 @@
         box-shadow: 0 22px 38px rgba(20, 42, 75, 0.1);
         backdrop-filter: blur(14px);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        display: inline-block;
         width: 100%;
         max-width: 440px;
-        text-align: left;
+        box-sizing: border-box;
+      }
+
+      .timeline-item--left .timeline-card {
+        margin-left: auto; /* Align to the center line */
+      }
+
+      .timeline-item--right .timeline-card {
+        margin-right: auto; /* Align to the center line */
       }
 
       .timeline-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-4px);
         box-shadow: 0 26px 48px rgba(20, 42, 75, 0.16);
-      }
-
-      /* Milestone Image Styling */
-      .timeline-img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 16px;
-        margin-bottom: 16px;
-        transition: transform 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-      }
-
-      .timeline-card:hover .timeline-img {
-        transform: scale(1.02);
       }
 
       .timeline-badge {
@@ -3196,6 +3211,206 @@
         letter-spacing: 0.02em;
       }
 
+      /* Stacked Photo Deck */
+      .photo-stack {
+        position: relative;
+        width: 240px;
+        height: 160px;
+        cursor: pointer;
+        z-index: 10;
+        transition: transform 0.3s ease;
+      }
+
+      .photo-stack:hover {
+        transform: scale(1.03);
+      }
+
+      .photo-stack-card {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 2px solid #fff;
+        box-shadow: 0 10px 25px rgba(20, 42, 75, 0.15);
+        background: #fff;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+      }
+
+      .photo-stack-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Default stacked state with rotations */
+      .photo-stack-card--3 {
+        transform: rotate(-6deg) translate(-10px, -5px);
+        z-index: 1;
+        opacity: 0.85;
+      }
+
+      .photo-stack-card--2 {
+        transform: rotate(4deg) translate(8px, 2px);
+        z-index: 2;
+        opacity: 0.95;
+      }
+
+      .photo-stack-card--1 {
+        transform: rotate(-1deg);
+        z-index: 3;
+      }
+
+      /* Fan out on hover */
+      .photo-stack:hover .photo-stack-card--3 {
+        transform: rotate(-12deg) translate(-30px, -10px);
+        box-shadow: 0 15px 30px rgba(20, 42, 75, 0.2);
+      }
+
+      .photo-stack:hover .photo-stack-card--2 {
+        transform: rotate(8deg) translate(25px, -3px);
+        box-shadow: 0 15px 30px rgba(20, 42, 75, 0.2);
+      }
+
+      .photo-stack:hover .photo-stack-card--1 {
+        transform: rotate(0deg) translateY(-8px);
+        box-shadow: 0 20px 35px rgba(20, 42, 75, 0.25);
+      }
+
+      /* Indicator badge for stack count */
+      .photo-stack-indicator {
+        position: absolute;
+        bottom: -15px;
+        right: 15px;
+        background: var(--primary);
+        color: #fff;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        box-shadow: 0 6px 15px rgba(14, 107, 255, 0.3);
+        z-index: 5;
+        opacity: 0.9;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .photo-stack:hover .photo-stack-indicator {
+        transform: scale(1.05) translateY(2px);
+        opacity: 1;
+      }
+
+      .photo-stack-indicator svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+      }
+
+      /* Lightbox Modal CSS */
+      .lightbox-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(13, 20, 30, 0.85);
+        backdrop-filter: blur(16px);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox-modal.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .lightbox-content img {
+        max-width: 100%;
+        max-height: 70vh;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 40px;
+        cursor: pointer;
+        transition: color 0.2s;
+        z-index: 10000;
+      }
+
+      .lightbox-close:hover {
+        color: #fff;
+      }
+
+      /* Lightbox Arrow Navigation Buttons */
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, color 0.2s;
+        z-index: 10000;
+        user-select: none;
+      }
+
+      .lightbox-nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .lightbox-nav--prev {
+        left: 40px;
+      }
+
+      .lightbox-nav--next {
+        right: 40px;
+      }
+
+      .lightbox-caption {
+        color: #fff;
+        margin-top: 16px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-align: center;
+      }
+
+      .lightbox-counter {
+        color: rgba(255,255,255,0.5);
+        margin-top: 6px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
       /* Responsive Layout for Mobile */
       @media (max-width: 768px) {
         .timeline-line-container {
@@ -3203,25 +3418,53 @@
           transform: none;
         }
 
-        .timeline-item {
-          width: 100%;
-          padding: 15px 15px 15px 45px;
-          text-align: left;
-          left: 0;
+        .timeline-dot {
+          left: 20px;
+          transform: translate(-50%, -50%);
         }
 
-        .timeline-item--left .timeline-dot,
-        .timeline-item--right .timeline-dot {
-          left: 11px;
-          right: auto;
+        .timeline-item.active .timeline-dot {
+          transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .timeline-content-wrapper {
+          flex-direction: column !important;
+          align-items: stretch;
+        }
+
+        .timeline-col-card, 
+        .timeline-col-media {
+          width: 100%;
+          padding: 0;
+        }
+
+        .timeline-col-media {
+          margin-top: 25px;
+          justify-content: flex-start;
+          padding-left: 20px;
         }
 
         .timeline-card {
           max-width: 100%;
         }
 
-        .timeline-img {
-          height: 180px;
+        .photo-stack {
+          width: 200px;
+          height: 135px;
+        }
+
+        .lightbox-nav {
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+        }
+        
+        .lightbox-nav--prev {
+          left: 10px;
+        }
+        
+        .lightbox-nav--next {
+          right: 10px;
         }
       }
     </style>
@@ -3315,107 +3558,189 @@
               <div class="timeline-line-active"></div>
             </div>
 
-            <!-- Milestone 1: 2021 -->
+            <!-- Milestone 1: 2021 (Schooling) - Card on Left, Stack on Right -->
             <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <img class="timeline-img" src="./school_milestone.png" alt="Swami Vivekanand Govt. Model School campus" />
-                <span class="timeline-badge">2021</span>
-                <h4 class="timeline-title">Schooling Completed</h4>
-                <div class="timeline-subtitle">Swami Vivekanand Govt. Model School</div>
-                <p>
-                  Completed senior secondary school (12th grade Science) focusing on Mathematics and Physics, providing the mathematical and analytical foundation for my software engineering path.
-                </p>
-                <div class="timeline-tags">
-                  <span class="tag">Science</span>
-                  <span class="tag">Mathematics</span>
-                  <span class="tag">Physics</span>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-col-card">
+                  <div class="timeline-card">
+                    <span class="timeline-badge">2021</span>
+                    <h4 class="timeline-title">Schooling Completed</h4>
+                    <div class="timeline-subtitle">Swami Vivekanand Govt. Model School</div>
+                    <p>
+                      Completed senior secondary school (12th grade Science) focusing on Mathematics and Physics, providing the mathematical and analytical foundation for my software engineering path.
+                    </p>
+                    <div class="timeline-tags">
+                      <span class="tag">Science</span>
+                      <span class="tag">Mathematics</span>
+                      <span class="tag">Physics</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-col-media">
+                  <div class="photo-stack" onclick="openStackGallery(1)">
+                    <div class="photo-stack-card photo-stack-card--3"><img src="./polytechnic_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--2"><img src="./university_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--1"><img src="./school_milestone.png" /></div>
+                    <div class="photo-stack-indicator">
+                      <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                      <span>3 Photos</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Milestone 2: 2021-2024 -->
+            <!-- Milestone 2: 2021-2024 (Diploma) - Card on Right, Stack on Left -->
             <div class="timeline-item timeline-item--right">
               <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <img class="timeline-img" src="./polytechnic_milestone.png" alt="Gokul Bhai Bhatt Govt. Polytechnic campus" />
-                <span class="timeline-badge">2021 - 2024</span>
-                <h4 class="timeline-title">Diploma in CSE</h4>
-                <div class="timeline-subtitle">Gokul Bhai Bhatt Govt. Polytechnic</div>
-                <p>
-                  Acquired key fundamentals in Computer Science. Studied database management systems, structures, core programming, and web designs. Graduated with an exceptional CGPA of 9.34.
-                </p>
-                <div class="timeline-tags">
-                  <span class="tag">Programming</span>
-                  <span class="tag">DBMS</span>
-                  <span class="tag">Web Basics</span>
-                  <span class="tag">CGPA 9.34</span>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-col-card">
+                  <div class="timeline-card">
+                    <span class="timeline-badge">2021 - 2024</span>
+                    <h4 class="timeline-title">Diploma in CSE</h4>
+                    <div class="timeline-subtitle">Gokul Bhai Bhatt Govt. Polytechnic</div>
+                    <p>
+                      Acquired key fundamentals in Computer Science. Studied database management systems, structures, core programming, and web designs. Graduated with an exceptional CGPA of 9.34.
+                    </p>
+                    <div class="timeline-tags">
+                      <span class="tag">Programming</span>
+                      <span class="tag">DBMS</span>
+                      <span class="tag">Web Basics</span>
+                      <span class="tag">CGPA 9.34</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-col-media">
+                  <div class="photo-stack" onclick="openStackGallery(2)">
+                    <div class="photo-stack-card photo-stack-card--3"><img src="./sedani_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--2"><img src="./school_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--1"><img src="./polytechnic_milestone.png" /></div>
+                    <div class="photo-stack-indicator">
+                      <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                      <span>3 Photos</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Milestone 3: 2024-2027 -->
+            <!-- Milestone 3: 2024-2027 (B.Tech) - Card on Left, Stack on Right -->
             <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <img class="timeline-img" src="./university_milestone.png" alt="JG University campus" />
-                <span class="timeline-badge">2024 - 2027</span>
-                <h4 class="timeline-title">B.Tech in CSE</h4>
-                <div class="timeline-subtitle">JG University, Ahmedabad</div>
-                <p>
-                  Pursuing my Bachelor's degree in Computer Science. Engaged in project-based learning, building software solutions, studying UI/UX, full-stack frameworks, and integrating modern AI technologies.
-                </p>
-                <div class="timeline-tags">
-                  <span class="tag">B.Tech</span>
-                  <span class="tag">Software Engineering</span>
-                  <span class="tag">UI/UX</span>
-                  <span class="tag">Ahmedabad</span>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-col-card">
+                  <div class="timeline-card">
+                    <span class="timeline-badge">2024 - 2027</span>
+                    <h4 class="timeline-title">B.Tech in CSE</h4>
+                    <div class="timeline-subtitle">JG University, Ahmedabad</div>
+                    <p>
+                      Pursuing my Bachelor's degree in Computer Science. Engaged in project-based learning, building software solutions, studying UI/UX, full-stack frameworks, and integrating modern AI technologies.
+                    </p>
+                    <div class="timeline-tags">
+                      <span class="tag">B.Tech</span>
+                      <span class="tag">Software Engineering</span>
+                      <span class="tag">UI/UX</span>
+                      <span class="tag">Ahmedabad</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-col-media">
+                  <div class="photo-stack" onclick="openStackGallery(3)">
+                    <div class="photo-stack-card photo-stack-card--3"><img src="./ruut_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--2"><img src="./polytechnic_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--1"><img src="./university_milestone.png" /></div>
+                    <div class="photo-stack-indicator">
+                      <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                      <span>3 Photos</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Milestone 4: 2025-2026 -->
+            <!-- Milestone 4: 2025-2026 (Sedani) - Card on Right, Stack on Left -->
             <div class="timeline-item timeline-item--right">
               <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <img class="timeline-img" src="./sedani_milestone.png" alt="Workspace at Sedani Digital" />
-                <span class="timeline-badge">May 2025 - May 2026</span>
-                <h4 class="timeline-title">Frontend Developer Intern</h4>
-                <div class="timeline-subtitle">Sedani Digital Pvt. Ltd.</div>
-                <p>
-                  Gained industrial experience building client projects. Crafted reusable React components, worked with modern frontend tooling (Tailwind CSS, React, npm), and bridged designs from Figma to reality.
-                </p>
-                <div class="timeline-tags">
-                  <span class="tag">React</span>
-                  <span class="tag">Tailwind CSS</span>
-                  <span class="tag">Figma to HTML</span>
-                  <span class="tag">Internship</span>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-col-card">
+                  <div class="timeline-card">
+                    <span class="timeline-badge">May 2025 - May 2026</span>
+                    <h4 class="timeline-title">Frontend Developer Intern</h4>
+                    <div class="timeline-subtitle">Sedani Digital Pvt. Ltd.</div>
+                    <p>
+                      Gained industrial experience building client projects. Crafted reusable React components, worked with modern frontend tooling (Tailwind CSS, React, npm), and bridged designs from Figma to reality.
+                    </p>
+                    <div class="timeline-tags">
+                      <span class="tag">React</span>
+                      <span class="tag">Tailwind CSS</span>
+                      <span class="tag">Figma to HTML</span>
+                      <span class="tag">Internship</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-col-media">
+                  <div class="photo-stack" onclick="openStackGallery(4)">
+                    <div class="photo-stack-card photo-stack-card--3"><img src="./university_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--2"><img src="./ruut_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--1"><img src="./sedani_milestone.png" /></div>
+                    <div class="photo-stack-indicator">
+                      <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                      <span>3 Photos</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Milestone 5: 2026-Present -->
+            <!-- Milestone 5: 2026-Present (Ruut) - Card on Left, Stack on Right -->
             <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <img class="timeline-img" src="./ruut_milestone.png" alt="CTO workspace at Ruut" />
-                <span class="timeline-badge">Jun 2026 - Present</span>
-                <h4 class="timeline-title">Founding Engineer &amp; CTO</h4>
-                <div class="timeline-subtitle">Ṛuut</div>
-                <p>
-                  Leading core engineering and design at Ṛuut. Architected and deployed the primary company site and comprehensive ERP platforms. Directing product operations and hybrid infrastructure scaling.
-                </p>
-                <div class="timeline-tags">
-                  <span class="tag">CTO</span>
-                  <span class="tag">Architecture</span>
-                  <span class="tag">ERP Systems</span>
-                  <span class="tag">Fullstack</span>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-col-card">
+                  <div class="timeline-card">
+                    <span class="timeline-badge">Jun 2026 - Present</span>
+                    <h4 class="timeline-title">Founding Engineer &amp; CTO</h4>
+                    <div class="timeline-subtitle">Ṛuut</div>
+                    <p>
+                      Leading core engineering and design at Ṛuut. Architected and deployed the primary company site and comprehensive ERP platforms. Directing product operations and hybrid infrastructure scaling.
+                    </p>
+                    <div class="timeline-tags">
+                      <span class="tag">CTO</span>
+                      <span class="tag">Architecture</span>
+                      <span class="tag">ERP Systems</span>
+                      <span class="tag">Fullstack</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-col-media">
+                  <div class="photo-stack" onclick="openStackGallery(5)">
+                    <div class="photo-stack-card photo-stack-card--3"><img src="./polytechnic_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--2"><img src="./sedani_milestone.png" /></div>
+                    <div class="photo-stack-card photo-stack-card--1"><img src="./ruut_milestone.png" /></div>
+                    <div class="photo-stack-indicator">
+                      <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                      <span>3 Photos</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
           </div>
         </section>
+
+        <!-- Lightbox Gallery Modal -->
+        <div id="lightbox" class="lightbox-modal">
+          <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+          <button class="lightbox-nav lightbox-nav--prev" onclick="prevImage(event)">&lt;</button>
+          <button class="lightbox-nav lightbox-nav--next" onclick="nextImage(event)">&gt;</button>
+          <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Lightbox image" />
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+            <div id="lightbox-counter" class="lightbox-counter">1 / 3</div>
+          </div>
+        </div>
 <section class="section-card cta" id="contact">
           <div>
             <h3>Let's build web experiences that don't suck.</h3>
@@ -3539,10 +3864,11 @@
           const percentage = (scrolled / containerHeight) * 100;
           activeLine.style.height = percentage + '%';
 
-          // Light up timeline items (dots & cards) as scroll progress passes them
+          // Light up timeline items as scroll progress reaches the vertical center of each row
           timelineItems.forEach(item => {
             const itemOffset = item.offsetTop;
-            if (scrolled >= itemOffset) {
+            const itemCenter = itemOffset + (item.offsetHeight / 2);
+            if (scrolled >= itemCenter) {
               item.classList.add('active');
             }
           });
@@ -3553,9 +3879,104 @@
         
         // Execute on load
         setTimeout(updateTimelineLine, 100);
+
+        // Lightbox Sliding Gallery Functions
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+
+        let currentStackImages = [];
+        let currentImageIndex = 0;
+
+        window.openStackGallery = function (stackId) {
+          const stacks = {
+            1: [
+              { src: './school_milestone.png', caption: 'Swami Vivekanand Govt. Model School - Campus View' },
+              { src: './university_milestone.png', caption: 'Academic Foundation - Mathematics & Science' },
+              { src: './polytechnic_milestone.png', caption: 'Early Computer Programming Exploration' }
+            ],
+            2: [
+              { src: './polytechnic_milestone.png', caption: 'Gokul Bhai Bhatt Govt. Polytechnic - Computer Science Dept.' },
+              { src: './school_milestone.png', caption: 'Building Fundamental Coding Concepts' },
+              { src: './sedani_milestone.png', caption: 'Data Structures and Algorithms labs' }
+            ],
+            3: [
+              { src: './university_milestone.png', caption: 'JG University - Modern Technology Campus in Ahmedabad' },
+              { src: './polytechnic_milestone.png', caption: 'Software Projects Development Labs' },
+              { src: './ruut_milestone.png', caption: 'B.Tech advanced Computer Science curriculum' }
+            ],
+            4: [
+              { src: './sedani_milestone.png', caption: 'Sedani Digital - Frontend Development internship workstation' },
+              { src: './ruut_milestone.png', caption: 'Building client products and Figma to React integration' },
+              { src: './university_milestone.png', caption: 'UI UX responsive design and workspace layout styling' }
+            ],
+            5: [
+              { src: './ruut_milestone.png', caption: 'Ṛuut - CTO Office and founding engineering workspace' },
+              { src: './sedani_milestone.png', caption: 'Main website and ERP systems deployment diagrams' },
+              { src: './polytechnic_milestone.png', caption: 'Collaborative startup workspace operations' }
+            ]
+          };
+
+          currentStackImages = stacks[stackId];
+          currentImageIndex = 0;
+          showLightboxImage();
+
+          lightbox.style.display = 'flex';
+          setTimeout(() => {
+            lightbox.classList.add('active');
+          }, 10);
+          document.body.style.overflow = 'hidden';
+        };
+
+        function showLightboxImage() {
+          const imgData = currentStackImages[currentImageIndex];
+          lightboxImg.src = imgData.src;
+          lightboxCaption.textContent = imgData.caption;
+          lightboxCounter.textContent = `${currentImageIndex + 1} / ${currentStackImages.length}`;
+        }
+
+        window.prevImage = function (e) {
+          if (e) e.stopPropagation();
+          currentImageIndex = (currentImageIndex - 1 + currentStackImages.length) % currentStackImages.length;
+          showLightboxImage();
+        };
+
+        window.nextImage = function (e) {
+          if (e) e.stopPropagation();
+          currentImageIndex = (currentImageIndex + 1) % currentStackImages.length;
+          showLightboxImage();
+        };
+
+        window.closeLightbox = function () {
+          lightbox.classList.remove('active');
+          setTimeout(() => {
+            lightbox.style.display = 'none';
+          }, 300);
+          document.body.style.overflow = '';
+        };
+
+        // Close when clicking outside content
+        lightbox.addEventListener('click', function (e) {
+          if (e.target === lightbox) {
+            closeLightbox();
+          }
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+          if (!lightbox.classList.contains('active')) return;
+          if (e.key === 'ArrowLeft') {
+            prevImage();
+          } else if (e.key === 'ArrowRight') {
+            nextImage();
+          } else if (e.key === 'Escape') {
+            closeLightbox();
+          }
+        });
       })();
     </script>
-      <footer>
+<footer>
         © 2025 Rahul Mali. Crafted with React energy &amp; plenty of Tailwind
         love.
       </footer>
