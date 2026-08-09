@@ -3024,20 +3024,22 @@
       }
     
       
-      /* Journey Page Styles - Left-Aligned & Wide Cards */
+      /* Journey Page Styles - Alternating & Compact Cards */
       .timeline-container {
         position: relative;
-        max-width: 960px;
+        width: 100%;
+        max-width: 900px;
         margin: 40px auto 20px;
         padding: 20px 0 80px;
       }
 
       .timeline-line-container {
         position: absolute;
-        left: 30px;
+        left: 50%;
         top: 0;
         bottom: 0;
         width: 4px;
+        transform: translateX(-50%);
         z-index: 1;
         background: rgba(38, 44, 53, 0.08);
         border-radius: 2px;
@@ -3058,14 +3060,13 @@
 
       .timeline-item {
         position: relative;
-        width: 100%;
-        padding: 25px 20px 25px 70px;
+        width: 50%;
+        padding: 20px 40px;
         box-sizing: border-box;
         z-index: 2;
         opacity: 0;
         transform: translateY(40px);
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        text-align: left;
       }
 
       .timeline-item.active {
@@ -3073,11 +3074,20 @@
         transform: translateY(0);
       }
 
+      .timeline-item--left {
+        left: 0;
+        text-align: right;
+      }
+
+      .timeline-item--right {
+        left: 50%;
+        text-align: left;
+      }
+
       /* Dots on the line */
       .timeline-dot {
         position: absolute;
-        top: 36px;
-        left: 23px;
+        top: 32px;
         width: 18px;
         height: 18px;
         border-radius: 50%;
@@ -3086,6 +3096,14 @@
         box-shadow: 0 0 0 4px rgba(14, 107, 255, 0.15), 0 4px 10px rgba(0,0,0,0.1);
         z-index: 3;
         transition: all 0.3s ease;
+      }
+
+      .timeline-item--left .timeline-dot {
+        right: -9px;
+      }
+
+      .timeline-item--right .timeline-dot {
+        left: -9px;
       }
 
       /* Active Dot State */
@@ -3098,18 +3116,17 @@
 
       /* Card Styling */
       .timeline-card {
-        padding: 32px;
+        padding: 28px;
         border-radius: 24px;
         background: rgba(255, 255, 255, 0.82);
         border: 1px solid rgba(255, 255, 255, 0.6);
         box-shadow: 0 22px 38px rgba(20, 42, 75, 0.1);
         backdrop-filter: blur(14px);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        display: block;
+        display: inline-block;
         width: 100%;
-        max-width: 850px;
+        max-width: 440px;
         text-align: left;
-        box-sizing: border-box;
       }
 
       .timeline-card:hover {
@@ -3120,16 +3137,16 @@
       /* Milestone Image Styling */
       .timeline-img {
         width: 100%;
-        height: 280px;
+        height: 200px;
         object-fit: cover;
         border-radius: 16px;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         transition: transform 0.3s ease;
         border: 1px solid rgba(255, 255, 255, 0.4);
       }
 
       .timeline-card:hover .timeline-img {
-        transform: scale(1.01);
+        transform: scale(1.02);
       }
 
       .timeline-badge {
@@ -3147,13 +3164,13 @@
 
       .timeline-title {
         margin: 0 0 6px;
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 700;
         color: var(--text-dark);
       }
 
       .timeline-subtitle {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
         color: var(--primary);
         margin-bottom: 14px;
@@ -3180,22 +3197,27 @@
       }
 
       /* Responsive Layout for Mobile */
-      @media (max-width: 500px) {
+      @media (max-width: 768px) {
         .timeline-line-container {
           left: 20px;
+          transform: none;
         }
 
         .timeline-item {
-          padding-left: 45px;
-          padding-right: 10px;
+          width: 100%;
+          padding: 15px 15px 15px 45px;
+          text-align: left;
+          left: 0;
         }
 
-        .timeline-dot {
-          left: 13px;
+        .timeline-item--left .timeline-dot,
+        .timeline-item--right .timeline-dot {
+          left: 11px;
+          right: auto;
         }
 
         .timeline-card {
-          padding: 20px;
+          max-width: 100%;
         }
 
         .timeline-img {
@@ -3294,7 +3316,7 @@
             </div>
 
             <!-- Milestone 1: 2021 -->
-            <div class="timeline-item">
+            <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
                 <img class="timeline-img" src="./school_milestone.png" alt="Swami Vivekanand Govt. Model School campus" />
@@ -3313,7 +3335,7 @@
             </div>
 
             <!-- Milestone 2: 2021-2024 -->
-            <div class="timeline-item">
+            <div class="timeline-item timeline-item--right">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
                 <img class="timeline-img" src="./polytechnic_milestone.png" alt="Gokul Bhai Bhatt Govt. Polytechnic campus" />
@@ -3333,7 +3355,7 @@
             </div>
 
             <!-- Milestone 3: 2024-2027 -->
-            <div class="timeline-item">
+            <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
                 <img class="timeline-img" src="./university_milestone.png" alt="JG University campus" />
@@ -3353,7 +3375,7 @@
             </div>
 
             <!-- Milestone 4: 2025-2026 -->
-            <div class="timeline-item">
+            <div class="timeline-item timeline-item--right">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
                 <img class="timeline-img" src="./sedani_milestone.png" alt="Workspace at Sedani Digital" />
@@ -3373,7 +3395,7 @@
             </div>
 
             <!-- Milestone 5: 2026-Present -->
-            <div class="timeline-item">
+            <div class="timeline-item timeline-item--left">
               <div class="timeline-dot"></div>
               <div class="timeline-card">
                 <img class="timeline-img" src="./ruut_milestone.png" alt="CTO workspace at Ruut" />
